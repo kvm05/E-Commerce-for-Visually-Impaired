@@ -1,0 +1,37 @@
+[id = "category light"] {
+	width: 323px;
+	height: 233px;
+	border: 2px solid #3c39ca;
+	box-sizing: border-box;
+	border-radius: 46px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 32px;
+	font-family: "Roboto";
+	background: none;
+}
+[id = "category dark"] {
+	width: 323px;
+	height: 233px;
+	border: 3px solid wheat;
+	box-sizing: border-box;
+	border-radius: 46px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 32px;
+	font-family: "Roboto";
+	background: none;
+	color: white;
+}
+[id="category light"]:hover {
+	box-shadow: 0em 0.5em 0.5em -0.4em rgba(0, 0, 0, 20%);
+	transform: translateY(-10px) ;
+	transition: all 0.3s;
+}
+[id="category dark"]:hover {
+	box-shadow: 0em 0.5em 0.5em -0.4em wheat;
+	transform: translateY(-10px);
+	transition: all 0.3s;
+}

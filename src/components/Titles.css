@@ -1,0 +1,68 @@
+#welcome {
+	height: 360px;
+	font-size: 96px;
+	font-family: "Roboto";
+	color: aliceblue;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#screen {
+	height: 360px;
+	width: 100%;
+	display: flex;
+}
+#content {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-content: center;
+}
+#shoes {
+	height: 360px;
+}
+[id = "left-button light" ]{
+	background: none;
+	border: none;
+	font-size: 30px;
+	width: 50px;
+	color: rgba(0, 0, 0, 0.3);
+}
+[id = "left-button dark" ]{
+	background: none;
+	border: none;
+	font-size: 30px;
+	width: 50px;
+	color: #808080;
+}
+[id="left-button light"]:hover {
+	font-size: 50px;
+	transition: font-size 0.2s ease;
+}
+[id="left-button dark"]:hover {
+	font-size: 50px;
+	transition: font-size 0.2s ease;
+}
+[id = "right-button light"] {
+	background: none;
+	border: none;
+	font-size: 30px;
+	width: 50px;
+	color: rgba(0, 0, 0, 0.3);
+}
+[id = "right-button dark"] {
+	background: none;
+	border: none;
+	font-size: 30px;
+	width: 50px;
+	color: #808080;
+}
+[id="right-button light"]:hover {
+	font-size: 50px;
+	transition: font-size 0.2s ease;
+}
+
+[id="right-button dark"]:hover {
+	font-size: 50px;
+	transition: font-size 0.2s ease;
+}
