@@ -11,7 +11,7 @@ function Homepage(){
     const [isBlind, getChildData] = useState(false)
     const dataFromChild = (childData) => {
         getChildData(childData)
-        console.log("ITS HERE")
+        // console.log("ITS HERE")
     }
     return(
         <div id={`homepage ${isBlind ? 'dark':'light'}`}>

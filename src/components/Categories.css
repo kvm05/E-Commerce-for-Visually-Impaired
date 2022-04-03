@@ -9,7 +9,7 @@
 	align-items: center;
 	font-size: 32px;
 	font-family: "Roboto";
-	background: none;
+	background: rgba(223, 223, 223, 0.2);
 }
 [id = "category dark"] {
 	width: 323px;
@@ -23,10 +23,10 @@
 	font-size: 32px;
 	font-family: "Roboto";
 	background: none;
-	color: white;
+	background: rgba(198, 198, 198, 0.4);
 }
 [id="category light"]:hover {
-	box-shadow: 0em 0.5em 0.5em -0.4em rgba(0, 0, 0, 20%);
+	box-shadow: 0em 0.5em 0.5em -0.4em #3c39ca;
 	transform: translateY(-10px) ;
 	transition: all 0.3s;
 }
