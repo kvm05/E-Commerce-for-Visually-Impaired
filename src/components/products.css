@@ -1,0 +1,95 @@
+.product{
+    margin-bottom:40px;
+    height:300px ;
+    display: flex;
+    /* border: 5px solid black; */
+    border-radius:30px;
+    padding:15px 10px 15px 20px;
+    background: rgba(198, 198, 198,0.2);
+}
+
+
+
+.image{
+    width:35%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    /* flex-grow: 1; */
+}
+
+.image button{
+    background: none;
+    border: none;
+    color:#cccccc;
+    font-size: 1.5em;
+}
+
+.image img{
+    display:block;
+    width:75%;
+    height:95%;
+    object-fit: contain;
+    object-position: center;
+    margin:0 10px;
+}
+
+.details{
+    width:57%;
+    padding: 20px;
+    margin:0 15px;
+}
+
+.description{
+    margin: 15px 0;
+    height:60%;
+}
+
+.right{
+    width: 30%;
+    padding: 62px 10px 20px 30px;
+}
+
+.right button{
+    display:block;
+    height: 40px;
+    width: 80%;
+    margin: 15px 0;
+    background-color: #cccccc;
+    border:none;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.right button:hover{
+    box-shadow: 0 0.5em 0.5em -0.4em black;
+}
+
+.priceLight{
+    /* width:20%; */
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.priceDark{
+    font-weight: bold;
+    font-size: 1.1em;
+    color:#cccccc;
+}
+
+.learnLight{
+    color:black;
+    text-decoration: none;
+}
+
+.learnDark{
+    color:#cccccc;
+    text-decoration: none;
+}
+
+.learnDark:hover,.learnLight:hover{
+    text-decoration: underline;
+}
+
+
+

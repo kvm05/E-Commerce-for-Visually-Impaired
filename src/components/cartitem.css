@@ -1,0 +1,114 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.cartitem{
+    height:150px;
+    display:flex;
+    margin:40px;
+    border-radius: 30px;
+    background: rgba(198, 198, 198,0.2);
+}
+
+.image{
+    width:20%;
+    display:flex;
+    align-items: center;
+    margin:10px 20px 10px 60px;
+}
+
+.image img{
+    width:75%;
+    height:95%;
+    object-fit: contain;
+    object-position: center;
+}
+
+.image button{
+    background: none;
+    border: none;
+    color:#cccccc;
+    font-size: 1.5em;
+}
+
+.nameDark{
+    text-align: center;
+    width: 22%;
+    font-weight: bold;
+    font-size: 1.2em;
+    color:wheat;
+    padding:60px 0;
+    margin:0 25px;
+}
+
+.nameLight{
+    text-align: center;
+    width: 22%;
+    font-weight: bold;
+    font-size: 1.2em;
+    align-self: center;
+    /* padding:60px 0; */
+    margin:0 25px;
+}
+
+.priceLight{
+    width:10%;
+    /* padding:67px 0; */
+    align-self: center;
+    margin:0 25px;
+    font-size: 1em;
+}
+
+.priceDark{
+    width:10%;
+    /* padding:67px 0; */
+    align-self: center;
+    margin:0 25px;
+    font-size: 1em;
+    color: wheat;
+}
+
+.quantityLight,.quantityDark{
+    display:flex;
+    align-items: center;
+    width:15%;
+}
+
+.quantityDark p,.quantityLight p{
+    width:20%;
+    text-align: center;
+}
+
+.quantityDark button,.quantityLight button{
+    display: inline-block;
+    background: none;
+    border-radius: 10px;
+    height:25%;
+    margin:0 15px;
+    width:20%;
+    border:2px solid black;
+
+}
+
+.quantityDark button{
+    color:wheat;
+    border:2px solid wheat;
+}
+
+#totalLight{
+    /* padding:67px 0; */
+    align-self: center;
+    margin:0 25px;
+    font-size: 1em;
+}
+
+#totalDark{
+    /* padding:67px 0; */
+    align-self: center;
+    margin:0 25px;
+    font-size: 1em;
+    color: wheat;
+}
+
