@@ -10,6 +10,7 @@
 	font-size: 32px;
 	font-family: "Roboto";
 	background: rgba(223, 223, 223, 0.2);
+	text-decoration: none;
 }
 [id = "category dark"] {
 	width: 323px;
@@ -24,14 +25,20 @@
 	font-family: "Roboto";
 	background: none;
 	background: rgba(198, 198, 198, 0.4);
+	text-decoration: none;
 }
 [id="category light"]:hover {
 	box-shadow: 0em 0.5em 0.5em -0.4em #3c39ca;
 	transform: translateY(-10px) ;
 	transition: all 0.3s;
+	text-decoration: none;
 }
 [id="category dark"]:hover {
 	box-shadow: 0em 0.5em 0.5em -0.4em wheat;
 	transform: translateY(-10px);
 	transition: all 0.3s;
+	text-decoration: none;
+}
+#MyLink{
+	text-decoration: none;
 }

@@ -2,6 +2,18 @@
     
 }
 
-.cart{
+.cartlight{
     flex-grow: 1;
+    /* border: 2px solid white; */
+    box-shadow: 0 0 60px rgba(46, 46, 64, .25);
+    border-radius: 30px;
+}
+.cartdark{
+    flex-grow: 1;
+    /* border: 2px solid white; */
+    box-shadow: 0 0 60px rgba(144, 144, 146, 0.25);
+    border-radius: 30px;
+}
+#heading{
+    margin: 40px 40px
 }
