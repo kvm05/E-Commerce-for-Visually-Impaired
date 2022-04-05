@@ -5,7 +5,7 @@ import Categories from "./Categories";
 import "./Homepage.css";
 import "./index.css";
 
-const categories = ["Category1", "Category2", "Category3", "Category4"];
+const categories = ["Shoes", "Electronics", "Food"];
 
 function Homepage(){
     const [isBlind, getChildData] = useState(false)

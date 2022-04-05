@@ -1,8 +1,7 @@
 import Product from "./products";
 import FilterPane from "./filterpane";
+import { Link, useNavigate } from "react-router-dom";
 import "./container.css"
-import wishlist from "../images/wishlist.png"
-import wishlistWheat from "../images/wishlist-wheat.png" 
 
 function Container(props){
     const image=[]
@@ -17,8 +16,10 @@ function Container(props){
                 <div className="category">
                     <h1>{props.name}</h1>
                     <div  className="icons">
-                        <a href="view cart"><img src={props.isHighContrast?require("../images/viewcart-wheat.png"):require("../images/view cart.png")} alt="view cart"></img></a>
-                        <a href="wishlist"><img src={props.isHighContrast?wishlistWheat:wishlist} alt="wishlist"></img></a>
+                        <Link to = '/cart'>
+                            <img src={props.isHighContrast?"/images/viewcart-wheat.png":"/images/view cart.png"} alt="view cart"></img>
+                        </Link>
+                        <a href="wishlist"><img src={props.isHighContrast?"/images/wishlist-wheat.png" :"/images/wishlist.png"} alt="wishlist"></img></a>
                     </div>
                 </div>
                 <Product name="Product 1" price="45" image={image} description="The Nike Mercurial Dream Speed Superfly 8 Elite embodies Cristiano Ronaldo's greatest self-proclaimed strength: the power of the mind and meditation. Calming shades of green work together with energising tones of purple and yellow, creating a boot that radiates positivity."

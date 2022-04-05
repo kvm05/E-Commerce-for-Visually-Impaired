@@ -1,14 +1,14 @@
 import React, {useState} from "react";
 import './Titles.css';
-import Shoes from "../images/red_shoes.jpg"
-import Shirt from "../images/red_shirt.jpg"
-import PS5 from "../images/ps5.jpg"
+// import Shoes from "/images/red_shoes.jpg"
+// import Shirt from "/images/red_shirt.jpg"
+// import PS5 from "/images/ps5.jpg"
 
 function Titles(props){
     const text = <div id="welcome">Welcome to Our Site!</div>
-    const shoes = <img src={Shoes} alt="Shoes" id="shoes"/>
-    const shirt = <img src={Shirt} alt="" id="shirt"/>
-    const ps5 = <img src={PS5} alt="" id="ps5"/>
+    const shoes = <img src="/images/red_shoes.jpg" alt="Shoes" id="shoes"/>
+    const shirt = <img src="/images/red_shirt.jpg" alt="" id="shirt"/>
+    const ps5 = <img src="/images/ps5.jpg" alt="" id="ps5"/>
     const products = [text,shoes,shirt,ps5];
     const length = products.length
     const [currentSlide, changeSlide] = useState(0)
