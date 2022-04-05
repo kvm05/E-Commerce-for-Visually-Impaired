@@ -65,13 +65,13 @@
     box-shadow: 0 0.5em 0.5em -0.4em black;
 }
 
-.priceLight{
+.productpriceLight{
     /* width:20%; */
     font-weight: bold;
     font-size: 1.1em;
 }
 
-.priceDark{
+.productpriceDark{
     font-weight: bold;
     font-size: 1.1em;
     color:#cccccc;

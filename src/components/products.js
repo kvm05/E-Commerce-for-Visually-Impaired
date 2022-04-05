@@ -29,7 +29,7 @@ function Product(props){
                 <p className="rating">Rating: {props.rating}</p>
             </div>
             <div className="right">
-                <p className={`price${props.isHighContrast?"Dark":"Light"}`}>Price: ₹{props.price}</p>
+                <p className={`productprice${props.isHighContrast?"Dark":"Light"}`}>Price: ₹{props.price}</p>
                 <button>ADD TO WISHLIST</button>
                 <button>ADD TO CART</button>
                 <a href="dsdssd" className={`learn${props.isHighContrast?"Dark":"Light"}`}>Learn More</a>
