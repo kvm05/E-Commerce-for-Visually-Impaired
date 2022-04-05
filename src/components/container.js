@@ -1,10 +1,8 @@
 import Product from "./products";
 import FilterPane from "./filterpane";
 import "./container.css"
-import viewcart from "./view cart.png"
-import viewcartWheat from "./viewcart-wheat.png"
-import wishlist from "./wishlist.png"
-import wishlistWheat from "./wishlist-wheat.png" 
+import wishlist from "../images/wishlist.png"
+import wishlistWheat from "../images/wishlist-wheat.png" 
 
 function Container(props){
     const image=[]
@@ -19,7 +17,7 @@ function Container(props){
                 <div className="category">
                     <h1>{props.name}</h1>
                     <div  className="icons">
-                        <a href="view cart"><img src={props.isHighContrast?require("./viewcart-wheat.png"):require("./view cart.png")} alt="view cart"></img></a>
+                        <a href="view cart"><img src={props.isHighContrast?require("../images/viewcart-wheat.png"):require("../images/view cart.png")} alt="view cart"></img></a>
                         <a href="wishlist"><img src={props.isHighContrast?wishlistWheat:wishlist} alt="wishlist"></img></a>
                     </div>
                 </div>

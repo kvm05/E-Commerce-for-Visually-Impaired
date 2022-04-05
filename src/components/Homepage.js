@@ -23,7 +23,6 @@ function Homepage(){
             </div>
             <div id="categories">
                 <Categories name = {categories[2]} checkBlind = {isBlind}/>
-                <Categories name = {categories[3]} checkBlind = {isBlind}/>
             </div>
         </div>
     );
