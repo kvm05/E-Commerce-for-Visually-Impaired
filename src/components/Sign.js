@@ -48,11 +48,11 @@ function Sign() {
         createAccountForm.classList.add("form_hidden");
       });
 
-      loginForm.addEventListener("submit", (e) => {
-        // e.preventDefault();
-        setFormMessage(loginForm, "error", "Invalid email/password!")
+      // loginForm.addEventListener("submit", (e) => {
+      //   // e.preventDefault();
+      //   setFormMessage(loginForm, "error", "Invalid email/password!")
         
-      });
+      // });
 
       document.querySelectorAll(".form_input").forEach((inputElement) => {
         inputElement.addEventListener("blur", (e) => {
@@ -102,11 +102,7 @@ function Sign() {
         const errorMessage = error.message;
         console.log('Incorrect')
         const loginForm = document.querySelector("#login");
-        loginForm.addEventListener("submit", (e) => {
-        // e.preventDefault();
         setFormMessage(loginForm, "error", "Invalid email/password!")
-        
-      });
         // ..
       });
   }
