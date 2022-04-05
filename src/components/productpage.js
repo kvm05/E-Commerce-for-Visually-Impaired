@@ -5,7 +5,7 @@ import Container from "./container";
 import CartPage from "./cartpage";
 
 
-function Homepage(){
+function ProductPage(){
     const [isBlind, getChildData] = useState(false)
     const dataFromChild = (childData) => {
         getChildData(childData)
@@ -15,12 +15,12 @@ function Homepage(){
         <div id={`homepage ${isBlind ? 'dark':'light'}`}>
             <Navbar func = {dataFromChild}/>
             
-            {/* <Container name="Category 1" isHighContrast={isBlind} /> */}
-            <CartPage isHighContrast={isBlind} />
+            <Container name="Category 1" isHighContrast={isBlind} />
+            {/* <CartPage isHighContrast={isBlind} /> */}
         
 
         </div>
     );
 }
 
-export default Homepage;
+export default ProductPage;

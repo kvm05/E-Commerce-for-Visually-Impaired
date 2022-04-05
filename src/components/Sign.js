@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
 import "./signin.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import {useForm} from "react-hook-form";
 // import {app, database} from "./Firebase";
-import { getAuth, signInWithPopup,GoogleAuthProvider, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithPopup,GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { registerVersion } from "firebase/app";
 
 
 function setFormMessage(formElement, type, message) {
@@ -25,6 +27,8 @@ function clearInputError(inputElement) {
 }
 
 function Sign() {
+  const navigate = useNavigate()
+  const {register, handleSubmit} = useForm()
   useEffect(() => {
     const loginForm = document.querySelector("#login");
       const createAccountForm = document.querySelector("#signUp");
@@ -32,7 +36,7 @@ function Sign() {
       document
         .querySelector("#createAccount")
         .addEventListener("click", (e) => {
-          console.log('Hello')
+          // console.log('Hello')
           // e.preventDefault();
           loginForm.classList.add("form_hidden");
           createAccountForm.classList.remove("form_hidden");
@@ -46,11 +50,8 @@ function Sign() {
 
       loginForm.addEventListener("submit", (e) => {
         // e.preventDefault();
-        // setFormMessage(
-        //   loginForm,
-        //   "error",
-        //   "Invalid username/password combination"
-        // );
+        setFormMessage(loginForm, "error", "Invalid email/password!")
+        
       });
 
       document.querySelectorAll(".form_input").forEach((inputElement) => {
@@ -73,6 +74,7 @@ function Sign() {
           const token = credential.accessToken;
           // The signed-in user info.
           const user = result.user;
+          navigate("/home")
           // ...
         }).catch((error) => {
           // Handle Errors here.
@@ -84,8 +86,31 @@ function Sign() {
           const credential = GoogleAuthProvider.credentialFromError(error);
           // ...
         });
-  }
+      }
   const emailLogin = (email, password) => {
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        console.log('Welcome In')
+        navigate('/home')
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log('Incorrect')
+        const loginForm = document.querySelector("#login");
+        loginForm.addEventListener("submit", (e) => {
+        // e.preventDefault();
+        setFormMessage(loginForm, "error", "Invalid email/password!")
+        
+      });
+        // ..
+      });
+  }
+  const newEmailLogin = (email, password) => {
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
@@ -99,10 +124,29 @@ function Sign() {
         // ..
       });
   }
+  const onSubmit = (data) => {
+    emailLogin(data.email, data.password)
+  }
+  const newUserSubmit = (data) => {
+    const loginForm = document.querySelector("#login");
+    console.log(data)
+    if(data.newPassword === data.newConfirmPassword){
+      newEmailLogin(data.newEmail, data.newPassword)
+      navigate("/home")
+    }
+    else{
+      setFormMessage(
+          loginForm,
+          "error",
+          "Invalid username/password combination"
+        );
+    }
+
+  }
   return (
     <div className="signin">
-        <div className="container">
-        <form className="form" id="login">
+        <div className="signincontainer" >
+        <form className="form" id="login" onSubmit={handleSubmit(onSubmit)}>
           <h1 className="form_title">Login</h1>
           <div className="form_message form_message_error"></div>
           <div className="form_input-group">
@@ -110,7 +154,9 @@ function Sign() {
               type="text"
               className="form_input"
               autoFocus
-              placeholder="Username or Email"
+              placeholder="Enter your email address"
+              {...register('email')}
+              name="email"
             />
             <div className="form_input_errormsg"></div>
           </div>
@@ -119,15 +165,17 @@ function Sign() {
               type="password"
               className="form_input"
               autoFocus
-              placeholder="Password"
+              name="password"
+              placeholder="Enter your password"
+              {...register('password')}
             />
             <div className="form_input_errormsg"></div>
           </div>
-          <Link to='/home'>
-            <button className="form_button" type="submit">
+          {/* <Link to='/home'> */}
+            <button className="form_button" type="submit" >
               Continue
             </button>
-          </Link>
+          {/* </Link> */}
           <p className="form_text">
             <a href="#" className="form_link">
               Forgotten password?
@@ -146,7 +194,7 @@ function Sign() {
           
         </form>
 
-        <form className="form form_hidden" id="signUp">
+        <form className="form form_hidden" id="signUp" onSubmit={handleSubmit(newUserSubmit)}>
           <h1 className="form_title">Create Account</h1>
           <div className="form_message form_message_error"></div>
           <div className="form_input-group">
@@ -155,6 +203,8 @@ function Sign() {
               className="form_input"
               autoFocus
               placeholder="Email Address"
+              {...register('newEmail')}
+              name = 'newEmail'
             />
             <div className="form_input_errormsg"></div>
           </div>
@@ -164,6 +214,8 @@ function Sign() {
               className="form_input"
               autoFocus
               placeholder="Password"
+              {...register('newPassword')}
+              name = 'newPassword'
             />
             <div className="form_input_errormsg"></div>
           </div>
@@ -173,6 +225,8 @@ function Sign() {
               className="form_input"
               autoFocus
               placeholder="Confirm password"
+              {...register('newConfirmPassword')}
+              name = 'newConfirmPassword'
             />
             <div className="form_input_errormsg"></div>
           </div>
