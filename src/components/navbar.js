@@ -1,6 +1,8 @@
 import React, {useRef, useState} from 'react';
 // import './App.css';
 import './index.css';
+import "./Categories.css"
+import { Link, useNavigate } from "react-router-dom";
 import {DetectOutsideClick} from "./DetectOutsideClick"; 
 
 const Navbar = (props)  =>{
@@ -48,9 +50,11 @@ const Navbar = (props)  =>{
             <div id='my-profile'>
               My Profile              
             </div>
-            <div id='logout'>
-              <i class="fas fa-arrow-right-from-bracket"></i>Logout             
-            </div>
+            <Link id='MyLink' to='/'>
+              <div id='logout'>
+                <i class="fas fa-arrow-right-from-bracket"></i>Logout             
+              </div>
+            </Link>
           </div>
           {/* add my profile and logout option with display hide and stuff */}
         </div>
