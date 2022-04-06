@@ -2,13 +2,35 @@ import Product from "./products";
 import FilterPane from "./filterpane";
 import { Link, useNavigate } from "react-router-dom";
 import "./container.css"
+import {readData, filterByCategory} from "./firebaseservices";
+import {UserContext} from "../App";
+import React, {useState, useContext, useEffect} from "react";
 
 function Container(props){
     const image=[]
     for(let i=11;i<=20;i++){
         image.push(`/images/prod${i}.png`);
     }
-    console.log(image);
+    // console.log(image);
+    const {user} = useContext(UserContext);
+
+    const [products, setProducts ] = useState([])
+    async function get(){
+        setProducts(await readData("products", props.name.toLowerCase(), user));
+    }
+
+ useEffect(get, [])
+
+    const displayProducts = products.map((product) =>{
+        return <Product name = {product.name}
+        price = {product.price}
+        image = {image}
+        description = {product.description}
+        rating = {product.rating}
+        category = {product.category}
+        isHighContrast = {props.isHighContrast}></Product>
+    })
+    
     return ( 
         <div className="container">
             <FilterPane />
@@ -22,14 +44,15 @@ function Container(props){
                         <a href="wishlist"><img src={props.isHighContrast?"/images/wishlist-wheat.png" :"/images/wishlist.png"} alt="wishlist"></img></a>
                     </div>
                 </div>
-                <Product name="Product 1" price="45" image={image} description="The Nike Mercurial Dream Speed Superfly 8 Elite embodies Cristiano Ronaldo's greatest self-proclaimed strength: the power of the mind and meditation. Calming shades of green work together with energising tones of purple and yellow, creating a boot that radiates positivity."
+                {/* <Product name="Product 1" price="45" image={image} description="The Nike Mercurial Dream Speed Superfly 8 Elite embodies Cristiano Ronaldo's greatest self-proclaimed strength: the power of the mind and meditation. Calming shades of green work together with energising tones of purple and yellow, creating a boot that radiates positivity."
                 rating="5" isHighContrast={props.isHighContrast}></Product>
                 <Product name="Product 1" price="45" image={image} description="The Nike Mercurial Dream Speed Superfly 8 Elite embodies Cristiano Ronaldo's greatest self-proclaimed strength: the power of the mind and meditation. Calming shades of green work together with energising tones of purple and yellow, creating a boot that radiates positivity."
                 rating="5" isHighContrast={props.isHighContrast}></Product>
                 <Product name="Product 1" price="45" image={image} description="The Nike Mercurial Dream Speed Superfly 8 Elite embodies Cristiano Ronaldo's greatest self-proclaimed strength: the power of the mind and meditation. Calming shades of green work together with energising tones of purple and yellow, creating a boot that radiates positivity."
                 rating="5" isHighContrast={props.isHighContrast}></Product>
                 <Product name="Product 1" price="45" image={image} description="The Nike Mercurial Dream Speed Superfly 8 Elite embodies Cristiano Ronaldo's greatest self-proclaimed strength: the power of the mind and meditation. Calming shades of green work together with energising tones of purple and yellow, creating a boot that radiates positivity."
-                rating="5" isHighContrast={props.isHighContrast}></Product>
+                rating="5" isHighContrast={props.isHighContrast}></Product> */}
+                {displayProducts}
             </div>
         </div>
       );

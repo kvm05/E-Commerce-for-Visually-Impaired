@@ -36,7 +36,8 @@
 .category h1{
     display: inline-block;
     font-size: 3em;    
-    margin-right: 60%;
+    /* margin-right: 60%; */
+    width: 85%;
 }
 
 .icons{

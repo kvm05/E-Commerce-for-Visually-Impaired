@@ -13,7 +13,7 @@ function CartPage(props){const [isBlind, getChildData] = useState(false)
         getChildData(childData)
     }
     const {user} = useContext(UserContext);
-    const userDetails = readData("users", user);
+    const userDetails = readData("users", "", user);
     // console.log(currentUser.email);
     
     const [ currentCart, updateCart] = useState(userDetails.cart);
@@ -23,7 +23,7 @@ function CartPage(props){const [isBlind, getChildData] = useState(false)
             const itemToChange = currentCart.filter((item) =>{
                 return item.id === id;
             
-        })[0];
+            })[0];
             itemToChange.quantity = newValue;
             if(itemToChange.quantity === 0){
                 currentCart.splice(currentCart.indexOf(itemToChange),1);
