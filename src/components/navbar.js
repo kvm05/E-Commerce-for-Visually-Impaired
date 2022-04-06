@@ -4,6 +4,7 @@ import './index.css';
 import "./Categories.css"
 import { Link, useNavigate } from "react-router-dom";
 import {DetectOutsideClick} from "./DetectOutsideClick"; 
+import { getAuth, signOut } from "firebase/auth";
 
 const Navbar = (props)  =>{
   const dropdownRef = useRef(null);
@@ -13,13 +14,25 @@ const Navbar = (props)  =>{
   const isCheckBlind = () =>{ setBlind(!isBlind)
   props.func(!isBlind)
 }
+  const auth = getAuth();
+  const emailSignOut = () => {
+    const auth = getAuth();
+    signOut(auth).then(() => {
+      // Sign-out successful.
+      console.log('Signed Out')
+    }).catch((error) => {
+      // An error happened.
+    });
+  }
   
   return (
     <div id = {`navbar ${isBlind ? 'dark':'light'}`}>
       <div id='left-navbar'>
-        <div id = 'logo'>
-          Logo
-        </div>  
+        <Link id='MyLink' to = '/home'>
+          <div id = 'logo'>
+            Logo
+          </div>  
+        </Link>
       </div> 
       <div id='right-navbar'>
         <div id='searchbar'>
@@ -51,7 +64,7 @@ const Navbar = (props)  =>{
               My Profile              
             </div>
             <Link id='MyLink' to='/'>
-              <div id='logout'>
+              <div id='logout' onClick={emailSignOut}>
                 <i class="fas fa-arrow-right-from-bracket"></i>Logout             
               </div>
             </Link>

@@ -273,7 +273,7 @@ input:checked + .slider:before {
 	border-radius: 100px;
 }
 
-button{
+/* button{
 		display:block;
 		height: 40px;
 		width: 80%;
@@ -282,4 +282,4 @@ button{
 		border:none;
 		border-radius: 10px;
 		font-weight: bold;
-}
+} */

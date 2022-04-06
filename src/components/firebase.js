@@ -12,11 +12,14 @@ const firebaseConfig = {
   messagingSenderId: "218673752279",
   appId: "1:218673752279:web:7be5b2e7a2c4e02bc56892"
 };
-
+function databaseProducts(){
+  
+}
 // Initialize Firebase
 
 export const app = initializeApp(firebaseConfig)
 export const database = getFirestore(app);
+// databaseProducts()
 
 // addDoc(collection(database, 'products'), {
 //   name: "Nike Mercurial",
