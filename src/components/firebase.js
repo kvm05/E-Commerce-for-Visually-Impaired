@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
+import { getFirestore, collection, addDoc, getDocs, query } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -17,3 +17,21 @@ const firebaseConfig = {
 
 export const app = initializeApp(firebaseConfig)
 export const database = getFirestore(app);
+
+// addDoc(collection(database, 'products'), {
+//   name: "Nike Mercurial",
+//   image: [],
+//   price: 8000,
+//   rating: 5,
+//   category: [
+//     "shoes", "sports", "nike"
+//   ],
+//   description: "Test"
+// })
+
+// async function read(){
+//   const querySnapshot = await getDocs(collection(database,'products'));
+//   querySnapshot.forEach((obj)=>{console.log(obj.data())});
+// }
+
+// read()

@@ -1,0 +1,30 @@
+Users
+    email
+    name
+    cart[]
+        name
+        id
+        image
+        price
+        quantity
+        rating
+        extras{}
+        category
+    wishlist[]
+        ...
+        -quantity
+    history[]
+        ...
+        +placed_at
+    wallet
+    coupons[]
+
+Product
+    name
+    id
+    image[]
+    price
+    rating
+    category
+    description
+

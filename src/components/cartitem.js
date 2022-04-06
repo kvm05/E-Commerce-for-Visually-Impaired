@@ -20,12 +20,16 @@ function CartItem(props){
     
     function increaseQuantity(){
         changeQuantity((prevQuantity)=>{
+            props.onCartUpdate(props.id, prevQuantity + 1);
+            props.updateTotal();
             return prevQuantity+1;
         })
     }
 
     function decreaseQuantity(){
         changeQuantity((prevQuantity)=>{
+            props.onCartUpdate(props.id, prevQuantity - 1);
+            props.updateTotal();
             return prevQuantity-1;
         })
     }
