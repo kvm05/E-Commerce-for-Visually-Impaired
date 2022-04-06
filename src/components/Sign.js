@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import "./signin.css";
 import { Link, useNavigate } from "react-router-dom";
 import {useForm} from "react-hook-form";
 // import {app, database} from "./Firebase";
 import { getAuth, signInWithPopup,GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { registerVersion } from "firebase/app";
+import { UserContext } from "../App";
 
 
 function setFormMessage(formElement, type, message) {
@@ -27,6 +28,9 @@ function clearInputError(inputElement) {
 }
 
 function Sign() {
+  // const {user} = useContext(UserContext)
+  // console.log('Hey param gaand mara')
+  // console.log(user.email)
   const navigate = useNavigate()
   const {register, handleSubmit} = useForm()
   useEffect(() => {

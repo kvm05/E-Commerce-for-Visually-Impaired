@@ -12,10 +12,11 @@ function CartPage(props){const [isBlind, getChildData] = useState(false)
     const dataFromChild = (childData) => {
         getChildData(childData)
     }
-    const currentUser = useContext(UserContext);
-    const userDetails = readData("users", currentUser);
+    const {user} = useContext(UserContext);
+    const userDetails = readData("users", user);
+    // console.log(currentUser.email);
     
-    const [ currentCart, updateCart] = useState(userDetails.cart)
+    const [ currentCart, updateCart] = useState(userDetails.cart);
 
     function onCartUpdate(id, newValue) {
         updateCart(() =>{
