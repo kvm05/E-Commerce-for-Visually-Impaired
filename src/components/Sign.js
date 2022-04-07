@@ -3,7 +3,7 @@ import "./signin.css";
 import { Link, useNavigate } from "react-router-dom";
 import {useForm} from "react-hook-form";
 // import {app, database} from "./Firebase";
-import { getAuth, signInWithPopup,GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithPopup,GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { registerVersion } from "firebase/app";
 import { UserContext } from "../App";
 
@@ -111,13 +111,20 @@ function Sign() {
         // ..
       });
   }
-  const newEmailLogin = (email, password) => {
+  const newEmailLogin = (email, password, name) => {
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
-
+        console.log(user)
+        updateProfile(user, {
+          displayName: name
+        }).then(()=>{
+          console.log('Name added')
+        }).catch((error) => {
+          console.log(error)
+        })
         // ...
       })
       .catch((error) => {
@@ -132,9 +139,8 @@ function Sign() {
   const newUserSubmit = (data) => {
     const loginForm = document.querySelector("#login");
     console.log(data)
-    if(data.newPassword === data.newConfirmPassword){
-      newEmailLogin(data.newEmail, data.newPassword)
-      
+    if(data.newPassword === data.newConfirmPassword && data.newPassword!=null && data.newConfirmPassword!=null){
+      newEmailLogin(data.newEmail, data.newPassword, data.newName)
       navigate("/home")
     }
     else{
@@ -200,6 +206,17 @@ function Sign() {
         <form className="form form_hidden" id="signUp" onSubmit={handleSubmit(newUserSubmit)}>
           <h1 className="form_title">Create Account</h1>
           <div className="form_message form_message_error"></div>
+          <div className="form_input-group">
+            <input
+              type="text"
+              className="form_input"
+              autoFocus
+              placeholder="Name"
+              {...register('newName')}
+              name = 'newName'
+            />
+            <div className="form_input_errormsg"></div>
+          </div>
           <div className="form_input-group">
             <input
               type="text"
