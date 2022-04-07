@@ -43,6 +43,7 @@ function MainPage() {
             <Route path='categories/Shoes' element={<ProductPage name='Shoes'/>}/>
             <Route path='categories/Electronics' element={<ProductPage name='Electronics'/>}/>
             <Route path='categories/Food' element={<ProductPage name='Food'/>}/>
+            <Route path='categories/Clothes' element={<ProductPage name='Clothes'/>}/>
             <Route path='cart' element={<CartPage/>}/>
         </Routes>
       </BrowserRouter>

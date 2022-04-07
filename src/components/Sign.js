@@ -8,6 +8,7 @@ import { registerVersion } from "firebase/app";
 import { UserContext } from "../App";
 
 
+
 function setFormMessage(formElement, type, message) {
   const messageElement = formElement.querySelector(".form_message");
   messageElement.textContent = message;
@@ -116,6 +117,7 @@ function Sign() {
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
+
         // ...
       })
       .catch((error) => {
@@ -132,6 +134,7 @@ function Sign() {
     console.log(data)
     if(data.newPassword === data.newConfirmPassword){
       newEmailLogin(data.newEmail, data.newPassword)
+      
       navigate("/home")
     }
     else{

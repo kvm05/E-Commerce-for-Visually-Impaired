@@ -5,7 +5,7 @@ import Categories from "./Categories";
 import "./Homepage.css";
 import "./index.css";
 
-const categories = ["Shoes", "Electronics", "Food"];
+const categories = ["Shoes", "Electronics", "Food", "Clothes"];
 
 function Homepage(){
     const [isBlind, getChildData] = useState(false)
@@ -22,7 +22,8 @@ function Homepage(){
                 <Categories name = {categories[1]} checkBlind = {isBlind}/>
             </div>
             <div id="categories">
-                <Categories name = {categories[2]} checkBlind = {isBlind}/>
+                <Categories name = {categories[2]} checkBlind = {isBlind}/> 
+                <Categories name = {categories[3]} checkBlind = {isBlind}/> 
             </div>
         </div>
     );
