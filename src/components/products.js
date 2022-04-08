@@ -1,8 +1,10 @@
 import React,{useState} from "react";
 import "./products.css"
+import { useSpeechSynthesis } from 'react-speech-kit';
 
 function Product(props){
     const [currentSlide,changeSlide]=useState(0);
+    const {speak, cancel} = useSpeechSynthesis();
     function goLeft(){
         changeSlide((prevSlide)=>{
             if (prevSlide == 0) return props.image.length - 1
@@ -24,16 +26,18 @@ function Product(props){
                 <button><i class="fas fa-chevron-right" onClick={goRight}></i></button>
             </div>
             <div className="details">
-                <h2 className="title">{props.name}</h2>
-                <p className="description">{props.description}</p>
-                <p className="rating">Rating: {props.rating}</p>
+                <h2 className="title" onMouseEnter={() => speak({text: props.name})} onMouseLeave={() => cancel()}>{props.name}</h2>
+                <p className="description" onMouseEnter={() => speak({text: props.description})} onMouseLeave={() => cancel()}>{props.description}</p>
+                <p className="rating" onMouseEnter={() => speak({text: `Rating: ${props.rating}`})} onMouseLeave={() => cancel()}>Rating: {props.rating}</p>
             </div>
             <div className="right">
-                <p className={`productprice${props.isHighContrast?"Dark":"Light"}`}>Price: ₹{props.price}</p>
-                <button>ADD TO WISHLIST</button>
+                <p className={`productprice${props.isHighContrast?"Dark":"Light"}`} id='price' onMouseEnter={() => speak({text: `Price: ₹${props.price}`})} onMouseLeave={() => cancel()}>Price: ₹{props.price}</p>
+                <button onMouseEnter={() => speak({text: "Add To Wishlist"})} onClick={() => speak({text: "Added to Wishlist"})} onMouseLeave={() => cancel()}>ADD TO WISHLIST</button>
                 <button onClick={() =>{
-                    props.addToCart(props.name);
-                }}>ADD TO CART</button>
+                    props.addToCart(props.name)
+                    speak({text: "Added to Cart"})
+                }} onMouseEnter={() => speak({text: "Add To Cart"})}
+                >ADD TO CART</button>
                 <a href="dsdssd" className={`learn${props.isHighContrast?"Dark":"Light"}`}>Learn More</a>
             </div>
         </div>

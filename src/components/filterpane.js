@@ -3,9 +3,10 @@ import "./filterpane.css"
 import { readData, getBrands } from "./firebaseservices";
 import { useEffect, useState, useContext } from "react";
 import { UserContext } from "../App"
+import { useSpeechSynthesis } from 'react-speech-kit';
 
 function FilterPane(props){
-
+    const {speak, cancel} = useSpeechSynthesis();
     // const { user } = useContext(UserContext)
     // const [products, setProducts ] = useState([]);  
     // const brands = [];
@@ -58,7 +59,7 @@ function FilterPane(props){
 
     const displayBrand = props.brands.map((brand) =>{
         return(
-            <li key = {brand}><a onClick = {() =>{
+            <li key = {brand}  onMouseEnter={() => speak({text: brand})} onMouseLeave={() => cancel()}><a onClick = {() =>{
                 console.log(brand);
                 props.filterBrand(brand);
             }}>{brand[0].toUpperCase() + brand.slice(1)}</a></li> 
@@ -67,9 +68,9 @@ function FilterPane(props){
 
     return(
         <div className="filter">
-            <h2>Filter by:-</h2>
+            <h2 onMouseEnter={() => speak({text: "Filter By"})} onMouseLeave={() => cancel()}>Filter by:-</h2>
             <div>
-            <h3>Brand</h3>
+            <h3 onMouseEnter={() => speak({text: "Brand"})} onMouseLeave={() => cancel()}>Brand</h3>
             <ul>{displayBrand}</ul>
             </div>
                 {/* <p>Ad consequat pariatur dolore ex anim aute ea officia velit irure aliquip laborum ipsum cillum. Pariatur velit deserunt dolore anim tempor tempor pariatur elit magna. Cupidatat adipisicing laboris ea elit enim amet pariatur. Est ex aliquip mollit ut proident mollit Lorem do aliquip occaecat irure officia minim.

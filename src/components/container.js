@@ -5,9 +5,10 @@ import "./container.css"
 import {readData, filterByBrand, getBrands, search, getAllProducts} from "./firebaseservices";
 import {UserContext} from "../App";
 import React, {useState, useContext, useEffect} from "react";
+import { useSpeechSynthesis } from 'react-speech-kit';
 
 function Container(props){
-    
+    const {speak, cancel} = useSpeechSynthesis();
     const image=[]
     for(let i=11;i<=20;i++){
         image.push(`/images/prod${i}.png`);
@@ -109,12 +110,12 @@ function Container(props){
             <FilterPane category = {props.name} filterBrand = {filterBrand} brands = {brands}></FilterPane>
             <div className="prod">
                 <div className="category">
-                <h1>{props.valueToBeSearched? "Search Results": name[0].toUpperCase()+name.slice(1)}</h1>
+                <h1 id='category-header' onMouseEnter={() => speak({text:document.querySelector('#category-header').textContent})}>{props.valueToBeSearched? "Search Results": name[0].toUpperCase()+name.slice(1)}</h1>
                     <div  className="icons">
                         <Link to = '/cart'>
-                            <img src={props.isHighContrast?"/images/viewcart-wheat.png":"/images/view cart.png"} alt="view cart"></img>
+                            <img src={props.isHighContrast?"/images/viewcart-wheat.png":"/images/view cart.png"} alt="view cart" onMouseEnter={() => speak({text: "View Cart"})}></img>
                         </Link>
-                        <a href="wishlist"><img src={props.isHighContrast?"/images/wishlist-wheat.png" :"/images/wishlist.png"} alt="wishlist"></img></a>
+                        <a href="wishlist"><img src={props.isHighContrast?"/images/wishlist-wheat.png" :"/images/wishlist.png"} alt="wishlist" onMouseEnter={() => speak({text: "View Wishlist: Currently Disabled"})}></img></a>
                     </div>
                 </div>
                 <div className="displaySection">
