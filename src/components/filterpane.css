@@ -4,4 +4,14 @@ h3{
 
 .filter{
     max-width: 20%;
+    /* padding:20px; */
+}
+
+ul{
+    margin: 0 20px;
+}
+
+ul a:hover{
+    text-decoration: underline;
+    cursor: pointer;
 }

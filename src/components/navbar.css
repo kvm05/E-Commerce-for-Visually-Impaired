@@ -283,3 +283,7 @@ input:checked + .slider:before {
 		border-radius: 10px;
 		font-weight: bold;
 } */
+
+button{
+	cursor: pointer;
+}

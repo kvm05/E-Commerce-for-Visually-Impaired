@@ -16,8 +16,7 @@
     /*background: url(./background.jpg);*/
     background: linear-gradient(180deg,#000 0%,#FF8C00 100%);
     background-size: cover;
-    background-image: url("https://images.unsplash.com/photo-1561715276-a2d087060f1d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80");
-    background-position: center;
+    background-image: url("/public/images/signin_background.jpg");
 }
 
 .signincontainer
@@ -28,8 +27,9 @@
     padding: 2rem;
     box-shadow: 0 0 40px rgba(0,0,0,0,2);
     border-radius: var(--border-radius);
-    background: rgba(198, 198, 198, 0.4);
-    color: wheat;
+    background: white;
+    color: black;
+    box-shadow: 0 0 60px rgba(46,46,46,.25 );
     font: 500 1rem 'Georgia',serif;
 }
 
@@ -92,9 +92,9 @@
     outline: none;
     background: none;
     border: none;
-    border-bottom: 2px solid wheat;
+    border-bottom: 2px solid black;
     /* transition: background 0.2s, border-color 0.2s; */
-    color: wheat;
+    color: black;
 }
 
 .form_input:focus
@@ -159,7 +159,7 @@
     text-decoration: underline;
 }
 .form_input::placeholder{
-    color: wheat;
+    color: black;
 }
 .google{
     background: none;

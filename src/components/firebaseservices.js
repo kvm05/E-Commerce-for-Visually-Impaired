@@ -1,4 +1,5 @@
 import { getFirestore, collection, addDoc, getDocs, getDoc, query, where, orderBy } from "firebase/firestore";
+import { get } from "react-hook-form";
 import { app, database } from "./firebase";
 // import { currentUser } from "./currentuser"
 
@@ -6,7 +7,7 @@ import { app, database } from "./firebase";
 export async function readData(collectionDB, category, currentUser){
     if(collectionDB === "products"){
         const q = query(collection(database, collectionDB), where("category", "array-contains", category), orderBy("name"));
-        console.log(category);
+        // console.log(category);
         const querySnapshot = await getDocs(q);
         return querySnapshot.docs.map((obj)=>{return obj.data()});
     }
@@ -17,17 +18,34 @@ export async function readData(collectionDB, category, currentUser){
     }
 }
 
-export async function addNewUser(user){
-    addDoc(collection(database, 'products'), {
-          name: "Nike Mercurial",
-          image: [],
-          price: 8000,
-          rating: 5,
-          category: [
-            "shoes", "sports", "nike"
-          ],
-          description: "Test"
+export function addNewUser(user){
+    addDoc(collection(database, "users"), {
+          name: "",
+          cart : [],
+          wishlist : [],
+          wallet : 1000,
+          uid : user.uid,
+          email : user.email
         })}
+
+export async function getAllProducts(){
+    const q = query(collection(database, "products"), orderBy("name"));
+    const querySnapshot = await getDocs(q);
+    return querySnapshot.docs.map((obj) =>{
+        return obj.data();
+    })
+}
+
+export async function search(parameter){
+    const products = await getAllProducts();
+    const res = [];
+    products.forEach((product) =>{
+        if(product.name.indexOf(parameter) !=-1){
+            res.push(product);
+        }
+    })
+    return res;
+}
 // export async function filterByCategory(category){
 //     const res = [];
 //     category.forEach(async (filter) =>{
@@ -40,4 +58,21 @@ export async function addNewUser(user){
 //     return res;
 // }
 
-// export async function filterByPrice()
+export async function getBrands(category){
+    const q = query(collection(database, "products"), where("category", "array-contains", category), orderBy("name"));
+    const querySnapshot = await getDocs(q);
+    const brands = [];
+    const temp = querySnapshot.docs.map((obj)=>{return obj.data()})
+    temp.forEach((obj =>{
+        if(brands.indexOf(obj.category[2]) === -1){
+            brands.push(obj.category[2]);
+        }
+    }));
+    return brands; 
+}
+
+export async function filterByBrand(brand){
+    const q = query(collection(database, "products"), where("category", "array-contains", brand), orderBy("name"));
+    const querySnapshot = await getDocs(q);
+    return querySnapshot.docs.map((obj)=>{return obj.data()});   
+}

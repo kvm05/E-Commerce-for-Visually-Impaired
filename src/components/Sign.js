@@ -3,9 +3,10 @@ import "./signin.css";
 import { Link, useNavigate } from "react-router-dom";
 import {useForm} from "react-hook-form";
 // import {app, database} from "./Firebase";
-import { getAuth, signInWithPopup,GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithPopup,GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { registerVersion } from "firebase/app";
 import { UserContext } from "../App";
+import { addNewUser } from "./firebaseservices";
 
 
 
@@ -111,12 +112,20 @@ function Sign() {
         // ..
       });
   }
-  const newEmailLogin = (email, password) => {
+  const newEmailLogin = async (email, password, name) => {
     const auth = getAuth();
-    createUserWithEmailAndPassword(auth, email, password)
+    await createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
+        console.log(user);
+        updateProfile(user, {
+          displayName: name
+        }).then(() => {
+          console.log('Name added')
+        }).catch((error) => {
+            console.log(error)
+        })
 
         // ...
       })
@@ -129,12 +138,15 @@ function Sign() {
   const onSubmit = (data) => {
     emailLogin(data.email, data.password)
   }
-  const newUserSubmit = (data) => {
+  const {user} = useContext(UserContext);
+
+  const newUserSubmit = async (data) => {
     const loginForm = document.querySelector("#login");
     console.log(data)
     if(data.newPassword === data.newConfirmPassword){
-      newEmailLogin(data.newEmail, data.newPassword)
-      
+      await newEmailLogin(data.newEmail, data.newPassword, data.newName);
+      addNewUser(user);
+      console.log(user); 
       navigate("/home")
     }
     else{
@@ -200,6 +212,17 @@ function Sign() {
         <form className="form form_hidden" id="signUp" onSubmit={handleSubmit(newUserSubmit)}>
           <h1 className="form_title">Create Account</h1>
           <div className="form_message form_message_error"></div>
+          <div className="form_input-group">
+            <input
+              type="text"
+              className="form_input"
+              autoFocus
+              placeholder="Name"
+              {...register('newName')}
+              name = 'newName'
+            />
+            <div className="form_input_errormsg"></div>
+          </div>
           <div className="form_input-group">
             <input
               type="text"

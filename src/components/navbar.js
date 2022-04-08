@@ -36,7 +36,10 @@ const Navbar = (props)  =>{
       </div> 
       <div id='right-navbar'>
         <div id='searchbar'>
-          <input type="search" id = {`search ${isBlind ? 'dark':'light'}`} placeholder='Search' />
+          <input type="search" id = {`search ${isBlind ? 'dark':'light'}`} placeholder='Search' onInput = {(event) =>{
+            console.log(event.target.value);
+            props.search(event.target.value);
+          }}/>
           <button id = {`search-button ${isBlind ? 'dark':'light'}`}>
             <i class="fas fa-magnifying-glass"></i>
           </button>
