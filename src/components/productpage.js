@@ -7,7 +7,7 @@ import CartPage from "./cartpage";
 
 
 function ProductPage(props){
-    const [isBlind, getChildData] = useState(false)
+    const [isBlind, getChildData] = useState(true)
     const dataFromChild = (childData) => {
         getChildData(childData)
     }

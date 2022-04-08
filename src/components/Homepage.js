@@ -8,7 +8,7 @@ import "./index.css";
 const categories = ["Shoes", "Electronics", "Food", "Clothes"];
 
 function Homepage(){
-    const [isBlind, getChildData] = useState(false)
+    const [isBlind, getChildData] = useState(true)
     const dataFromChild = (childData) => {
         getChildData(childData)
         // console.log("ITS HERE")

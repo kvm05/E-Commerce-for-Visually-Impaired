@@ -10,7 +10,7 @@ const Navbar = (props)  =>{
   const dropdownRef = useRef(null);
   const [isClicked, setClicked] = DetectOutsideClick(dropdownRef, false);
   const onClick = () => setClicked(!isClicked);
-  const [isBlind, setBlind] = useState(false)
+  const [isBlind, setBlind] = useState(true)
   const isCheckBlind = () =>{ setBlind(!isBlind)
   props.func(!isBlind)
 }
@@ -47,7 +47,7 @@ const Navbar = (props)  =>{
         <div id='toggle1'>
           <div id='toggle1text'>{`High Contrast: ${isBlind ? 'On' : 'Off'}`}</div>
           <label className="switch">
-            <input type="checkbox" onClick={isCheckBlind}/>
+            <input type="checkbox" onClick={isCheckBlind} defaultChecked={true} checked={isBlind}/>
               <span className="slider round"></span>
             </label>
         </div>
