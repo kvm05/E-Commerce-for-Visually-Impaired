@@ -6,6 +6,7 @@ import {useForm} from "react-hook-form";
 import { getAuth, signInWithPopup,GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { registerVersion } from "firebase/app";
 import { UserContext } from "../App";
+import { addNewUser } from "./firebaseservices";
 
 
 
@@ -111,9 +112,9 @@ function Sign() {
         // ..
       });
   }
-  const newEmailLogin = (email, password, name) => {
+  const newEmailLogin = async (email, password, name) => {
     const auth = getAuth();
-    createUserWithEmailAndPassword(auth, email, password)
+    await createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
@@ -136,7 +137,9 @@ function Sign() {
   const onSubmit = (data) => {
     emailLogin(data.email, data.password)
   }
-  const newUserSubmit = (data) => {
+  const {user} = useContext(UserContext);
+
+  const newUserSubmit = async (data) => {
     const loginForm = document.querySelector("#login");
     console.log(data)
     if(data.newPassword === data.newConfirmPassword && data.newPassword!=null && data.newConfirmPassword!=null){

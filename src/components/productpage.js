@@ -11,11 +11,20 @@ function ProductPage(props){
     const dataFromChild = (childData) => {
         getChildData(childData)
     }
+
+    const [ valueToBeSearched, setValue ] = useState(""); 
+    const prevState = valueToBeSearched;
+    function search(value){
+        setValue(value);
+    }
+
+
+    console.log(valueToBeSearched);
     // console.log(ClickCategory)
     return(
         <div id={`homepage ${isBlind ? 'dark':'light'}`}>
-            <Navbar func = {dataFromChild}/>
-            <Container name={props.name} isHighContrast={isBlind} />    
+            <Navbar search = {search} func = {dataFromChild}/>
+            <Container name={props.name} valueToBeSearched = {valueToBeSearched} isHighContrast={isBlind} />    
         </div>
     );
 }

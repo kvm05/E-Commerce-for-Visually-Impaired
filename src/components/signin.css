@@ -16,8 +16,7 @@
     /*background: url(./background.jpg);*/
     background: linear-gradient(180deg,#000 0%,#FF8C00 100%);
     background-size: cover;
-    background-image: url("C:/SPIT/e-commerce-web/public/images/signin_background.jpg");
-    background-position: center;
+    background-image: url("/public/images/signin_background.jpg");
 }
 
 .signincontainer
