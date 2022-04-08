@@ -82,6 +82,8 @@ code {
 	font-size: 18px;
 	text-align: center;
 	font-family: "Roboto";
+	color: wheat;
+
 }
 #search:focus {
 	outline: none;

@@ -20,6 +20,8 @@ function Container(props){
     const [ name, setName ] = useState(props.name.toLowerCase());
 
     let displayProducts = [];
+    let filteredProducts = [];
+
 
     async function filterBrand(brand){
         // console.log(brand);
@@ -59,7 +61,6 @@ function Container(props){
     useEffect(get, [])
     
     function display(){
-        let filteredProducts = [];
         console.log('Value: ' + props.valueToBeSearched)
         if (props.valueToBeSearched){
             console.log("search");
@@ -97,7 +98,9 @@ function Container(props){
     }, []);
 
     
-        
+        function addToCart(prodName){
+
+        }
     
     
     return ( 
@@ -106,13 +109,16 @@ function Container(props){
             <FilterPane category = {props.name} filterBrand = {filterBrand} brands = {brands}></FilterPane>
             <div className="prod">
                 <div className="category">
-                    <h1>{props.name}</h1>
+                <h1>{props.valueToBeSearched? "Search Results": name[0].toUpperCase()+name.slice(1)}</h1>
                     <div  className="icons">
                         <Link to = '/cart'>
                             <img src={props.isHighContrast?"/images/viewcart-wheat.png":"/images/view cart.png"} alt="view cart"></img>
                         </Link>
                         <a href="wishlist"><img src={props.isHighContrast?"/images/wishlist-wheat.png" :"/images/wishlist.png"} alt="wishlist"></img></a>
                     </div>
+                </div>
+                <div className="displaySection">
+                    {filteredProducts.length !=0 ? displayProducts : "No items match your search!"}
                 </div>
                 {/* <Product name="Product 1" price="45" image={image} description="The Nike Mercurial Dream Speed Superfly 8 Elite embodies Cristiano Ronaldo's greatest self-proclaimed strength: the power of the mind and meditation. Calming shades of green work together with energising tones of purple and yellow, creating a boot that radiates positivity."
                 rating="5" isHighContrast={props.isHighContrast}></Product>
@@ -122,7 +128,6 @@ function Container(props){
                 rating="5" isHighContrast={props.isHighContrast}></Product>
                 <Product name="Product 1" price="45" image={image} description="The Nike Mercurial Dream Speed Superfly 8 Elite embodies Cristiano Ronaldo's greatest self-proclaimed strength: the power of the mind and meditation. Calming shades of green work together with energising tones of purple and yellow, creating a boot that radiates positivity."
                 rating="5" isHighContrast={props.isHighContrast}></Product> */}
-                {displayProducts}
             </div>
         </div>
       );

@@ -31,7 +31,9 @@ function Product(props){
             <div className="right">
                 <p className={`productprice${props.isHighContrast?"Dark":"Light"}`}>Price: ₹{props.price}</p>
                 <button>ADD TO WISHLIST</button>
-                <button>ADD TO CART</button>
+                <button onClick={() =>{
+                    props.addToCart(props.name);
+                }}>ADD TO CART</button>
                 <a href="dsdssd" className={`learn${props.isHighContrast?"Dark":"Light"}`}>Learn More</a>
             </div>
         </div>
