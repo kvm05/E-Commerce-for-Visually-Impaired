@@ -20,7 +20,8 @@ function CartItem(props){
     
     function increaseQuantity(){
         changeQuantity((prevQuantity)=>{
-            props.onCartUpdate(props.id, prevQuantity + 1);
+            props.onCartUpdate(props.name, prevQuantity + 1);
+            console.log(prevQuantity+1);
             props.updateTotal();
             return prevQuantity+1;
         })
@@ -28,7 +29,8 @@ function CartItem(props){
 
     function decreaseQuantity(){
         changeQuantity((prevQuantity)=>{
-            props.onCartUpdate(props.id, prevQuantity - 1);
+            props.onCartUpdate(props.name, prevQuantity - 1);
+            console.log(prevQuantity-1);
             props.updateTotal();
             return prevQuantity-1;
         })
@@ -41,9 +43,9 @@ function CartItem(props){
     return(
         <div className="cartitem">
             <div className="image">
-                <button><i class="fas fa-chevron-left" onClick={goLeft}></i></button>
+                <button onClick={goLeft}><i class="fas fa-chevron-left" ></i></button>
                 <img src={props.image[currentSlide]} alt={props.name}></img>
-                <button><i class="fas fa-chevron-right" onClick={goRight}></i></button>
+                <button onClick={goRight}><i class="fas fa-chevron-right" ></i></button>
             </div>
             <div className={`name${props.isHighContrast?"Dark":"Light"}`}>
                 {props.name}

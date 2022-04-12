@@ -2,12 +2,18 @@
 	margin: 0px 0px;
 } */
 
-body{
-	height:100%;
+body,html{
+	background-size: cover;
+
+	/* height:100%; */
+	background: linear-gradient(180deg, #000 0%, #FF8C00 100%) no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
 }
 
 #root{
-	height:100%;
 }
 
 [id = 'homepage dark'] {
@@ -20,7 +26,7 @@ body{
 	-moz-osx-font-smoothing: grayscale;
 	/* height: 74vh; */
 	color: wheat;
-	background: linear-gradient(180deg, #000 0%, #FF8C00 100%);
+	/* z-index: -69; */
 }
 [id = 'homepage light'] {
 	height:100%;
@@ -32,6 +38,8 @@ body{
 	-moz-osx-font-smoothing: grayscale;
 	/* height: 74vh; */
 	background: linear-gradient(180deg, #2176ff 0%, #ffffff 100%);
+	/* z-index: -69; */
+
 }
 
 code {

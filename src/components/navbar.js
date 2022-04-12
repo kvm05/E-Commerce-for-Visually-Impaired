@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, { useRef, useState, useContext } from 'react';
 // import './App.css';
 import './index.css';
 import "./Categories.css"
@@ -6,10 +6,12 @@ import { Link, useNavigate } from "react-router-dom";
 import {DetectOutsideClick} from "./DetectOutsideClick"; 
 import { getAuth, signOut } from "firebase/auth";
 import { useSpeechSynthesis } from 'react-speech-kit';
+import { UserContext } from '../App';
 
 const Navbar = (props)  =>{
   const dropdownRef = useRef(null);
   const [isClicked, setClicked] = DetectOutsideClick(dropdownRef, false);
+  const {user} = useContext(UserContext);
   const {speak, cancel} = useSpeechSynthesis();
   const onClick = () => setClicked(!isClicked);
   const [isBlind, setBlind] = useState(true)
@@ -63,6 +65,7 @@ const Navbar = (props)  =>{
               <span className="slider round"></span>
           </label>
         </div>
+        {(user) ? 
         <div id='profile-bar'>
           <button id='profile' onClick={onClick}  onMouseEnter={() => speak({text:"Click to see profile or logout"})} onMouseLeave={() => cancel()}>
             <i className="fas fa-user"></i>
@@ -77,8 +80,13 @@ const Navbar = (props)  =>{
               </div>
             </Link>
           </div>
-          {/* add my profile and logout option with display hide and stuff */}
+        </div> : 
+        <div>
+          <button id="login">
+            Log In!
+          </button>
         </div>
+        }
       </div>
     </div>
   )

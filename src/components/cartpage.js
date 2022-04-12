@@ -1,4 +1,4 @@
-import React, {useState, useContext} from "react";
+import React, {useState, useContext, useEffect} from "react";
 import CartItem from "./cartitem";
 import OrderSummary from "./ordersummary";
 import Navbar from './navbar';
@@ -7,21 +7,41 @@ import "./cartpage.css"
 import "./firebaseservices"
 import {readData} from "./firebaseservices";
 import {UserContext} from "../App";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
-function CartPage(props){const [isBlind, getChildData] = useState(false)
+function CartPage(props){const [isBlind, getChildData] = useState(true)
     const dataFromChild = (childData) => {
         getChildData(childData)
     }
     const {user} = useContext(UserContext);
-    const userDetails = readData("users", "", user);
+    let userDetails = [];
+
+    function get(){
+        const auth = getAuth();
+        onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            console.log(user);
+            userDetails = await readData("users", "", user);
+            updateCart(userDetails.cart)
+        } else {
+            // User is signed out
+            // ...
+        }
+        });
+        
+    }
+
     // console.log(currentUser.email);
     
-    const [ currentCart, updateCart] = useState(userDetails.cart);
+    const [ currentCart, updateCart] = useState([]);
 
-    function onCartUpdate(id, newValue) {
+    useEffect(get, [])
+
+
+    function onCartUpdate(name, newValue) {
         updateCart(() =>{
             const itemToChange = currentCart.filter((item) =>{
-                return item.id === id;
+                return item.name === name;
             
             })[0];
             itemToChange.quantity = newValue;
@@ -38,12 +58,15 @@ function CartPage(props){const [isBlind, getChildData] = useState(false)
     }
 
     const [ currenTotal, setTotal ] = useState(calculateTotal())  
-
+    
+    useEffect(updateTotal, []);
     function calculateTotal(){
         let total = 0;
-        for(let item in currentCart){
-            total += item.quantity;
-        }
+        currentCart.forEach((item) =>{
+            total += item.quantity*item.price;
+        })
+    
+        console.log(total);
         return total;
     }
 
@@ -54,10 +77,12 @@ function CartPage(props){const [isBlind, getChildData] = useState(false)
         })
     }
 
+    const image=["/images/prod11.png"]
+
     const displayCart = currentCart.map((item) => {
         return <CartItem name = {item.name}
                 price = {item.price}
-                image = {item.image}
+                image = {image}
                 quantity = {item.quantity}
                 onCartUpdate = {onCartUpdate}
                 updateTotal = {updateTotal}
@@ -65,7 +90,6 @@ function CartPage(props){const [isBlind, getChildData] = useState(false)
                 id ={item.id}></CartItem>
     })
 
-    const image=["/images/prod11.png"]
     return (
         <div className="cartpage" id={`homepage ${isBlind ? 'dark':'light'}`}>
             <Navbar func = {dataFromChild}/>

@@ -114,25 +114,14 @@ function Sign() {
   }
   const newEmailLogin = async (email, password, name) => {
     const auth = getAuth();
-    await createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in 
-        const user = userCredential.user;
-        console.log(user)
-        updateProfile(user, {
-          displayName: name
-        }).then(()=>{
-          console.log('Name added')
-        }).catch((error) => {
-          console.log(error)
-        })
-        // ...
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // ..
-      });
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password)
+    const user = userCredential.user;
+    console.log(user);
+    await updateProfile(user, {
+      displayName: name
+    })
+    console.log('Name added')
+    return user
   }
   const onSubmit = (data) => {
     emailLogin(data.email, data.password)
@@ -142,8 +131,10 @@ function Sign() {
   const newUserSubmit = async (data) => {
     const loginForm = document.querySelector("#login");
     console.log(data)
-    if(data.newPassword === data.newConfirmPassword && data.newPassword!=null && data.newConfirmPassword!=null){
-      newEmailLogin(data.newEmail, data.newPassword, data.newName)
+    if(data.newPassword === data.newConfirmPassword){
+      const mNewUser = await newEmailLogin(data.newEmail, data.newPassword, data.newName);
+      addNewUser(mNewUser, data.newName);
+      console.log(mNewUser); 
       navigate("/home")
     }
     else{

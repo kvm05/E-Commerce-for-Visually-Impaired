@@ -1,4 +1,4 @@
-import { getFirestore, collection, addDoc, getDocs, getDoc, query, where, orderBy } from "firebase/firestore";
+import { getFirestore, collection, addDoc, getDocs, doc, getDoc, query, where, orderBy, updateDoc, arrayUnion } from "firebase/firestore";
 import { get } from "react-hook-form";
 import { app, database } from "./firebase";
 // import { currentUser } from "./currentuser"
@@ -12,15 +12,16 @@ export async function readData(collectionDB, category, currentUser){
         return querySnapshot.docs.map((obj)=>{return obj.data()});
     }
     else if(collectionDB === "users"){
+        console.log(currentUser.uid);
         const q = query(collection(database, collectionDB), where("uid", "==", currentUser.uid));
         const querySnapshot = await getDocs(q);
         return querySnapshot.docs[0].data();
     }
 }
 
-export function addNewUser(user){
-    addDoc(collection(database, "users"), {
-          name: "",
+export function addNewUser(user, name){
+     addDoc(collection(database, "users"), {
+          name: name,
           cart : [],
           wishlist : [],
           wallet : 1000,
@@ -75,4 +76,17 @@ export async function filterByBrand(brand){
     const q = query(collection(database, "products"), where("category", "array-contains", brand), orderBy("name"));
     const querySnapshot = await getDocs(q);
     return querySnapshot.docs.map((obj)=>{return obj.data()});   
+}
+
+export async function updateCart(product, user){
+    const q = query(collection(database, "users"), where("uid", "==", user.uid));
+    const querySnapshot = await getDocs(q);
+    const docId = querySnapshot.docs[0].ref.id; 
+    console.log(docId);
+        const ref = doc(database, "users", docId);
+
+    // Atomically add a new region to the "regions" array field.
+    await updateDoc(ref, {
+        cart: arrayUnion(product)
+});
 }
