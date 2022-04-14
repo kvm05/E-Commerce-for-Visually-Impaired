@@ -32,8 +32,8 @@ const Navbar = (props)  =>{
   return (
     <div id = {`navbar ${isBlind ? 'dark':'light'}`}>
       <div id='left-navbar'>
-        <Link id='MyLink' to = '/home'>
-          <div id = 'logo'>
+        <Link id='MyLink' to = '/'>
+          <div id = {`logo${isBlind ? 'dark':'light'}`}>
             Logo
           </div>  
         </Link>
@@ -43,7 +43,7 @@ const Navbar = (props)  =>{
           <input type="search" id = {`search ${isBlind ? 'dark':'light'}`} placeholder='Search' onInput = {(event) =>{
             console.log(event.target.value);
             props.search(event.target.value);
-          }}/>
+          }} onMouseLeave={() => cancel()}/>
           <button id = {`search-button ${isBlind ? 'dark':'light'}`}>
             <i class="fas fa-magnifying-glass"></i>
           </button>
@@ -74,7 +74,7 @@ const Navbar = (props)  =>{
             <div id='my-profile'  onMouseEnter={() => speak({text:"Currently Disabled"})} onMouseLeave={() => cancel()}>
               My Profile              
             </div>
-            <Link id='MyLink' to='/'>
+            <Link id='MyLink' to='/sign'>
               <div id='logout' onClick={emailSignOut}  onMouseEnter={() => speak({text:"Logout"})} onMouseLeave={() => cancel()}>
                 <i class="fas fa-arrow-right-from-bracket"></i>Logout             
               </div>
@@ -82,9 +82,11 @@ const Navbar = (props)  =>{
           </div>
         </div> : 
         <div>
-          <button id="login">
-            Log In!
-          </button>
+          <Link id='MyLink' to='/sign'>
+            <button id={`login-button${isBlind ? 'dark':'light'}`} onMouseEnter={() => speak({text:"Login"})} onMouseLeave={() => cancel()}>
+              Login
+            </button>
+          </Link>
         </div>
         }
       </div>

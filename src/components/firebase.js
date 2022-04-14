@@ -21,16 +21,16 @@ export const app = initializeApp(firebaseConfig)
 export const database = getFirestore(app);
 // databaseProducts()
 
-// addDoc(collection(database, 'products'), {
-//   name: "Nike Mercurial",
-//   image: [],
-//   price: 8000,
-//   rating: 5,
-//   category: [
-//     "shoes", "sports", "nike"
-//   ],
-//   description: "Test"
-// })
+addDoc(collection(database, 'products'), {
+  name: "Nike Mercurial",
+  image: [],
+  price: 8000,
+  rating: 5,
+  category: [
+    "shoes", "sports", "nike"
+  ],
+  description: "Test"
+})
 
 // async function read(){
 //   const querySnapshot = await getDocs(collection(database,'products'));

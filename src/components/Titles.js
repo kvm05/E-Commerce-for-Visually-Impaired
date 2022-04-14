@@ -24,7 +24,7 @@ function Titles(props){
     return(
         <div id="screen">
             <button id={`left-button ${props.checkBlind ? 'dark':'light'}`} onClick={onClickLeft}><i class="fas fa-chevron-left"></i></button>
-            <div id="content" onMouseEnter={() => speak({text:document.querySelector('#content').textContent})}>{products[currentSlide]}</div>
+            <div id="content" onMouseEnter={() => speak({text:document.querySelector('#content').textContent})} onMouseLeave={() => cancel()}>{products[currentSlide]}</div>
             <button id={`right-button ${props.checkBlind ? 'dark':'light'}`} onClick={onClickRight}><i class="fas fa-chevron-right"></i></button>
         </div>
         // add buttons for showing various offers

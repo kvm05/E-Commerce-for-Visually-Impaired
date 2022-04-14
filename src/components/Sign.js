@@ -80,7 +80,7 @@ function Sign() {
           const token = credential.accessToken;
           // The signed-in user info.
           const user = result.user;
-          navigate("/home")
+          navigate("/")
           // ...
         }).catch((error) => {
           // Handle Errors here.
@@ -100,7 +100,7 @@ function Sign() {
         // Signed in 
         const user = userCredential.user;
         console.log('Welcome In')
-        navigate('/home')
+        navigate('/')
         // ...
       })
       .catch((error) => {
@@ -135,7 +135,7 @@ function Sign() {
       const mNewUser = await newEmailLogin(data.newEmail, data.newPassword, data.newName);
       addNewUser(mNewUser, data.newName);
       console.log(mNewUser); 
-      navigate("/home")
+      navigate("/")
     }
     else{
       setFormMessage(
@@ -149,6 +149,11 @@ function Sign() {
   return (
     <div className="signin">
         <div className="signincontainer" >
+        <Link to='/'>
+          <div id='guestHome'>
+            Click here to go to home as a Guest! &#x2192;
+          </div>
+        </Link>
         <form className="form" id="login" onSubmit={handleSubmit(onSubmit)}>
           <h1 className="form_title">Login</h1>
           <div className="form_message form_message_error"></div>
@@ -179,11 +184,11 @@ function Sign() {
               Continue
             </button>
           {/* </Link> */}
-          <p className="form_text">
+          {/* <p className="form_text">
             <a href="#" className="form_link">
               Forgotten password?
             </a>
-          </p>
+          </p> */}
           <p className="form_text">
             Don't have an account yet?
             <a href="#" className="form_link" id="createAccount">
@@ -191,7 +196,7 @@ function Sign() {
             </a>
           </p>
           <div className="or">
-            -OR- <br/>
+            OR <br/>
             <button className="google" onClick={googleLogin}><i class="fab fa-google"></i></button>
           </div>
           

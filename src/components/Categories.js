@@ -18,7 +18,7 @@ function Categories(props){
                 onClickCategory(props.name)
                 speak({text: `Opening ${props.name}`})
             }} 
-            onMouseEnter={() => speak({ text: props.name })}>
+            onMouseEnter={() => speak({ text: props.name })} onMouseLeave={() => cancel()}>
                 {props.name}
             </button>
         </Link>

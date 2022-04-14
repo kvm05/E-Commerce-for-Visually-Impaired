@@ -46,29 +46,56 @@ code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
 		monospace;
 }
-#logo {
+#logodark {
 	/* position: absolute; */
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 76px;
-	height: 76px;
+	width: 60px;
+	height: 60px;
 	left: 41px;
 	top: 37px;
 	border: 5px;
 	text-align: center;
-	border-radius: 76px;
-	background: #fcfbfb;
+	font-family: "Roboto";
+	border-radius: 60px;
+	background: #464649;
+	color: wheat !important;
+	margin: 10px 20px;
+}
+#logolight {
+	/* position: absolute; */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 1px solid transparent;
+	box-shadow: 0 2px 5px 1px rgb(64 60 67 / 16%);
+	width: 60px;
+	height: 60px;
+	left: 41px;
+	top: 37px;
+	border: 5px;
+	text-align: center;
+	font-family: "Roboto";
+	border-radius: 60px;
+	background: #ccc;
+	margin: 10px 20px;
+}
+#logodark:hover{
+	background-color: wheat;
 	color: #000 !important;
+	transition: all 0.5s;
 }
 [id='navbar light'] {
 	display: flex;
 	align-items: center;
+	border-bottom: 2px solid #a1c4fc;
 	/* justify-content: space-between; */
 }
 [id='navbar dark'] {
 	display: flex;
 	align-items: center;
+	border-bottom: 2px solid wheat;
 	/* justify-content: space-between; */
 }
 [id = 'search light'] {
@@ -167,9 +194,11 @@ input:checked + .slider:before {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background: #ffffff;
+	background: #464649;
+	color: wheat;
 	border: none;
 }
+
 #right-navbar {
 	display: flex;
 	align-items: center;
@@ -296,4 +325,51 @@ input:checked + .slider:before {
 
 button{
 	cursor: pointer;
+}
+
+#login-buttondark{
+	border-radius: 5px;
+	height: 40px;
+	box-sizing: border-box;
+	padding: 10px;
+	font-family: 'Roboto';
+	font-size: 20px;
+	margin: 0px 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: #464649;
+	border: none;
+	color: wheat;
+}
+#login-buttonlight{
+	border-radius: 5px;
+	border: 1px solid transparent;
+	box-shadow: 0 2px 5px 1px rgb(64 60 67 / 16%);
+	height: 40px;
+	box-sizing: border-box;
+	padding: 10px;
+	font-family: 'Roboto';
+	font-size: 20px;
+	margin: 0px 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: #ccc;
+	border: none;
+}
+
+#login-buttondark:hover,
+#profile:hover{
+	background-color: wheat;
+	color: #000;
+	transition: all 0.5s;
+}
+
+#login-buttonlight:hover,
+#logolight:hover
+{
+	background-color: #68a0f9;
+	color: white;
+	transition: all 0.5s;
 }

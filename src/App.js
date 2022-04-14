@@ -45,8 +45,8 @@ function MainPage() {
     <UserContext.Provider value={{ user, setUser }}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<SignIn></SignIn>} />
-          <Route path="/home" element={<Homepage />} />
+          <Route path="/" element={<Homepage />} />
+          <Route path="/sign" element={<SignIn></SignIn>} />
           <Route
             path="categories/Shoes"
             element={<ProductPage name="Shoes" />}
