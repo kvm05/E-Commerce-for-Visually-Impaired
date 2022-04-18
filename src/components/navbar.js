@@ -67,13 +67,15 @@ const Navbar = (props)  =>{
         </div>
         {(user) ? 
         <div id='profile-bar'>
-          <button id='profile' onClick={onClick}  onMouseEnter={() => speak({text:"Click to see profile or logout"})} onMouseLeave={() => cancel()}>
+          <button id={`profile${isBlind ? 'dark':'light'}`} onClick={onClick}  onMouseEnter={() => speak({text:"Click to see profile or logout"})} onMouseLeave={() => cancel()}>
             <i className="fas fa-user"></i>
           </button>
           <div className={`menu ${isClicked ? 'active':'inactive'} ${isBlind ? 'dark':'light'}`}>
-            <div id='my-profile'  onMouseEnter={() => speak({text:"Currently Disabled"})} onMouseLeave={() => cancel()}>
-              My Profile              
-            </div>
+            <Link to='/account' id='MyLink'>
+              <div id='my-profile'  onMouseEnter={() => speak({text:"Currently Disabled"})} onMouseLeave={() => cancel()}>
+                My Profile              
+              </div>
+            </Link>
             <Link id='MyLink' to='/sign'>
               <div id='logout' onClick={emailSignOut}  onMouseEnter={() => speak({text:"Logout"})} onMouseLeave={() => cancel()}>
                 <i class="fas fa-arrow-right-from-bracket"></i>Logout             

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import "./components/index.css";
 import Homepage from "./components/Homepage";
 import SignIn from "./components/Sign";
+import AccountPage from "./components/AccountPage"
 import {
   BrowserRouter as Router,
   Route,
@@ -61,6 +62,7 @@ function MainPage() {
             element={<ProductPage name="Clothes" />}
           />
           <Route path="cart" element={<CartPage />} />
+          <Route path="account" element={<AccountPage />} />
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>

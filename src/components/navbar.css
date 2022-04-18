@@ -3,18 +3,12 @@
 } */
 
 body,html{
-	background-size: cover;
+	
 
 	/* height:100%; */
-	background: linear-gradient(180deg, #000 0%, #FF8C00 100%) no-repeat center center fixed; 
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
+	
 }
 
-#root{
-}
 
 [id = 'homepage dark'] {
 	height:100%;
@@ -25,7 +19,13 @@ body,html{
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	/* height: 74vh; */
-	color: wheat;
+	color: wheat !important;
+	background-size: cover;
+	background: linear-gradient(180deg, #000 0%, #FF8C00 100%) no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
 	/* z-index: -69; */
 }
 [id = 'homepage light'] {
@@ -37,7 +37,12 @@ body,html{
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	/* height: 74vh; */
-	background: linear-gradient(180deg, #2176ff 0%, #ffffff 100%);
+	background-size: cover;
+	background: linear-gradient(180deg, #2176ff 0%, #ffffff 100%) no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
 	/* z-index: -69; */
 
 }
@@ -90,12 +95,18 @@ code {
 	display: flex;
 	align-items: center;
 	border-bottom: 2px solid #a1c4fc;
+	/* position: fixed;
+	width: 100%; */
+	background: #3985ff;
 	/* justify-content: space-between; */
 }
 [id='navbar dark'] {
 	display: flex;
 	align-items: center;
 	border-bottom: 2px solid wheat;
+	/* position: fixed;
+	width: 100%; */
+	background: #1c0f00;
 	/* justify-content: space-between; */
 }
 [id = 'search light'] {
@@ -185,7 +196,7 @@ input:checked + .slider:before {
 .slider.round:before {
 	border-radius: 50%;
 }
-#profile {
+#profiledark {
 	width: 50px;
 	height: 50px;
 	top: 35px;
@@ -196,6 +207,19 @@ input:checked + .slider:before {
 	align-items: center;
 	background: #464649;
 	color: wheat;
+	border: none;
+}
+#profilelight {
+	width: 50px;
+	height: 50px;
+	top: 35px;
+	border-radius: 50px;
+	margin: 0px 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-shadow: 0 2px 5px 1px rgb(64 60 67 / 16%);
+	background: #ccc;
 	border: none;
 }
 
@@ -277,6 +301,7 @@ input:checked + .slider:before {
 	border-bottom: 1px solid #dddddd;
 	padding-left: 5px;
 	font-family: "Roboto";
+	color: grey;
 }
 #my-profile:hover {
 	background-color: #d3d3d3;
@@ -360,14 +385,15 @@ button{
 }
 
 #login-buttondark:hover,
-#profile:hover{
+#profiledark:hover{
 	background-color: wheat;
 	color: #000;
 	transition: all 0.5s;
 }
 
 #login-buttonlight:hover,
-#logolight:hover
+#logolight:hover,
+#profilelight:hover
 {
 	background-color: #68a0f9;
 	color: white;
