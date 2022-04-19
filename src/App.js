@@ -22,8 +22,14 @@ export const UserContext = React.createContext({
   setUser: () => {},
 });
 
+export const OrderContext = React.createContext({
+  orderTotal: 0,
+  setOrderTotal: () => {},
+});
+
 function MainPage() {
   const [user, setUser] = useState(null);
+  const [orderTotal, setOrderTotal] = useState(0);
 
   useEffect(() => {
     const auth = getAuth();
@@ -44,6 +50,7 @@ function MainPage() {
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
+      <OrderContext.Provider value = {{orderTotal, setOrderTotal}}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Homepage />} />
@@ -65,6 +72,7 @@ function MainPage() {
           <Route path="account" element={<AccountPage />} />
         </Routes>
       </BrowserRouter>
+      </OrderContext.Provider>
     </UserContext.Provider>
   );
 }
