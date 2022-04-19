@@ -1,7 +1,10 @@
-import React,{useState} from "react";
+import React,{useState, useContext} from "react";
 import "./cartitem.css"
+import {OrderContext} from "../App";
+import ProductPage from "./productpage";
 
 function CartItem(props){
+    const {orderTotal, setOrderTotal} = useContext(OrderContext);
     const [currentSlide,changeSlide]=useState(0);
     function goLeft(){
         changeSlide((prevSlide)=>{
@@ -21,8 +24,13 @@ function CartItem(props){
     function increaseQuantity(){
         changeQuantity((prevQuantity)=>{
             props.onCartUpdate(props.name, prevQuantity + 1);
-            console.log(prevQuantity+1);
-            props.updateTotal();
+            // console.log(prevQuantity+1);
+            // setOrderTotal((prevOrderTotal) =>{
+            //     return prevOrderTotal + props.price;
+            // })
+            // console.log(orderTotal);
+            setOrderTotal(orderTotal + props.price);
+            console.log(orderTotal)
             return prevQuantity+1;
         })
     }
@@ -31,7 +39,11 @@ function CartItem(props){
         changeQuantity((prevQuantity)=>{
             props.onCartUpdate(props.name, prevQuantity - 1);
             console.log(prevQuantity-1);
-            props.updateTotal();
+            // setOrderTotal((prevOrderTotal) =>{
+            //     return prevOrderTotal - props.price;
+            // })
+            setOrderTotal(orderTotal - props.price);
+
             return prevQuantity-1;
         })
     }

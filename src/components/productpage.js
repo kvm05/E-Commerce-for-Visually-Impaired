@@ -1,9 +1,10 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 import Navbar from './navbar';
 import "./navbar.css";
 import Container from "./container";
 // import { ClickCategory } from "./Categories";
 import CartPage from "./cartpage";
+import {SearchContext} from "../App"
 
 
 function ProductPage(props){
@@ -12,19 +13,14 @@ function ProductPage(props){
         getChildData(childData)
     }
 
-    const [ valueToBeSearched, setValue ] = useState(""); 
-    const prevState = valueToBeSearched;
-    function search(value){
-        setValue(value);
-    }
-
+    const {valueToBeSearched} = useContext(SearchContext);
 
     console.log(valueToBeSearched);
     // console.log(ClickCategory)
     return(
         <div id={`homepage ${isBlind ? 'dark':'light'}`}>
-            <Navbar search = {search} func = {dataFromChild}/>
-            <Container name={props.name} valueToBeSearched = {valueToBeSearched} isHighContrast={isBlind} />    
+            <Navbar func = {dataFromChild}/>
+            <Container name={props.name} isHighContrast={isBlind} />    
         </div>
     );
 }

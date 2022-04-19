@@ -1,9 +1,12 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 import Navbar from './navbar';
 import Titles from "./Titles";
 import Categories from "./Categories";
 import "./Homepage.css";
 import "./index.css";
+import { SearchContext } from "../App";
+import ProductPage from "./productpage";
+import Container from "./container";
 
 const categories = ["Shoes", "Electronics", "Food", "Clothes"];
 
@@ -12,7 +15,18 @@ function Homepage(){
     const dataFromChild = (childData) => {
         getChildData(childData)
         // console.log("ITS HERE")
+        
     }
+
+    const {valueToBeSearched} = useContext(SearchContext);
+    if(valueToBeSearched)
+        return (
+            <div id={`homepage ${isBlind ? 'dark':'light'}`}>
+                <Navbar func = {dataFromChild}/>
+                <Container name="Search Results" isHighContrast={isBlind} />    
+            </div>
+        );
+        
     return(
         <div id={`homepage ${isBlind ? 'dark':'light'}`}>
             <Navbar func = {dataFromChild}/>

@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import {DetectOutsideClick} from "./DetectOutsideClick"; 
 import { getAuth, signOut } from "firebase/auth";
 import { useSpeechSynthesis } from 'react-speech-kit';
-import { UserContext } from '../App';
+import { UserContext, SearchContext } from '../App';
 
 const Navbar = (props)  =>{
   const dropdownRef = useRef(null);
@@ -28,6 +28,8 @@ const Navbar = (props)  =>{
       // An error happened.
     });
   }
+
+  const {setValueToBeSearched} = useContext(SearchContext);
   
   return (
     <div id = {`navbar ${isBlind ? 'dark':'light'}`}>
@@ -42,7 +44,7 @@ const Navbar = (props)  =>{
         <div id='searchbar' onMouseEnter={() => speak({text:"Search"})} onMouseLeave={() => cancel()}>
           <input type="search" id = {`search ${isBlind ? 'dark':'light'}`} placeholder='Search' onInput = {(event) =>{
             console.log(event.target.value);
-            props.search(event.target.value);
+            setValueToBeSearched(event.target.value);
           }} onMouseLeave={() => cancel()}/>
           <button id = {`search-button ${isBlind ? 'dark':'light'}`}>
             <i class="fas fa-magnifying-glass"></i>

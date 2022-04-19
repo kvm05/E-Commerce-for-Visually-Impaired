@@ -3,7 +3,7 @@ import FilterPane from "./filterpane";
 import { Link, useNavigate } from "react-router-dom";
 import "./container.css"
 import {readData, filterByBrand, getBrands, search, getAllProducts, updateCart} from "./firebaseservices";
-import {UserContext} from "../App";
+import {UserContext, SearchContext} from "../App";
 import React, {useState, useContext, useEffect} from "react";
 import { useSpeechSynthesis } from 'react-speech-kit';
 
@@ -15,6 +15,7 @@ function Container(props){
     }
     // console.log(image);
     const {user} = useContext(UserContext);
+    const {valueToBeSearched} = useContext(SearchContext);
 
     const [allProducts, setAllProducts ] = useState([])
 
@@ -63,10 +64,10 @@ function Container(props){
     
     function display(){
         console.log('Value: ' + props.valueToBeSearched)
-        if (props.valueToBeSearched){
+        if (valueToBeSearched){
             console.log("search");
             filteredProducts = allProducts.filter((product) =>{
-                return product.name.toLowerCase().indexOf(props.valueToBeSearched.toLowerCase()) !==-1;
+                return product.name.toLowerCase().indexOf(valueToBeSearched.toLowerCase()) !==-1;
             })
         }
         else{

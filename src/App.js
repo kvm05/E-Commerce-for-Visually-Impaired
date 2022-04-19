@@ -27,9 +27,15 @@ export const OrderContext = React.createContext({
   setOrderTotal: () => {},
 });
 
+export const SearchContext = React.createContext({
+  valueToBeSearched: "",
+  setValueToBeSearched: () => {},
+})
+
 function MainPage() {
   const [user, setUser] = useState(null);
   const [orderTotal, setOrderTotal] = useState(0);
+  const [valueToBeSearched, setValueToBeSearched] = useState("");
 
   useEffect(() => {
     const auth = getAuth();
@@ -51,27 +57,29 @@ function MainPage() {
   return (
     <UserContext.Provider value={{ user, setUser }}>
       <OrderContext.Provider value = {{orderTotal, setOrderTotal}}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Homepage />} />
-          <Route path="/sign" element={<SignIn></SignIn>} />
-          <Route
-            path="categories/Shoes"
-            element={<ProductPage name="Shoes" />}
-          />
-          <Route
-            path="categories/Electronics"
-            element={<ProductPage name="Electronics" />}
-          />
-          <Route path="categories/Food" element={<ProductPage name="Food" />} />
-          <Route
-            path="categories/Clothes"
-            element={<ProductPage name="Clothes" />}
-          />
-          <Route path="cart" element={<CartPage />} />
-          <Route path="account" element={<AccountPage />} />
-        </Routes>
-      </BrowserRouter>
+        <SearchContext.Provider value = {{valueToBeSearched, setValueToBeSearched}}>
+          <BrowserRouter> 
+            <Routes>
+              <Route path="/" element={<Homepage />} />
+              <Route path="/sign" element={<SignIn></SignIn>} />
+              <Route
+                path="categories/Shoes"
+                element={<ProductPage name="Shoes" />}
+              />
+              <Route
+                path="categories/Electronics"
+                element={<ProductPage name="Electronics" />}
+              />
+              <Route path="categories/Food" element={<ProductPage name="Food" />} />
+              <Route
+                path="categories/Clothes"
+                element={<ProductPage name="Clothes" />}
+              />
+              <Route path="cart" element={<CartPage />} />
+              <Route path="account" element={<AccountPage />} />
+            </Routes>
+          </BrowserRouter>
+        </SearchContext.Provider>
       </OrderContext.Provider>
     </UserContext.Provider>
   );
