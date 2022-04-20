@@ -30,7 +30,6 @@ function CartItem(props){
             // })
             // console.log(orderTotal);
             setOrderTotal(orderTotal + props.price);
-            console.log(orderTotal)
             return prevQuantity+1;
         })
     }
@@ -43,7 +42,6 @@ function CartItem(props){
             //     return prevOrderTotal - props.price;
             // })
             setOrderTotal(orderTotal - props.price);
-
             return prevQuantity-1;
         })
     }

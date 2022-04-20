@@ -22,9 +22,6 @@ function CartPage(props){const [isBlind, getChildData] = useState(true)
     const {orderTotal, setOrderTotal} = useContext(OrderContext);
     const {valueToBeSearched} = useContext(SearchContext);
 
-    console.log('My user is')
-    console.log(user)
-
     async function get(){
         
         if (currentUser == null && user != null) {
@@ -32,10 +29,7 @@ function CartPage(props){const [isBlind, getChildData] = useState(true)
             userDetails = await readData("users", "", user);
             updateCart(userDetails.cart)
         }
-        
     }
-
-    
 
     // console.log(currentUser.email);
     
@@ -76,8 +70,6 @@ function CartPage(props){const [isBlind, getChildData] = useState(true)
         currentCart.forEach((item) =>{
             total += item.quantity*item.price;
         })
-    
-        console.log(total);
         return total;
     }
 
@@ -86,6 +78,13 @@ function CartPage(props){const [isBlind, getChildData] = useState(true)
             currentCart.length = 0;
             return [...currentCart];
         })
+    }
+
+    function undoChanges(){
+        console.log(userDetails.cart);
+        console.log("Clicked")
+        updateCart(userDetails.cart);
+        console.log(currentCart);        
     }
 
     const image=["/images/prod11.png"]
@@ -125,10 +124,11 @@ function CartPage(props){const [isBlind, getChildData] = useState(true)
                     <CartItem name="Product 1" price={45} image={image} quantity={2}  isHighContrast={isBlind}></CartItem> */}
                     {displayCart}
                 </div>
-                <OrderSummary total={orderTotal} isHighContrast={props.isHighContrast}></OrderSummary>
+                <OrderSummary isHighContrast={props.isHighContrast}></OrderSummary>
             </div>
             <div className="cartButtons">
-                <button onClick={clearCart}>Clear Cart</button>
+                <button onClick = {clearCart}>Clear Cart</button>
+                <button onclick = {undoChanges}>Undo Changes</button>
             </div>
         </div>
     )

@@ -6,7 +6,6 @@ function OrderSummary(props){
     const {orderTotal} = useContext(OrderContext);
     const tax=Math.floor((0.18*orderTotal)*100)/100;
     const final=Math.floor((orderTotal+tax)*100)/100;
-    console.log(orderTotal);
     return (
         <div className="ordersummary">
             <h2 className={`summary${props.isHighContrast?"Dark":"Light"}`}>Order Summary</h2>

@@ -12,7 +12,6 @@ export async function readData(collectionDB, category, currentUser){
         return querySnapshot.docs.map((obj)=>{return obj.data()});
     }
     else if(collectionDB === "users"){
-        console.log(currentUser.uid);
         const q = query(collection(database, collectionDB), where("uid", "==", currentUser.uid));
         const querySnapshot = await getDocs(q);
         return querySnapshot.docs[0].data();
