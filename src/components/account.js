@@ -49,8 +49,11 @@ function Account() {
             </h2>
             <h2 id='accWishlistHeader'>
                 Current Wishlist:
-                <br />
-                <button id='accWishlist'>Wishlist</button>
+                <div>
+                    <Link to='/wishlist' id='MyLink'>
+                        <button id='accWishlist'>Wishlist</button>
+                    </Link>
+                </div>
             </h2>
         </div>
     )

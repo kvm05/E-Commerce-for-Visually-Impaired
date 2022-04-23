@@ -95,8 +95,8 @@ code {
 	display: flex;
 	align-items: center;
 	border-bottom: 2px solid #a1c4fc;
-	/* position: fixed;
-	width: 100%; */
+	position: fixed;
+	width: 100%;
 	background: #3985ff;
 	/* justify-content: space-between; */
 }

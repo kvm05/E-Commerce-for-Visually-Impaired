@@ -116,7 +116,7 @@ function Sign() {
     const auth = getAuth();
     const userCredential = await createUserWithEmailAndPassword(auth, email, password)
     const user = userCredential.user;
-    console.log(user);
+    // console.log(user);
     await updateProfile(user, {
       displayName: name
     })
