@@ -89,3 +89,16 @@ export async function updateCart(product, user){
         cart: arrayUnion(product)
 });
 }
+
+export async function updateWishlist(product, user){
+    const q = query(collection(database, "users"), where("uid", "==", user.uid));
+    const querySnapshot = await getDocs(q);
+    const docId = querySnapshot.docs[0].ref.id; 
+    console.log(docId);
+        const ref = doc(database, "users", docId);
+
+    // Atomically add a new region to the "regions" array field.
+    await updateDoc(ref, {
+        wishlist: arrayUnion(product)
+});
+}

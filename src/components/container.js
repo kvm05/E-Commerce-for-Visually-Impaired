@@ -2,7 +2,7 @@ import Product from "./products";
 import FilterPane from "./filterpane";
 import { Link, useNavigate } from "react-router-dom";
 import "./container.css"
-import {readData, filterByBrand, getBrands, search, getAllProducts, updateCart} from "./firebaseservices";
+import {readData, filterByBrand, getBrands, search, getAllProducts, updateCart, updateWishlist} from "./firebaseservices";
 import {UserContext, SearchContext} from "../App";
 import React, {useState, useContext, useEffect} from "react";
 import { useSpeechSynthesis } from 'react-speech-kit';
@@ -85,7 +85,8 @@ function Container(props){
         rating = {product.rating}
         category = {product.category}
         isHighContrast = {props.isHighContrast}
-        addToCart = {addToCart}></Product>
+        addToCart = {addToCart}
+        addToWishlist = {addToWishlist}></Product>
     })
     }
     
@@ -95,6 +96,14 @@ function Container(props){
         })
         cartItem[0]["quantity"] = 1;
         updateCart(cartItem[0], user);
+    }
+
+    function addToWishlist(prodName){
+        const wishlistitem = filteredProducts.filter((product) =>{
+            return product.name === prodName;
+        })
+        wishlistitem[0]["quantity"] = 1;
+        updateWishlist(wishlistitem[0], user);
     }
 
     const [ brands, setBrands ] = useState([]);
@@ -122,7 +131,9 @@ function Container(props){
                         <Link to = '/cart'>
                             <img src={props.isHighContrast?"/images/viewcart-wheat.png":"/images/view cart.png"} alt="view cart" onMouseEnter={() => speak({text: "View Cart"})}></img>
                         </Link>
-                        <a href="wishlist"><img src={props.isHighContrast?"/images/wishlist-wheat.png" :"/images/wishlist.png"} alt="wishlist" onMouseEnter={() => speak({text: "View Wishlist: Currently Disabled"})}></img></a>
+                        <Link to = '/wishlist'>
+                            <a href="wishlist"><img src={props.isHighContrast?"/images/wishlist-wheat.png" :"/images/wishlist.png"} alt="wishlist" onMouseEnter={() => speak({text: "View Wishlist: Currently Disabled"})}></img></a>
+                        </Link>
                     </div>
                 </div>
                 {/* <Product name="Product 1" price="45" image={image} description="The Nike Mercurial Dream Speed Superfly 8 Elite embodies Cristiano Ronaldo's greatest self-proclaimed strength: the power of the mind and meditation. Calming shades of green work together with energising tones of purple and yellow, creating a boot that radiates positivity."
