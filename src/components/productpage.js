@@ -5,6 +5,7 @@ import Container from "./container";
 // import { ClickCategory } from "./Categories";
 import CartPage from "./cartpage";
 import {SearchContext} from "../App"
+import DetailedProducts from "./detailedproducts";
 
 
 function ProductPage(props){
@@ -20,7 +21,8 @@ function ProductPage(props){
     return(
         <div id={`homepage ${isBlind ? 'dark':'light'}`}>
             <Navbar func = {dataFromChild}/>
-            <Container name={props.name} isHighContrast={isBlind} />    
+            {/* <Container name={props.name} isHighContrast={isBlind} />     */}
+            <DetailedProducts></DetailedProducts>
         </div>
     );
 }
