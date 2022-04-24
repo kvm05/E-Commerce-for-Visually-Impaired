@@ -12,14 +12,11 @@
     border-radius: 30px;
     width: 50%;
     margin: 40px;
+    padding: 40px;
     background: rgba(198, 198, 198,0.2);
     /* border-color: #cccccc; */
 }
 
-table{
-    margin: 40px;
-    /* max-height: 500px; */
-}
 
 td, th{
     border-bottom: 3px solid black;

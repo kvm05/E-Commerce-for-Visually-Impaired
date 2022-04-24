@@ -1,0 +1,40 @@
+.custInfoDark, .custInfoLight, .recInfoLight, .recInfoDark{
+    background: rgba(198, 198, 198,0.2);
+    border-radius: 30px;
+    padding: 40px;
+    width: 60%;
+    margin: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1{
+    padding-bottom: 30px;
+    margin-bottom: 20px;
+    text-align: center;
+    border-bottom: 5px solid wheat;
+    width: 70%;
+}
+
+form{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+form div{
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+
+input, textarea{
+    margin: 10px;
+    padding: 15px 10px;
+    /* border-radius: 10px; */
+    border: none;
+    background: none;
+    border-bottom: 2px solid wheat;
+    color: white;
+}

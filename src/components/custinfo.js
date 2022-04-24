@@ -7,29 +7,33 @@ function CustInfo(props){
 
     const {user} = useContext(UserContext);
     const [currentUser, setCurrentUser] = useState(null);
+    const [userDetails, setUserDetails] = useState([]);
 
-    let userDetails = [];
+    // let userDetails = [];
 
 
     async function get(){
         if (currentUser == null && user != null) {
             setCurrentUser(user)
-            userDetails = await readData("users", "", user);
+            setUserDetails(await readData("users", "", user));
         }
     }
 
     get();
 
+    console.log(userDetails)
+
     return(
         <div className = {`custInfo${props.isHighContrast ? "Light" : "Dark"}`}>
+            <h1>Customer Info</h1>
             <form>
                 <div className = "custName">
                     <label for = "custName">Name:</label>
-                    <input type = "text" id = "custName" defaultValue = {userDetails.name} disabled></input>
+                    <input type = "text" readonly = "readonly" id = "custName" value = {userDetails.name}></input>
                 </div>
                 <div className = "custEmail">
                     <label for = "custEmail">Email:</label>
-                    <input type = "email" id = "custEmail" defaultValue = {userDetails.email} disabled></input>
+                    <input type = "email" id = "custEmail" value = {userDetails.email} readonly = "readonly"></input>
                 </div>
                 <div className = "custMob">
                     <label for = "custMob">Mobile Number:</label>

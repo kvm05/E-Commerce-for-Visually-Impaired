@@ -23,6 +23,7 @@ function RecInfo(props){
 
     return(
         <div className = {`recInfo${props.isHighContrast ? "Light" : "Dark"}`}>
+            <h1>Recipient Info</h1>
             <form>
                 <div className = "recName">
                     <label for = "recName">Name:</label>
