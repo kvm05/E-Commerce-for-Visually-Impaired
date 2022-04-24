@@ -95,7 +95,6 @@ code {
 	display: flex;
 	align-items: center;
 	border-bottom: 2px solid #a1c4fc;
-	position: fixed;
 	width: 100%;
 	background: #3985ff;
 	/* justify-content: space-between; */
@@ -263,11 +262,15 @@ input:checked + .slider:before {
 [id = "search-button light"] {
 	background: none;
 	border: none;
+	margin: 0px 10px;
+	font-size: 20px;
 }
 [id = "search-button dark"] {
 	background: none;
 	border: none;
 	color: wheat;
+	margin: 0px 10px;
+	font-size: 20px;
 }
 .menu {
 	background: #ffffff;

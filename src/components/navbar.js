@@ -5,14 +5,19 @@ import "./Categories.css"
 import { Link, useNavigate } from "react-router-dom";
 import {DetectOutsideClick} from "./DetectOutsideClick"; 
 import { getAuth, signOut } from "firebase/auth";
-import { useSpeechSynthesis } from 'react-speech-kit';
+import { useSpeechSynthesis, useSpeechRecognition } from 'react-speech-kit';
 import { UserContext, SearchContext } from '../App';
 
 const Navbar = (props)  =>{
   const dropdownRef = useRef(null);
   const [isClicked, setClicked] = DetectOutsideClick(dropdownRef, false);
-  const {user} = useContext(UserContext);
+  const {user, setUser} = useContext(UserContext);
   const {speak, cancel} = useSpeechSynthesis();
+  const { listen, stop, listening} = useSpeechRecognition({
+    onResult: (result) => {
+      setValueToBeSearched(result)
+    }
+  })
   const onClick = () => setClicked(!isClicked);
   const [isBlind, setBlind] = useState(true)
   const isCheckBlind = () =>{ setBlind(!isBlind)
@@ -23,13 +28,14 @@ const Navbar = (props)  =>{
     const auth = getAuth();
     signOut(auth).then(() => {
       // Sign-out successful.
+      setUser(null)
       console.log('Signed Out')
     }).catch((error) => {
       // An error happened.
     });
   }
 
-  const {setValueToBeSearched} = useContext(SearchContext);
+  const {valueToBeSearched,setValueToBeSearched} = useContext(SearchContext);
   
   return (
     <div id = {`navbar ${isBlind ? 'dark':'light'}`}>
@@ -41,13 +47,23 @@ const Navbar = (props)  =>{
         </Link>
       </div> 
       <div id='right-navbar'>
-        <div id='searchbar' onMouseEnter={() => speak({text:"Search"})} onMouseLeave={() => cancel()}>
-          <input type="search" id = {`search ${isBlind ? 'dark':'light'}`} placeholder='Search' onInput = {(event) =>{
+        <div id='searchbar'>
+          <input type="search" id = {`search ${isBlind ? 'dark':'light'}`} placeholder='Search' onMouseEnter={() => speak({text:"Search"})} onMouseLeave={() => cancel()} onInput = {(event) =>{
             console.log(event.target.value);
             setValueToBeSearched(event.target.value);
-          }} onMouseLeave={() => cancel()}/>
-          <button id = {`search-button ${isBlind ? 'dark':'light'}`}>
+          }} value={valueToBeSearched}/>
+          <button id = {`search-button ${isBlind ? 'dark':'light'}`} onMouseEnter={() => speak({text:`Click to search`})} onMouseLeave={() => cancel()}>
             <i class="fas fa-magnifying-glass"></i>
+          </button>
+          <button id = {`search-button ${isBlind ? 'dark':'light'}`} onClick={() => {
+            if(listening){
+              stop()
+            }
+            else{
+              listen()
+            }
+          }} onMouseEnter={() => speak({text:`Click for voice input`})} onMouseLeave={() => cancel()}>
+            <i class="fa-solid fa-microphone"></i>
           </button>
         </div>
         <div id='toggle1'>
@@ -74,7 +90,7 @@ const Navbar = (props)  =>{
           </button>
           <div className={`menu ${isClicked ? 'active':'inactive'} ${isBlind ? 'dark':'light'}`}>
             <Link to='/account' id='MyLink'>
-              <div id='my-profile'  onMouseEnter={() => speak({text:"Currently Disabled"})} onMouseLeave={() => cancel()}>
+              <div id='my-profile'  onMouseEnter={() => speak({text:"Click to see profile"})} onMouseLeave={() => cancel()}>
                 My Profile              
               </div>
             </Link>

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import "./detailedproducts.css"
+// import "./detailedproducts.css"
 
 function DetailedProducts(){
         const temp = [

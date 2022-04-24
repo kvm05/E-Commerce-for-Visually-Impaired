@@ -21,8 +21,8 @@ function ProductPage(props){
     return(
         <div id={`homepage ${isBlind ? 'dark':'light'}`}>
             <Navbar func = {dataFromChild}/>
-            {/* <Container name={props.name} isHighContrast={isBlind} />     */}
-            <DetailedProducts></DetailedProducts>
+            <Container name={props.name} isHighContrast={isBlind} />    
+            {/* <DetailedProducts></DetailedProducts> */}
         </div>
     );
 }
