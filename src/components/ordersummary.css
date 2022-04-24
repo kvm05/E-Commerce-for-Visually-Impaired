@@ -51,13 +51,12 @@
 
 .ordersummary button{
     display:block;
-    height: 50px;
-    width: 80%;
+    height: 60px;
+    padding: 0 20px;
+    /* width: 80%; */
     margin: 15px 0;
     background-color: #cccccc;
     border:none;
     border-radius: 10px;
     font-weight: bold;
 }
-
-

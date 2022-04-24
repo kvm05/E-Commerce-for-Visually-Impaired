@@ -63,7 +63,7 @@ function Container(props){
     useEffect(get, [])
     
     function display(){
-        console.log('Value: ' + props.valueToBeSearched)
+        console.log('Value: ' + valueToBeSearched)
         if (valueToBeSearched){
             console.log("search");
             filteredProducts = allProducts.filter((product) =>{
@@ -94,7 +94,6 @@ function Container(props){
         const cartItem = filteredProducts.filter((product) =>{
             return product.name === prodName;
         })
-        cartItem[0]["quantity"] = 1;
         updateCart(cartItem[0], user);
     }
 

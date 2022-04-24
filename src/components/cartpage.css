@@ -35,5 +35,10 @@
 }
 
 #heading{
-    margin: 40px 40px
+    margin: 20px 80px;
+    display: inline-block;
+    font-size: 3em;    
+    /* margin-right: 60%; */
+    width: 85%;
 }
+

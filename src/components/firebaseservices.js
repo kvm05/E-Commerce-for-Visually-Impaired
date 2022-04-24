@@ -1,4 +1,4 @@
-import { getFirestore, collection, addDoc, getDocs, doc, getDoc, query, where, orderBy, updateDoc, arrayUnion } from "firebase/firestore";
+import { getFirestore, collection, addDoc, getDocs, doc, getDoc, query, where, orderBy, updateDoc, arrayUnion, setDoc } from "firebase/firestore";
 import { get } from "react-hook-form";
 import { app, database } from "./firebase";
 // import { currentUser } from "./currentuser"
@@ -80,13 +80,30 @@ export async function filterByBrand(brand){
 export async function updateCart(product, user){
     const q = query(collection(database, "users"), where("uid", "==", user.uid));
     const querySnapshot = await getDocs(q);
+    const currentCart = querySnapshot.docs[0].data().cart;
+
+    console.log(product)
+    console.log(currentCart);
+    let flag = false;
+    for(let i = 0; i < currentCart.length; i++){
+        if(currentCart[i].name === product.name){
+            currentCart[i].quantity += 1;
+            flag = true;
+            break;
+        }
+    }
+
+    if(!flag){
+        product.quantity = 1;
+        currentCart.push(product);
+    }
+
     const docId = querySnapshot.docs[0].ref.id; 
-    console.log(docId);
         const ref = doc(database, "users", docId);
 
     // Atomically add a new region to the "regions" array field.
     await updateDoc(ref, {
-        cart: arrayUnion(product)
+        cart: currentCart
 });
 }
 
@@ -101,4 +118,17 @@ export async function updateWishlist(product, user){
     await updateDoc(ref, {
         wishlist: arrayUnion(product)
 });
+}
+
+export async function setCartBeforeBilling(currentCart, user){
+    const q = query(collection(database, "users"), where("uid", "==", user.uid));
+    const querySnapshot = await getDocs(q);
+    const docId = querySnapshot.docs[0].ref.id; 
+    console.log(docId);
+        const ref = doc(database, "users", docId);
+
+    // Atomically add a new region to the "regions" array field.
+    await updateDoc(ref, {
+        cart: currentCart
+});   
 }

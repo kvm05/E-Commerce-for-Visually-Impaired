@@ -17,6 +17,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 // import { currentUser } from "./components/currentuser"
 import { PrivateRoute } from "./components/PrivateRoute";
 import Wishlist from "./components/wishlist";
+import BillingPage from "./components/billingpage";
 
 export const UserContext = React.createContext({
   user: {},
@@ -77,6 +78,7 @@ function MainPage() {
               <Route path="cart" element={<CartPage />} />
               <Route path="account" element={<AccountPage />} />
               <Route path = "wishlist" element = {<Wishlist />} />
+              <Route path = "billing" element = {<BillingPage />} />
             </Routes>
           </BrowserRouter>
         </SearchContext.Provider>

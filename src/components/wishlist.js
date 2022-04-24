@@ -82,6 +82,8 @@ function Wishlist(props){const [isBlind, getChildData] = useState(true)
         </div>
     );
 
+    const temp = <h3>"Your wishlist is empty!"</h3>;
+    
     return (
         <div className="cartpage" id={`homepage ${isBlind ? 'dark':'light'}`}>
             <Navbar func = {dataFromChild}/> 
@@ -99,7 +101,7 @@ function Wishlist(props){const [isBlind, getChildData] = useState(true)
                             </Link>                    
                         </div>
                     </div>
-                    {displayProducts ? displayProducts : "Your wishlist is empty!"}
+                    {displayProducts ? displayProducts : temp}
                 </div>
             </div>
         </div>
