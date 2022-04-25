@@ -2,6 +2,7 @@ import React,{useState, useContext} from "react";
 import "./products.css"
 import { useSpeechSynthesis } from 'react-speech-kit';
 import { TTSContext } from '../App';
+import "./navbar.css"
 
 function Product(props){
     const [currentSlide,changeSlide]=useState(0);
@@ -25,7 +26,7 @@ function Product(props){
             <div className="image">
                 <button><i class="fas fa-chevron-left" onClick={goLeft}></i></button>
                 <img src={props.image[currentSlide]} alt={props.name}></img>
-                <button><i class="fas fa-chevron-right" onClick={goRight}></i></button>
+                <button ><i class="fas fa-chevron-right" onClick={goRight}></i></button>
             </div>
             <div className="details">
                 <h2 className="title" onMouseEnter={() => screenReader?speak({text: props.name}):cancel()} onMouseLeave={() => cancel()}>{props.name}</h2>
@@ -34,15 +35,15 @@ function Product(props){
             </div>
             <div className="right">
                 <p className={`productprice${props.isHighContrast?"Dark":"Light"}`} id='price' onMouseEnter={() => screenReader?speak({text: `Price: ₹${props.price}`}):cancel()} onMouseLeave={() => cancel()}>Price: ₹{props.price}</p>
-                <button onMouseEnter={() => screenReader?speak({text: "Add To Wishlist"}):cancel()} onClick={() => {
+                <button id={`login-button${props.isHighContrast ? 'dark':'light'}`} onMouseEnter={() => screenReader?speak({text: "Add To Wishlist"}):cancel()} onClick={() => {
                     screenReader?speak({text: "Added to Wishlist"}):cancel();
                     props.addToWishlist(props.name)}} 
-                    onMouseLeave={() => cancel()}>ADD TO WISHLIST</button>
-                <button onClick={() =>{
+                    onMouseLeave={() => cancel()}><i class="fa-solid fa-bookmark"></i></button>
+                <button id={`login-button${props.isHighContrast ? 'dark':'light'}`} onClick={() =>{
                     props.addToCart(props.name)
                     screenReader?speak({text: "Added to Cart"}):cancel()
                 }} onMouseEnter={() => screenReader?speak({text: "Add To Cart"}):cancel()}
-                >ADD TO CART</button>
+                ><i class="fa-solid fa-cart-shopping"></i></button>
                 <a href="dsdssd" className={`learn${props.isHighContrast?"Dark":"Light"}`}>Learn More</a>
             </div>
         </div>

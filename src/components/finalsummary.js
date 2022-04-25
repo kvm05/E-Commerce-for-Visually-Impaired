@@ -3,6 +3,7 @@ import {OrderContext, UserContext} from "../App";
 import { Link, useNavigate } from "react-router-dom";
 import {useContext, useState} from "react";
 import { readData } from "./firebaseservices";
+import "./navbar.css"
 
 function FinalSummary(props){
     const {orderTotal} = useContext(OrderContext);
@@ -47,7 +48,7 @@ function FinalSummary(props){
                 <h3>New Balance: </h3><p>{newBalance}</p>
                 </div>
             </div>
-            <button onclick = {updateFinalBalance}>Pay And Checkout</button>
+            <button id={`login-button${props.isHighContrast ? 'dark':'light'}`} onclick = {updateFinalBalance}>Pay And Checkout</button>
         </div>
     )
 }

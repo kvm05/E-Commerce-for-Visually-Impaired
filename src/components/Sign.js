@@ -1,12 +1,13 @@
 import React, { useContext, useEffect } from "react";
-import "./signin.css";
 import { Link, useNavigate } from "react-router-dom";
 import {useForm} from "react-hook-form";
 // import {app, database} from "./Firebase";
 import { getAuth, signInWithPopup,GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { registerVersion } from "firebase/app";
+import Navbar from './navbar';
 import { UserContext } from "../App";
 import { addNewUser } from "./firebaseservices";
+import "./signin.css";
 
 
 

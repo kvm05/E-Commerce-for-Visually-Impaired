@@ -29,7 +29,7 @@ function CartPage(props){
         if (currentUser == null && user != null) {
             setUser(user)
             userDetails = await readData("users", "", user);
-            updateCurrentCart(userDetails.cart)
+            updateCurrentCart([...userDetails.cart.map(x => Object.assign({}, x))])
             setBackupCart([...userDetails.cart.map(x => Object.assign({}, x))])
         }
     }
@@ -95,6 +95,7 @@ function CartPage(props){
 
     function undoChanges(){
         updateCurrentCart(() =>{
+            console.log("Backup:")
             console.log(backupCart)
             return [...backupCart];
         });
@@ -104,7 +105,8 @@ function CartPage(props){
 
 
     const displayCart = currentCart.map((item) => {
-        console.log(item)
+        console.log("Quantity:");
+        console.log(item.quantity)
         return <CartItem name = {item.name}
                 price = {item.price}
                 image = {image}
@@ -148,11 +150,11 @@ function CartPage(props){
                     {/* {displayCart ? displayCart : temp} */}
                     {displayCart}
                 </div>
-                <OrderSummary isHighContrast={props.isHighContrast} toBilling = {toBilling}></OrderSummary>
+                <OrderSummary isHighContrast={isBlind} toBilling = {toBilling}></OrderSummary>
             </div>
             <div className="cartButtons">
-                <button onClick = {clearCart}>Clear Cart</button>
-                <button onClick = {undoChanges}>Undo Changes</button>
+                <button id={`login-button${isBlind ? 'dark':'light'}`} onClick = {clearCart}>Clear Cart</button>
+                <button id={`login-button${isBlind ? 'dark':'light'}`} onClick = {undoChanges}>Undo Changes</button>
             </div>
         </div>
     )

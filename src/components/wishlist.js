@@ -9,7 +9,8 @@ import WishListItem from "./wishlistitem";
 import Container from "./container";
 import Navbar from "./navbar";
 
-function Wishlist(props){const [isBlind, getChildData] = useState(true)
+function Wishlist(props){
+    const [isBlind, getChildData] = useState(true)
     const dataFromChild = (childData) => {
         getChildData(childData)
     }
@@ -47,7 +48,7 @@ function Wishlist(props){const [isBlind, getChildData] = useState(true)
             description = {product.description}
             rating = {product.rating}
             category = {product.category}
-            isHighContrast = {props.isHighContrast}
+            isHighContrast = {isBlind}
             addToCart = {addToCart}
             removeFromWishlist = {removeFromWishlist}></WishListItem>
         })

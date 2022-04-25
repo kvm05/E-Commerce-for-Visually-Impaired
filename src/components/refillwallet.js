@@ -2,6 +2,7 @@ import { UserContext } from "../App";
 import { readData } from "./firebaseservices";
 import {useContext, useState} from "react";
 import "./refillwallet.css"
+import "./navbar.css"
 
 
 function RefillWallet(props){
@@ -62,13 +63,13 @@ function RefillWallet(props){
 
     return(
         <div className = {`refillWallet${props.isHighContrast ? "Light" : "Dark"}`}>
-            <h1>Refill Wallet</h1>
+            <h1 id="refillHeader">Refill Wallet</h1>
             <div>
                 <h3>Current Balance:</h3>
                 <p>{currentBalance}</p>
             </div>
             {refill ? logos : []}
-            <button onClick = {() =>{
+            <button id={`login-button${props.isHighContrast ? 'dark':'light'}`} onClick = {() =>{
                 toggleRefill((prevState) =>{
                     return !prevState;
                 })

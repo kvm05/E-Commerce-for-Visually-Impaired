@@ -36,7 +36,12 @@
 .category h1{
     display: inline-block;
     font-size: 3em;    
+    text-align: center;
     /* margin-right: 60%; */
+    padding-bottom: 30px;
+    margin-bottom: 20px;
+    text-align: center;
+    border-bottom: 5px solid wheat;
     width: 85%;
 }
 

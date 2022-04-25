@@ -26,6 +26,11 @@
 .summaryDark{
     color:#cccccc;
     border-bottom: 5px solid wheat;    
+    padding-bottom: 30px;
+    margin-bottom: 10px;
+    text-align: center;
+    border-bottom: 5px solid wheat;
+    width: 90%;
 }
 
 .summaryLight{
@@ -60,13 +65,14 @@
 .ordersummary button, .finalSummary button{
     display:block;
     height: 60px;
-    padding: 0 20px;
-    /* width: 80%; */
-    margin: 15px 0;
+    padding: 0 0px !important;
+    width: 80%;
+    /* margin: 0px 10px !important; */
+    margin: 0 10px !important;
     background-color: #cccccc;
     border:none;
     border-radius: 10px;
-    font-weight: bold;
+    /* font-weight: bold; */
 }
 
 .finalSummary h1{

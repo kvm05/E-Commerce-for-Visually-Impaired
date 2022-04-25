@@ -10,8 +10,13 @@
     height: fit-content;
 }
 
-h1{
+#refillHeader{
     margin: 0 auto;
+    padding-bottom: 30px;
+    margin-bottom: 20px;
+    text-align: center;
+    border-bottom: 5px solid wheat;
+    width: 90%;
 }
 
 .refillWalletLight h3, .refillWalletDark h3{

@@ -25,8 +25,8 @@ function CustInfo(props){
 
     return(
         <div className = {`custInfo${props.isHighContrast ? "Light" : "Dark"}`}>
-            <h1>Customer Info</h1>
-            <form>
+            <h1 id="customerHeader">Customer Info</h1>
+            <form id="customerForm">
                 <div className = "custName">
                     <label for = "custName">Name:</label>
                     <input type = "text" onInput = {(event) =>{

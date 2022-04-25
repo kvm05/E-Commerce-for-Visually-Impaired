@@ -43,7 +43,7 @@ function OrderTable(props){
 
     return(
         <div className = {`orderTable${props.isHighContrast ? 'Dark':'Light'}`} >
-            <h1>Order Summary</h1>
+            <h1 id="orderHeader">Order Summary</h1>
             <div className = "table">
                 <table>
                     <thead>

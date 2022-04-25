@@ -2,6 +2,7 @@ import "./ordersummary.css"
 import {OrderContext} from "../App";
 import { Link, useNavigate } from "react-router-dom";
 import {useContext} from "react";
+import "./navbar.css"
 
 function OrderSummary(props){
     const {orderTotal} = useContext(OrderContext);
@@ -22,7 +23,7 @@ function OrderSummary(props){
                 </div>
             </div>
             <Link to = "/billing" style={{textDecoration:"none"}}>
-                <button onClick = {props.toBilling}>Proceed To Billing</button>
+                <button id={`login-button${props.isHighContrast ? 'dark':'light'}`} onClick = {props.toBilling}>Proceed To Billing</button>
             </Link>
         </div>
     )

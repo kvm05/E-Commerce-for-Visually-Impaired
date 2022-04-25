@@ -391,7 +391,7 @@ button{
 #profiledark:hover{
 	background-color: wheat;
 	color: #000;
-	transition: all 0.5s;
+	transition: all 0.3s;
 }
 
 #login-buttonlight:hover,
@@ -400,5 +400,5 @@ button{
 {
 	background-color: #68a0f9;
 	color: white;
-	transition: all 0.5s;
+	transition: all 0.3s;
 }

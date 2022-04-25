@@ -55,11 +55,11 @@
     display:block;
     height: 40px;
     width: 80%;
-    margin: 15px 0;
+    margin: 15px 0 !important;
     background-color: #cccccc;
     border:none;
     border-radius: 10px;
-    font-weight: bold;
+    /* font-weight: bold; */
 }
 
 .right button:hover{
@@ -81,6 +81,7 @@
 .learnLight{
     color:black;
     text-decoration: none;
+    margin: 5px auto !important;
 }
 
 .learnDark{

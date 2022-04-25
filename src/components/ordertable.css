@@ -62,10 +62,10 @@ th{
     display: inline-block;
 }
 
-h1{
+#orderHeader{
     padding-bottom: 30px;
     margin-bottom: 20px;
     text-align: center;
     border-bottom: 5px solid wheat;
-    width: 70%;
+    width: 100%;
 }

@@ -1,6 +1,7 @@
 import React,{useState} from "react";
 import "./products.css"
 import { useSpeechSynthesis } from 'react-speech-kit';
+import "./navbar.css"
 
 function WishlistItem(props){
     const [currentSlide,changeSlide]=useState(0);
@@ -32,12 +33,12 @@ function WishlistItem(props){
             </div>
             <div className="right">
                 <p className={`productprice${props.isHighContrast?"Dark":"Light"}`} id='price' onMouseEnter={() => speak({text: `Price: ₹${props.price}`})} onMouseLeave={() => cancel()}>Price: ₹{props.price}</p>
-                <button onMouseEnter={() => speak({text: "Remove From Wishlist"})} onClick={() => {speak({text: "Removed from Wishlist"});
+                <button id={`login-button${props.isHighContrast ? 'dark':'light'}`} onMouseEnter={() => speak({text: "Remove From Wishlist"})} onClick={() => {speak({text: "Removed from Wishlist"});
                 props.removeFromWishlist(props.name)}} onMouseLeave={() => cancel()}>REMOVE FROM WISHLIST</button>
-                <button onClick={() =>{
+                <button id={`login-button${props.isHighContrast ? 'dark':'light'}`} onClick={() =>{
                     props.addToCart(props.name)
                     speak({text: "Added to Cart"})
-                }} onMouseEnter={() => speak({text: "Add To Cart"})}>ADD TO CART</button>
+                }} onMouseEnter={() => speak({text: "Add To Cart"})} onMouseLeave={() => cancel()}>ADD TO CART</button>
                 <a href="dsdssd" className={`learn${props.isHighContrast?"Dark":"Light"}`}>Learn More</a>
             </div>
         </div>
