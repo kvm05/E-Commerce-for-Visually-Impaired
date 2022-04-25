@@ -22,7 +22,7 @@ function OrderSummary(props){
                 </div>
             </div>
             <Link to = "/billing" style={{textDecoration:"none"}}>
-                <button onClick = {props.toBilling}>Proceed To Checkout</button>
+                <button onClick = {props.toBilling}>Proceed To Billing</button>
             </Link>
         </div>
     )

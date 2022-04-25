@@ -81,7 +81,7 @@ function Container(props){
         displayProducts = filteredProducts.map((product) =>{
         return <Product name = {product.name}
         price = {product.price}
-        image = {image}
+        image = {product.image}
         description = {product.description}
         rating = {product.rating}
         category = {product.category}

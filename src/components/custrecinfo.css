@@ -1,13 +1,13 @@
 .custInfoDark, .custInfoLight, .recInfoLight, .recInfoDark{
     background: rgba(198, 198, 198,0.2);
     border-radius: 30px;
-    padding: 40px;
+    padding: 50px 30px;
     width: 55%;
     margin: 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    height: 620px;
 }
 
 

@@ -1,4 +1,4 @@
-.ordersummary{
+.ordersummary, .finalSummary{
     height:425px;
     display:flex;
     flex-direction: column;
@@ -10,8 +10,14 @@
     align-items: center;
 }
 
+.finalSummary{
+    padding-top: 40px;
+    height: 550px;
+    width: 30%;
+}
+
 .summaryLight.summaryDark{
-    text-align: center;
+    text-align: left;
     height:30%;
     padding: 20px;
     /* padding: 20px; */
@@ -39,17 +45,19 @@
     display:flex;
     align-items: center;
     justify-content: center;
+    padding: 0 10px;
 }
 
 .totalDark{
-    color:#cccccc;
+    color: wheat;
 }
 
 .totalLight h3,.totalDark h3{
-    width: 60%;
+    width: 50%;
+    margin-right: 20%;
 }
 
-.ordersummary button{
+.ordersummary button, .finalSummary button{
     display:block;
     height: 60px;
     padding: 0 20px;
@@ -59,4 +67,12 @@
     border:none;
     border-radius: 10px;
     font-weight: bold;
+}
+
+.finalSummary h1{
+    color: wheat;
+}
+
+.finalSummary button{
+    padding: 20px;
 }

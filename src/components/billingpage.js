@@ -6,6 +6,7 @@ import ShipmentForm from "./shipmentform";
 import RefillWallet from "./refillwallet";
 import "./billingpage.css"
 import CustInfo from "./custinfo";
+import FinalSummary from "./finalsummary";
 
 function BillingPage(){
 
@@ -17,10 +18,13 @@ function BillingPage(){
     return (
         <div className = "billingPage" id={`homepage ${isBlind ? 'dark':'light'}`}>
             <Navbar func = {dataFromChild}/>
-            <OrderTable isHighContrast = {isBlind}></OrderTable>
-            <div className = "bottomContainer">
+            <div className = "topContainer">
                 <CustInfo isHighContrast = {isBlind}></CustInfo>
                 <RefillWallet isHighContrast = {isBlind}></RefillWallet>
+            </div>
+            <div className = "bottomContainer">
+            <OrderTable isHighContrast = {isBlind}></OrderTable>
+            <FinalSummary isHighContrast ={isBlind}></FinalSummary>
             </div>
         </div>
     )

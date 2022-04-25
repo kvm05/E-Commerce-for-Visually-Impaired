@@ -36,6 +36,19 @@ export async function getAllProducts(){
     })
 }
 
+export async function updateWallet(user, newBalance){
+    const q = query(collection(database, "users"), where("uid", "==", user.uid));
+    const querySnapshot = await getDocs(q);
+    const docId = querySnapshot.docs[0].ref.id; 
+    console.log(docId);
+        const ref = doc(database, "users", docId);
+
+    // Atomically add a new region to the "regions" array field.
+    await updateDoc(ref, {
+        wallet: newBalance
+});   
+}
+
 export async function search(parameter){
     const products = await getAllProducts();
     const res = [];

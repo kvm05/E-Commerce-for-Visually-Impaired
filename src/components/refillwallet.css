@@ -6,26 +6,30 @@
     margin: 40px ;
     display: flex;
     flex-direction: column;
-    height: 700px;
+    /* min-height: 100px; */
+    height: fit-content;
 }
 
 h1{
     margin: 0 auto;
 }
 
-h3{
+.refillWalletLight h3, .refillWalletDark h3{
+
     display: inline-block;
     text-align: left;
     margin-right: 40%;
+    margin-left: 40px;
     font-size: 1.2rem;
 
 }
 
-p{
+.refillWalletLight p, .refillWalletDark p{
     display: inline-block;
     font-size: 1.2rem;
 
 }
+
 
 .logos{
     margin-top: 20px;
@@ -56,4 +60,27 @@ p{
     /* height:80%; */
     object-fit: contain;
     object-position: center;
+}
+
+.logos h3{
+    margin-left: 0;
+}
+
+.refillWalletDark button, .refillWalletLight button{
+    margin: 40px;
+    height: 60px;
+    padding: 15px 20px;
+    /* width: 80%; */
+    background-color: #cccccc;
+    border:none;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.logos label{
+    margin-right: 25%;
+    font-size: 1.2em;
+    font-weight: bold;
+    display: inline-block;
+    width: 40%;
 }
