@@ -15,7 +15,6 @@ function ProductPage(props){
     }
 
     const {valueToBeSearched} = useContext(SearchContext);
-
     console.log(valueToBeSearched);
     // console.log(ClickCategory)
     return(

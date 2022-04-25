@@ -34,10 +34,13 @@ export const SearchContext = React.createContext({
   setValueToBeSearched: () => {},
 })
 
+export const TTSContext = React.createContext({})
+
 function MainPage() {
   const [user, setUser] = useState(null);
   const [orderTotal, setOrderTotal] = useState(0);
   const [valueToBeSearched, setValueToBeSearched] = useState("");
+  const [screenReader, changeScreenReader] = useState(true);
 
   useEffect(() => {
     const auth = getAuth();
@@ -58,29 +61,31 @@ function MainPage() {
     <UserContext.Provider value={{ user, setUser }}>
       <OrderContext.Provider value = {{orderTotal, setOrderTotal}}>
         <SearchContext.Provider value = {{valueToBeSearched, setValueToBeSearched}}>
-          <BrowserRouter> 
-            <Routes>
-              <Route path="/" element={<Homepage />} />
-              <Route path="/sign" element={<SignIn></SignIn>} />
-              <Route
-                path="categories/Shoes"
-                element={<ProductPage name="Shoes" />}
-              />
-              <Route
-                path="categories/Electronics"
-                element={<ProductPage name="Electronics" />}
-              />
-              <Route path="categories/Food" element={<ProductPage name="Food" />} />
-              <Route
-                path="categories/Clothes"
-                element={<ProductPage name="Clothes" />}
-              />
-              <Route path="cart" element={<CartPage />} />
-              <Route path="account" element={<AccountPage />} />
-              <Route path = "wishlist" element = {<Wishlist />} />
-              <Route path = "billing" element = {<BillingPage />} />
-            </Routes>
-          </BrowserRouter>
+          <TTSContext.Provider value={{screenReader, changeScreenReader}}>
+            <BrowserRouter> 
+              <Routes>
+                <Route path="/" element={<Homepage />} />
+                <Route path="/sign" element={<SignIn></SignIn>} />
+                <Route
+                  path="categories/Shoes"
+                  element={<ProductPage name="Shoes" />}
+                />
+                <Route
+                  path="categories/Electronics"
+                  element={<ProductPage name="Electronics" />}
+                />
+                <Route path="categories/Food" element={<ProductPage name="Food" />} />
+                <Route
+                  path="categories/Clothes"
+                  element={<ProductPage name="Clothes" />}
+                />
+                <Route path="cart" element={<CartPage />} />
+                <Route path="account" element={<AccountPage />} />
+                <Route path = "wishlist" element = {<Wishlist />} />
+                <Route path = "billing" element = {<BillingPage />} />
+              </Routes>
+            </BrowserRouter>
+          </TTSContext.Provider>
         </SearchContext.Provider>
       </OrderContext.Provider>
     </UserContext.Provider>

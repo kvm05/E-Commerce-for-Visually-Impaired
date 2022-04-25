@@ -3,12 +3,13 @@ import FilterPane from "./filterpane";
 import { Link, useNavigate } from "react-router-dom";
 import "./container.css"
 import {readData, filterByBrand, getBrands, search, getAllProducts, updateCart, updateWishlist} from "./firebaseservices";
-import {UserContext, SearchContext} from "../App";
+import {UserContext, SearchContext, TTSContext} from "../App";
 import React, {useState, useContext, useEffect} from "react";
 import { useSpeechSynthesis } from 'react-speech-kit';
 
 function Container(props){
     const {speak, cancel} = useSpeechSynthesis();
+    const {screenReader} = useContext(TTSContext);
     const image=[]
     for(let i=11;i<=20;i++){
         image.push(`/images/prod${i}.png`);
@@ -125,13 +126,13 @@ function Container(props){
             <FilterPane category = {props.name} filterBrand = {filterBrand} brands = {brands}></FilterPane>
             <div className="prod">
                 <div className="category">
-                <h1 id='category-header' onMouseEnter={() => speak({text:document.querySelector('#category-header').textContent})}>{props.valueToBeSearched? "Search Results": name[0].toUpperCase()+name.slice(1)}</h1>
+                <h1 id='category-header' onMouseEnter={() => screenReader?speak({text:document.querySelector('#category-header').textContent}):cancel()}>{props.valueToBeSearched? "Search Results": name[0].toUpperCase()+name.slice(1)}</h1>
                     <div  className="icons">
                         <Link to = '/cart'>
-                            <img src={props.isHighContrast?"/images/viewcart-wheat.png":"/images/view cart.png"} alt="view cart" onMouseEnter={() => speak({text: "View Cart"})}></img>
+                            <img src={props.isHighContrast?"/images/viewcart-wheat.png":"/images/view cart.png"} alt="view cart" onMouseEnter={() => screenReader?speak({text: "View Cart"}):cancel()}></img>
                         </Link>
                         <Link to = '/wishlist'>
-                            <a href="wishlist"><img src={props.isHighContrast?"/images/wishlist-wheat.png" :"/images/wishlist.png"} alt="wishlist" onMouseEnter={() => speak({text: "View Wishlist: Currently Disabled"})}></img></a>
+                            <a href="wishlist"><img src={props.isHighContrast?"/images/wishlist-wheat.png" :"/images/wishlist.png"} alt="wishlist" onMouseEnter={() => screenReader?speak({text: "View Wishlist"}):cancel()}></img></a>
                         </Link>
                     </div>
                 </div>

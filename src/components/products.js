@@ -1,10 +1,12 @@
-import React,{useState} from "react";
+import React,{useState, useContext} from "react";
 import "./products.css"
 import { useSpeechSynthesis } from 'react-speech-kit';
+import { TTSContext } from '../App';
 
 function Product(props){
     const [currentSlide,changeSlide]=useState(0);
     const {speak, cancel} = useSpeechSynthesis();
+    const {screenReader} = useContext(TTSContext);
     function goLeft(){
         changeSlide((prevSlide)=>{
             if (prevSlide == 0) return props.image.length - 1
@@ -26,18 +28,20 @@ function Product(props){
                 <button><i class="fas fa-chevron-right" onClick={goRight}></i></button>
             </div>
             <div className="details">
-                <h2 className="title" onMouseEnter={() => speak({text: props.name})} onMouseLeave={() => cancel()}>{props.name}</h2>
-                <p className="description" onMouseEnter={() => speak({text: props.description})} onMouseLeave={() => cancel()}>{props.description}</p>
-                <p className="rating" onMouseEnter={() => speak({text: `Rating: ${props.rating}`})} onMouseLeave={() => cancel()}>Rating: {props.rating}</p>
+                <h2 className="title" onMouseEnter={() => screenReader?speak({text: props.name}):cancel()} onMouseLeave={() => cancel()}>{props.name}</h2>
+                <p className="description" onMouseEnter={() => screenReader?speak({text: props.description}):cancel()} onMouseLeave={() => cancel()}>{props.description}</p>
+                <p className="rating" onMouseEnter={() => screenReader?speak({text: `Rating: ${props.rating}`}):cancel()} onMouseLeave={() => cancel()}>Rating: {props.rating}</p>
             </div>
             <div className="right">
-                <p className={`productprice${props.isHighContrast?"Dark":"Light"}`} id='price' onMouseEnter={() => speak({text: `Price: ₹${props.price}`})} onMouseLeave={() => cancel()}>Price: ₹{props.price}</p>
-                <button onMouseEnter={() => speak({text: "Add To Wishlist"})} onClick={() => {speak({text: "Added to Wishlist"});
-                props.addToWishlist(props.name)}} onMouseLeave={() => cancel()}>ADD TO WISHLIST</button>
+                <p className={`productprice${props.isHighContrast?"Dark":"Light"}`} id='price' onMouseEnter={() => screenReader?speak({text: `Price: ₹${props.price}`}):cancel()} onMouseLeave={() => cancel()}>Price: ₹{props.price}</p>
+                <button onMouseEnter={() => screenReader?speak({text: "Add To Wishlist"}):cancel()} onClick={() => {
+                    screenReader?speak({text: "Added to Wishlist"}):cancel();
+                    props.addToWishlist(props.name)}} 
+                    onMouseLeave={() => cancel()}>ADD TO WISHLIST</button>
                 <button onClick={() =>{
                     props.addToCart(props.name)
-                    speak({text: "Added to Cart"})
-                }} onMouseEnter={() => speak({text: "Add To Cart"})}
+                    screenReader?speak({text: "Added to Cart"}):cancel()
+                }} onMouseEnter={() => screenReader?speak({text: "Add To Cart"}):cancel()}
                 >ADD TO CART</button>
                 <a href="dsdssd" className={`learn${props.isHighContrast?"Dark":"Light"}`}>Learn More</a>
             </div>

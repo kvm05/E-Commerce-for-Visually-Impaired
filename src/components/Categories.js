@@ -1,12 +1,14 @@
-import {React, useState} from "react";
+import {React, useState, useContext} from "react";
 import "./Categories.css"
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useSpeechSynthesis } from 'react-speech-kit';
+import { TTSContext } from '../App';
 
 function Categories(props){
     const navigate = useNavigate()
     const [cat, setCat] = useState('')
     const {speak, cancel} = useSpeechSynthesis();
+    const {screenReader, changeScreenReader} = useContext(TTSContext);
     const onClickCategory = (currCat) => {
         setCat(currCat)
         navigate("/categories")
@@ -16,9 +18,9 @@ function Categories(props){
             <button id={`category ${props.checkBlind ? 'dark':'light'}`} 
             onClick={() => {
                 onClickCategory(props.name)
-                speak({text: `Opening ${props.name}`})
+                screenReader?speak({text: `Opening ${props.name}`}):cancel()
             }} 
-            onMouseEnter={() => speak({ text: props.name })} onMouseLeave={() => cancel()}>
+            onMouseEnter={() => screenReader?speak({ text: props.name }):cancel()} onMouseLeave={() => cancel()}>
                 {props.name}
             </button>
         </Link>
