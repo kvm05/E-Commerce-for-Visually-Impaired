@@ -26,13 +26,11 @@ function CartPage(props){
     const [backupCart, setBackupCart] = useState(null);
 
     async function get(){
-        backupCart && console.log("Backup" + backupCart.length)
         if (currentUser == null && user != null) {
             setUser(user)
             userDetails = await readData("users", "", user);
             updateCurrentCart(userDetails.cart)
-            console.log("mai wajah hu")
-            setBackupCart(userDetails.cart)
+            setBackupCart([...userDetails.cart.map(x => Object.assign({}, x))])
         }
     }
 
@@ -96,17 +94,17 @@ function CartPage(props){
     }
 
     function undoChanges(){
-        console.log("Clicked")
-        console.log(backupCart)
         updateCurrentCart(() =>{
-            console.log("gaandu")
+            console.log(backupCart)
             return [...backupCart];
         });
     }
 
     const image=["/images/prod11.png"]
 
+
     const displayCart = currentCart.map((item) => {
+        console.log(item)
         return <CartItem name = {item.name}
                 price = {item.price}
                 image = {image}

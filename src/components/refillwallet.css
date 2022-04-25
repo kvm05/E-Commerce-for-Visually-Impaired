@@ -1,0 +1,59 @@
+.refillWalletLight, .refillWalletDark{
+    background: rgba(198, 198, 198,0.2);
+    border-radius: 30px;
+    padding: 40px;
+    width: 40%;
+    margin: 40px ;
+    display: flex;
+    flex-direction: column;
+    height: 700px;
+}
+
+h1{
+    margin: 0 auto;
+}
+
+h3{
+    display: inline-block;
+    text-align: left;
+    margin-right: 40%;
+    font-size: 1.2rem;
+
+}
+
+p{
+    display: inline-block;
+    font-size: 1.2rem;
+
+}
+
+.logos{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    padding: 0 40px;
+    max-height: 60%;
+    overflow: auto;
+}
+
+.logos > div{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    /* margin: 40px; */
+    margin: 15px 0;
+}
+
+.logos a{
+    max-width: 60%;
+    margin-right: 50px;
+}
+
+.logos img{
+    display: inline-block;
+    height: 90%;
+    max-width: 50%;
+    /* height:80%; */
+    object-fit: contain;
+    object-position: center;
+}

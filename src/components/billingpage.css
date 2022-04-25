@@ -1,0 +1,7 @@
+.billingPageLight, .billingPageDark{
+    display: flex;
+}
+
+.bottomContainer{
+    display: flex;
+}
