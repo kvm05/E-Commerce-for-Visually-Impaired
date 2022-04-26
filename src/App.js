@@ -18,6 +18,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { PrivateRoute } from "./components/PrivateRoute";
 import Wishlist from "./components/wishlist";
 import BillingPage from "./components/billingpage";
+import DetailedProducts from "./components/detailedproducts";
 
 export const UserContext = React.createContext({
   user: {},
@@ -89,6 +90,7 @@ function MainPage() {
         </SearchContext.Provider>
       </OrderContext.Provider>
     </UserContext.Provider>
+    // <DetailedProducts/>
   );
 }
 

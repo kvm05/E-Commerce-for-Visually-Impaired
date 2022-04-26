@@ -13,6 +13,7 @@ const Navbar = (props)  =>{
   const [isClicked, setClicked] = DetectOutsideClick(dropdownRef, false);
   const {user, setUser} = useContext(UserContext);
   const {screenReader, changeScreenReader} = useContext(TTSContext);
+  const navigate = useNavigate()
   const {speak, cancel} = useSpeechSynthesis();
   const { listen, stop, listening} = useSpeechRecognition({
     onResult: (result) => {
@@ -38,6 +39,28 @@ const Navbar = (props)  =>{
 
   const {valueToBeSearched,setValueToBeSearched} = useContext(SearchContext);
   
+  const goToCat = () => {
+    const index = valueToBeSearched.indexOf("go to");
+    if(index!==-1){
+      const cat = valueToBeSearched.slice(index+6,valueToBeSearched.length)
+      const category = cat.charAt(0).toUpperCase() + cat.slice(1);
+      const path = "categories/".concat(category)
+      // console.log(category)
+      setValueToBeSearched('')
+      navigate(path)
+    }
+    else{
+      const index2 = valueToBeSearched.indexOf("open");
+      if(index2!==-1){
+        const cat = valueToBeSearched.slice(index2+5,valueToBeSearched.length)
+        const category = cat.charAt(0).toUpperCase() + cat.slice(1);
+        const path = "categories/".concat(category)
+        console.log(path)
+        setValueToBeSearched('')
+        navigate(path)
+      }
+    }
+  }
   return (
     <div id = {`navbar ${isBlind ? 'dark':'light'}`}>
       <div id='left-navbar'>
@@ -58,6 +81,7 @@ const Navbar = (props)  =>{
           </button>
           <button id = {`search-button ${isBlind ? 'dark':'light'}`} onClick={() => {
             if(listening){
+              goToCat()
               stop()
             }
             else{
