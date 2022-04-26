@@ -1,5 +1,5 @@
 .ordersummary, .finalSummary{
-    height:425px;
+    height: fit-content;
     display:flex;
     flex-direction: column;
     margin:40px;
@@ -29,7 +29,6 @@
     padding-bottom: 30px;
     margin-bottom: 10px;
     text-align: center;
-    border-bottom: 5px solid wheat;
     width: 90%;
 }
 
@@ -64,14 +63,16 @@
 
 .ordersummary button, .finalSummary button{
     display:block;
-    height: 60px;
-    padding: 0 0px !important;
+    /* padding: 0 0px !important; */
     width: 80%;
+    height: 60px;
+    padding: 10px !important;
     /* margin: 0px 10px !important; */
-    margin: 0 10px !important;
+    /* margin: 0 10px !important; */
     background-color: #cccccc;
     border:none;
     border-radius: 10px;
+    margin: 0 20px !important;
     /* font-weight: bold; */
 }
 

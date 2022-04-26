@@ -29,9 +29,7 @@ function CustInfo(props){
             <form id="customerForm">
                 <div className = "custName">
                     <label for = "custName">Name:</label>
-                    <input type = "text" onInput = {(event) =>{
-                        
-                    }} readonly = "readonly" id = "custName" value = {userDetails.name}></input>
+                    <input type = "text" readonly = "readonly" id = "custName" value = {userDetails.name}></input>
                 </div>
                 <div className = "custEmail">
                     <label for = "custEmail">Email:</label>

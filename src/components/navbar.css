@@ -357,11 +357,11 @@ button{
 
 #login-buttondark{
 	border-radius: 5px;
-	height: 40px;
+	height: 60px;
 	box-sizing: border-box;
 	padding: 10px;
 	font-family: 'Roboto';
-	font-size: 20px;
+	font-size: 0.9em;
 	margin: 0px 40px;
 	display: flex;
 	justify-content: center;
@@ -369,22 +369,24 @@ button{
 	background: #464649;
 	border: none;
 	color: wheat;
+	font-weight: bold;
 }
 #login-buttonlight{
 	border-radius: 5px;
 	border: 1px solid transparent;
 	box-shadow: 0 2px 5px 1px rgb(64 60 67 / 16%);
-	height: 40px;
+	height: 60px;
 	box-sizing: border-box;
 	padding: 10px;
 	font-family: 'Roboto';
-	font-size: 20px;
+	font-size: 0.9em;
 	margin: 0px 40px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	background: #ccc;
 	border: none;
+	font-weight: bold;
 }
 
 #login-buttondark:hover,

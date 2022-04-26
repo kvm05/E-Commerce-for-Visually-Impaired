@@ -26,6 +26,7 @@
     margin-right: 40%;
     margin-left: 40px;
     font-size: 1.2rem;
+    width: 30%;
 
 }
 
@@ -35,7 +36,6 @@
 
 }
 
-
 .logos{
     margin-top: 20px;
     display: flex;
@@ -43,6 +43,7 @@
     padding: 0 40px;
     max-height: 200px;
     overflow: auto;
+    margin-bottom: 40px;
 }
 
 .logos > div{
@@ -67,8 +68,13 @@
     object-position: center;
 }
 
-.logos h3{
+.walletOps h3{
     margin-left: 0;
+    display: inline-block;
+    text-align: left;
+    margin-right: 40%;
+    margin-left: 40px;
+    font-size: 1.2rem;
 }
 
 .refillWalletDark button, .refillWalletLight button{
@@ -79,13 +85,37 @@
     background-color: #cccccc;
     border:none;
     border-radius: 10px;
-    font-weight: bold;
+    /* font-weight: bold; */
 }
 
-.logos label{
-    margin-right: 25%;
+.walletOps label{
+    margin-right: 10%;
     font-size: 1.2em;
     font-weight: bold;
     display: inline-block;
     width: 40%;
+    margin-left: 40px;
+}
+
+.walletOps input{
+    margin: 10px;
+    padding: 15px 10px;
+    /* border-radius: 10px; */
+    border: none;
+    background: none;
+    border-bottom: 2px solid wheat;
+    color: white;
+    width: 30%;
+    text-align: right;
+}
+
+.newBalance p{
+    text-align: right;
+}
+
+.closeRefill{
+    font-size: 30px;
+    margin: 0 !important;
+    margin-left: 90% !important;
+    background: none !important;
 }

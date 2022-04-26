@@ -10,6 +10,8 @@ function RefillWallet(props){
     const {user} = useContext(UserContext);
     const [currentUser, setCurrentUser] = useState(null);
     const [currentBalance, setCurrentBalance] = useState(0);
+    const [refillAmount, setRefillAmount] = useState(0);
+    const [newBalance, setNewBalance] = useState(0);
     const [refill, toggleRefill] = useState(false);
 
     let userDetails = [];
@@ -20,25 +22,42 @@ function RefillWallet(props){
             setCurrentUser(user)
             userDetails = await readData("users", "", user);
             setCurrentBalance(userDetails.wallet);
+            setNewBalance(userDetails.wallet);
         }
     }
 
     get();
 
-    const logos = <div className = "logos">
+    function fillMoney(){
+       if(refill){
+        setCurrentBalance(newBalance);
+        props.refillWallet(newBalance);
+       }
+       else{
+           toggleRefill(true);
+       }
+    }
+
+    const logos = <div className = "walletOps">
+            <button class = "closeRefill" onClick = {() =>{
+                toggleRefill(false);
+            }}><i class="fa fa-window-close" aria-hidden="true"></i>
+            </button>
             <div className = "updateBalance">
                 <label for = "updateBalance">Refill amount:</label>
-                <input type = "text" id = "updateBalance" onInput = {(event) =>{
-                                            console.log("hi")
-                    if(typeof(event.target.value) === "number")
-                    {
-                        setCurrentBalance((prevBalance) =>{
-                        console.log("hi")
-                        return prevBalance + event.target.value;
-                    })}
+                <input type = "text" placeholder = {refillAmount} id = "updateBalance" onInput = {(event) =>{
+                    if(!isNaN(parseInt(event.target.value))){
+                        setRefillAmount(parseInt(event.target.value))
+                        setNewBalance(currentBalance + parseInt(event.target.value))
+                    }
                 }}></input>
+                <div className = "newBalance">
+                    <h3>New Balance:</h3>
+                    <p>{newBalance}</p>
+                </div>
             </div>
             <h3>Refill using:</h3>
+            <div className = "logos">
             <div>
                 <a href = "https://paytm.com/" alt = "Paytm" id = "Paytm"><img src = "/images/paytm.png" alt = "Paytm" /></a>
                 <p>PayTM</p>
@@ -59,6 +78,7 @@ function RefillWallet(props){
                 <a href = "https://www.visa.co.in//" alt = "Visa"><img src = "/images/visa.png" alt = "Visa" /></a>
                 <p>Visa</p>
             </div>
+            </div>
         </div>
 
     return(
@@ -69,11 +89,7 @@ function RefillWallet(props){
                 <p>{currentBalance}</p>
             </div>
             {refill ? logos : []}
-            <button id={`login-button${props.isHighContrast ? 'dark':'light'}`} onClick = {() =>{
-                toggleRefill((prevState) =>{
-                    return !prevState;
-                })
-            }}>Refill Wallet</button>
+            <button id={`login-button${props.isHighContrast ? 'dark':'light'}`} onClick = {fillMoney}>Refill Wallet</button>
         </div>
     )
 }
