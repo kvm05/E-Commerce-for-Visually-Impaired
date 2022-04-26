@@ -3,13 +3,14 @@ import { readData } from "./firebaseservices";
 import {useContext, useState} from "react";
 import "./refillwallet.css"
 import "./navbar.css"
+import {BalanceContext} from "./billingpage"
 
 
 function RefillWallet(props){
     
     const {user} = useContext(UserContext);
     const [currentUser, setCurrentUser] = useState(null);
-    const [currentBalance, setCurrentBalance] = useState(0);
+    const {currentBalance, setCurrentBalance} = useContext(BalanceContext);
     const [refillAmount, setRefillAmount] = useState(0);
     const [newBalance, setNewBalance] = useState(0);
     const [refill, toggleRefill] = useState(false);
@@ -17,16 +18,16 @@ function RefillWallet(props){
     let userDetails = [];
 
 
-    async function get(){
-        if (currentUser == null && user != null) {
-            setCurrentUser(user)
-            userDetails = await readData("users", "", user);
-            setCurrentBalance(userDetails.wallet);
-            setNewBalance(userDetails.wallet);
-        }
-    }
+    // async function get(){
+    //     if (currentUser == null && user != null) {
+    //         setCurrentUser(user)
+    //         userDetails = await readData("users", "", user);
+    //         setCurrentBalance(userDetails.wallet);
+    //         setNewBalance(userDetails.wallet);
+    //     }
+    // }
 
-    get();
+    // get();
 
     function fillMoney(){
        if(refill){

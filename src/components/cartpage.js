@@ -109,7 +109,7 @@ function CartPage(props){
         console.log(item.quantity)
         return <CartItem name = {item.name}
                 price = {item.price}
-                image = {image}
+                image = {item.image}
                 quantity = {item.quantity}
                 onCartUpdate = {onCartUpdate}
                 // updateTotal = {updateTotal}

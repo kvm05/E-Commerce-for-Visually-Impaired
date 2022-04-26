@@ -1,6 +1,6 @@
 import OrderTable from "./ordertable"
 import Navbar from "./navbar";
-import {useState, useContext} from "react";
+import React, {useState, useContext} from "react";
 import "./navbar.css"
 import ShipmentForm from "./shipmentform";
 import RefillWallet from "./refillwallet";
@@ -10,6 +10,11 @@ import FinalSummary from "./finalsummary";
 import { UserContext } from "../App";
 import { readData, updateWallet } from "./firebaseservices";
 
+export const BalanceContext = React.createContext(
+    {currentBalance: 0,
+    setCurrentBalance: () => {}}
+);
+
 function BillingPage(){
 
     const [isBlind, getChildData] = useState(true)
@@ -17,14 +22,20 @@ function BillingPage(){
         getChildData(childData)
     }
 
+    const customerDetails = {};
+
     const {user, setUser} = useContext(UserContext);
     const [currentUser, setCurrentUser] = useState(null);
     let userDetails = [];
+    const [currentBalance, setCurrentBalance] = useState(0);
+
+    
 
     async function get(){
         if (currentUser == null && user != null) {
             userDetails = await readData("users", "", user);
             setCurrentUser(user);
+            setCurrentBalance(userDetails.wwallet);
         }
     }
 
@@ -34,18 +45,28 @@ function BillingPage(){
         updateWallet(user, newBalance);
     }
 
+    function updateCustomerInfo(field, value){
+        customerDetails[field] = value;
+    }
+
+    function checkout(){
+
+    }
+
     return (
-        <div className = "billingPage" id={`homepage ${isBlind ? 'dark':'light'}`}>
+        <BalanceContext.Provider value = {{currentBalance, setCurrentBalance}}>
+            <div className = "billingPage" id={`homepage ${isBlind ? 'dark':'light'}`}>
             <Navbar func = {dataFromChild}/>
             <div className = "topContainer">
-                <CustInfo isHighContrast = {isBlind}></CustInfo>
+                <CustInfo isHighContrast = {isBlind} updateCustomerInfo = {updateCustomerInfo}></CustInfo>
                 <RefillWallet isHighContrast = {isBlind} refillWallet = {refillWallet}></RefillWallet>
             </div>
             <div className = "bottomContainer">
                 <OrderTable isHighContrast = {isBlind}></OrderTable>
-                <FinalSummary isHighContrast ={isBlind}></FinalSummary>
+                <FinalSummary isHighContrast ={isBlind} checkout = {checkout}></FinalSummary>
             </div>
         </div>
+        </BalanceContext.Provider>
     )
 }
 

@@ -4,12 +4,13 @@ import { Link, useNavigate } from "react-router-dom";
 import {useContext, useState} from "react";
 import { readData } from "./firebaseservices";
 import "./navbar.css"
+import { BalanceContext } from "./billingpage";
 
 function FinalSummary(props){
     const {orderTotal} = useContext(OrderContext);
     const {user} = useContext(UserContext);
     const [currentUser, setCurrentUser] = useState(null);
-    const [currentBalance, setCurrentBalance] = useState(0);
+    const {currentBalance, setCurrentBalance} = useContext(BalanceContext);
 
     let userDetails = [];
 
@@ -23,9 +24,6 @@ function FinalSummary(props){
 
     get();
 
-    function updateFinalBalance(){
-
-    }
     console.log(orderTotal);
     const tax=Math.floor((0.18*orderTotal)*100)/100;
     const final=Math.floor((orderTotal+tax)*100)/100;
@@ -48,7 +46,9 @@ function FinalSummary(props){
                 <h3>New Balance: </h3><p>{newBalance}</p>
                 </div>
             </div>
-            <button id={`login-button${props.isHighContrast ? 'dark':'light'}`} onclick = {updateFinalBalance}>Pay And Checkout</button>
+            <button id={`login-button${props.isHighContrast ? 'dark':'light'}`} onclick = {() =>{
+                props.checkout()
+            }}>Pay And Checkout</button>
         </div>
     )
 }

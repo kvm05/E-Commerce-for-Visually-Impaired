@@ -44,7 +44,7 @@ function Wishlist(props){
         displayProducts = currentWishlist.map((product) =>{
             return <WishListItem name = {product.name}
             price = {product.price}
-            image = {image}
+            image = {product.image}
             description = {product.description}
             rating = {product.rating}
             category = {product.category}
