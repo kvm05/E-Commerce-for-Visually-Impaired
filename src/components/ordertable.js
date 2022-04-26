@@ -7,21 +7,23 @@ function OrderTable(props){
 
     const {user} = useContext(UserContext);
     const [currentUser, setCurrentUser] = useState(null);
-    const [currentCart, setCurrentCart] = useState([]);
+    // const [currentCart, setCurrentCart] = useState([]);
+    // setCurrentCart(props.cart);
+    const currentCart = props.cart;
 
     let userDetails = [];
 
 
-    async function get(){
-        if (currentUser == null && user != null) {
-            setCurrentUser(user)
-            userDetails = await readData("users", "", user);
-            setCurrentCart(userDetails.cart);
-            console.log(userDetails.cart)
-        }
-    }
+    // async function get(){
+    //     if (currentUser == null && user != null) {
+    //         setCurrentUser(user)
+    //         userDetails = await readData("users", "", user);
+    //         setCurrentCart(userDetails.cart);
+    //         console.log(userDetails.cart)
+    //     }
+    // }
 
-    get();
+    // get();
 
     console.log(currentCart)
 

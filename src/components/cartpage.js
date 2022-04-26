@@ -29,7 +29,7 @@ function CartPage(props){
         if (currentUser == null && user != null) {
             setUser(user)
             userDetails = await readData("users", "", user);
-            updateCurrentCart([...userDetails.cart.map(x => Object.assign({}, x))])
+            updateCurrentCart(userDetails.cart)
             setBackupCart([...userDetails.cart.map(x => Object.assign({}, x))])
         }
     }
@@ -123,6 +123,7 @@ function CartPage(props){
         //     updateCart(item, user);
         // })
         setCartBeforeBilling(currentCart, user);
+        console.log(currentCart);
     }
 
     if(valueToBeSearched)

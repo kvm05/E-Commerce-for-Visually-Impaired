@@ -28,7 +28,7 @@ function BillingPage(){
     const [currentUser, setCurrentUser] = useState(null);
     let userDetails = [];
     const [currentBalance, setCurrentBalance] = useState(0);
-
+    const [currentCart, setCurrentCart] = useState([]);
     
 
     async function get(){
@@ -36,6 +36,7 @@ function BillingPage(){
             userDetails = await readData("users", "", user);
             setCurrentUser(user);
             setCurrentBalance(userDetails.wwallet);
+            setCurrentCart(userDetails.cart);
         }
     }
 
@@ -62,7 +63,7 @@ function BillingPage(){
                 <RefillWallet isHighContrast = {isBlind} refillWallet = {refillWallet}></RefillWallet>
             </div>
             <div className = "bottomContainer">
-                <OrderTable isHighContrast = {isBlind}></OrderTable>
+                <OrderTable isHighContrast = {isBlind} cart = {currentCart}></OrderTable>
                 <FinalSummary isHighContrast ={isBlind} checkout = {checkout}></FinalSummary>
             </div>
         </div>
