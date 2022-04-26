@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, addDoc, getDocs, query } from "firebase/firestore";
+import { getFirestore, collection, addDoc, getDocs, query, doc, updateDoc, where } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -520,3 +520,19 @@ databaseProducts()
 // }
 
 // read()
+
+// async function filterByBrand(){
+//   const q = query(collection(database, "products"), where("category", "array-contains", "phones"));
+//   const querySnapshot = await getDocs(q);
+//   console.log(querySnapshot.docs[0].data())
+//   const ids =  querySnapshot.docs.map((obj)=>{return obj.ref.id});   
+//   console.log(ids)
+//   for (let i=0; i<ids.length; i++){
+//     console.log(ids[i])
+//     const ref = doc(database, "products", ids[i]);
+//     await updateDoc(ref, {
+//       size: ["64 GB", "128 GB", "256 GB"]
+//   });
+//   }
+// }
+// filterByBrand()
