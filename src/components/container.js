@@ -74,6 +74,7 @@ function Container(props){
         else{
             console.log("hi")
             console.log(allProducts);
+            console.log(name);
             filteredProducts = allProducts.filter((product) =>{
                 return product.category.indexOf(name) !== -1;
             })

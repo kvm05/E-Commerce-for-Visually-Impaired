@@ -44,7 +44,7 @@ const Navbar = (props)  =>{
     if(index!==-1){
       const cat = valueToBeSearched.slice(index+6,valueToBeSearched.length)
       const category = cat.charAt(0).toUpperCase() + cat.slice(1);
-      const path = "categories/".concat(category)
+      const path = "/categories/".concat(category)
       // console.log(category)
       setValueToBeSearched('')
       navigate(path)
@@ -54,7 +54,7 @@ const Navbar = (props)  =>{
       if(index2!==-1){
         const cat = valueToBeSearched.slice(index2+5,valueToBeSearched.length)
         const category = cat.charAt(0).toUpperCase() + cat.slice(1);
-        const path = "categories/".concat(category)
+        const path = "/categories/".concat(category)
         console.log(path)
         setValueToBeSearched('')
         navigate(path)
@@ -88,7 +88,7 @@ const Navbar = (props)  =>{
               listen()
             }
           }} onMouseEnter={() => screenReader?speak({text:`Click for voice input`}):cancel()} onMouseLeave={() => cancel()}>
-            <i class="fa-solid fa-microphone"></i>
+            {listening?<i class="fa-solid fa-microphone-slash"></i>:<i class="fa-solid fa-microphone"></i>}
           </button>
         </div>
         <div id='toggle1'>

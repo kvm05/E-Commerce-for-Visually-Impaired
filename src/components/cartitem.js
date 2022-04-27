@@ -6,8 +6,8 @@ import ProductPage from "./productpage";
 function CartItem(props){
     const {orderTotal, setOrderTotal} = useContext(OrderContext);
     const [currentSlide,changeSlide]=useState(0);
-    console.log("Quantity in cartitem");
-    console.log(props.quantity);
+    // console.log("Quantity in cartitem");
+    // console.log(props.quantity);
     function goLeft(){
         changeSlide((prevSlide)=>{
             if (prevSlide === 0) return props.image.length - 1
@@ -23,11 +23,11 @@ function CartItem(props){
 
     const [currentQuantity,changeQuantity]=useState(props.quantity);
 
-    useEffect(() => {
-        console.log("currentQuantity:");
-        console.log(currentQuantity);
-    },[currentQuantity])
-    //
+    // useEffect(() => {
+    //     console.log("currentQuantity:");
+    //     console.log(currentQuantity);
+    // },[currentQuantity])
+    // //
     function increaseQuantity(){
         changeQuantity((prevQuantity)=>{
             props.onCartUpdate(props.name, prevQuantity + 1);
@@ -73,7 +73,7 @@ function CartItem(props){
             </div>
             <div className={`quantity${props.isHighContrast?"Dark":"Light"}`}>
                 <button onClick={decreaseQuantity}><i class="fa fa-minus" aria-hidden="true"></i></button>
-                <p>{currentQuantity}</p>
+                <p>{props.quantity}</p>
                 <button onClick={increaseQuantity}><i class="fa fa-plus" aria-hidden="true"></i></button>
             </div>
             <div id={`total${props.isHighContrast?"Dark":"Light"}`}>Total: {currentQuantity*props.price}</div>

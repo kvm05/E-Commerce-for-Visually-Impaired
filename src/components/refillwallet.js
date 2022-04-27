@@ -46,7 +46,7 @@ function RefillWallet(props){
             </button>
             <div className = "updateBalance">
                 <label for = "updateBalance">Refill amount:</label>
-                <input type = "text" placeholder = {refillAmount} id = "updateBalance" onInput = {(event) =>{
+                <input type = "text" placeholder = {0} id = "updateBalance" onInput = {(event) =>{
                     if(!isNaN(parseInt(event.target.value))){
                         setRefillAmount(parseInt(event.target.value))
                         setNewBalance(currentBalance + parseInt(event.target.value))

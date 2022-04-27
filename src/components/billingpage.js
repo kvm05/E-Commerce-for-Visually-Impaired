@@ -50,6 +50,8 @@ function BillingPage(){
         customerDetails[field] = value;
     }
 
+    console.log(currentCart);
+
     function checkout(){
 
     }

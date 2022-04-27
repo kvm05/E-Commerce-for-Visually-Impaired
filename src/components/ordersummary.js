@@ -22,9 +22,7 @@ function OrderSummary(props){
                 <h3>Final Total: </h3><p>{final}</p>
                 </div>
             </div>
-            <Link to = "/billing" style={{textDecoration:"none"}}>
-                <button id={`login-button${props.isHighContrast ? 'dark':'light'}`} onClick = {props.toBilling}>Proceed To Billing</button>
-            </Link>
+            <button id={`login-button${props.isHighContrast ? 'dark':'light'}`} onClick = {props.toBilling}>Proceed To Billing</button>
         </div>
     )
 }

@@ -1,4 +1,5 @@
 import React, {useState, useContext, useEffect} from "react";
+import { useNavigate } from 'react-router-dom'
 import CartItem from "./cartitem";
 import OrderSummary from "./ordersummary";
 import Navbar from './navbar';
@@ -25,12 +26,17 @@ function CartPage(props){
     const [ currentCart, updateCurrentCart] = useState([]);
     const [backupCart, setBackupCart] = useState(null);
 
+    const navigate = useNavigate();
+
     async function get(){
         if (currentUser == null && user != null) {
             setUser(user)
             userDetails = await readData("users", "", user);
             updateCurrentCart(userDetails.cart)
-            setBackupCart([...userDetails.cart.map(x => Object.assign({}, x))])
+            const temp = [...userDetails.cart.map(x => Object.assign({}, x))]
+            console.log("Initialize backup")
+            console.log(temp)
+            setBackupCart(temp)
         }
     }
 
@@ -50,18 +56,19 @@ function CartPage(props){
     
     function onCartUpdate(name, newValue) {
         updateCurrentCart(() =>{
-            const itemsToChange = currentCart.filter((item) =>{
+            
+            let tempCart = [...currentCart.map(x => Object.assign({}, x))];
+            const itemsToChange = tempCart.filter((item) =>{
                 return item.name === name;
             
             })
-            console.log(itemsToChange)
+            console.log(tempCart)
             const itemToChange = itemsToChange[0]
             itemToChange.quantity = newValue;
-            let tempCart = [...currentCart];
             if(itemToChange.quantity === 0){
                 //return currentCart.filter(x => x.name != itemToChange.name)
                 // tempCart.splice(currentCart.indexOf(itemToChange), 1);
-                tempCart = currentCart.filter((item) => {
+                tempCart = tempCart.filter((item) => {
                     return item.name != itemToChange.name;
                 })
             }   
@@ -105,8 +112,8 @@ function CartPage(props){
 
 
     const displayCart = currentCart.map((item) => {
-        console.log("Quantity:");
-        console.log(item.quantity)
+        // console.log("Quantity:");
+        // console.log(item.quantity)
         return <CartItem name = {item.name}
                 price = {item.price}
                 image = {item.image}
@@ -118,12 +125,14 @@ function CartPage(props){
                 id ={item.id}></CartItem>
     })
 
-    function toBilling(){
+    async function toBilling(){
         // currentCart.forEach((item) =>{
         //     updateCart(item, user);
         // })
-        setCartBeforeBilling(currentCart, user);
         console.log(currentCart);
+        await setCartBeforeBilling(currentCart, user);
+        navigate('/billing')
+
     }
 
     if(valueToBeSearched)
