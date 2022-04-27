@@ -8,7 +8,7 @@ import "./billingpage.css"
 import CustInfo from "./custinfo";
 import FinalSummary from "./finalsummary";
 import { UserContext } from "../App";
-import { readData, updateWallet } from "./firebaseservices";
+import { readData, updateWallet, completePurchase, setCartBeforeBilling } from "./firebaseservices";
 
 export const BalanceContext = React.createContext(
     {currentBalance: 0,
@@ -35,14 +35,20 @@ function BillingPage(){
         if (currentUser == null && user != null) {
             userDetails = await readData("users", "", user);
             setCurrentUser(user);
-            setCurrentBalance(userDetails.wwallet);
+            setCurrentBalance(userDetails.wallet);
             setCurrentCart(userDetails.cart);
         }
     }
 
     get();
 
+    let total = 0;
+    for(let item of currentCart){
+        total += item.quantity * item.price;
+    }
+
     function refillWallet(newBalance){
+        setCurrentBalance(newBalance);
         updateWallet(user, newBalance);
     }
 
@@ -50,10 +56,24 @@ function BillingPage(){
         customerDetails[field] = value;
     }
 
-    console.log(currentCart);
+    function checkout(newBalance){
+        const purchasedProducts = currentCart.map((product) =>{
+            return Object.assign(product, customerDetails);
+        })
 
-    function checkout(){
+        const date = new Date();
+        const currentDate = [];
+        currentDate.push(date.getDate());
+        currentDate.push(date.getMonth());
+        currentDate.push(date.getFullYear());
 
+        for(let product of purchasedProducts){
+            product["purchaseDate"] = currentDate;
+            completePurchase(product, user);
+        }
+        
+        setCartBeforeBilling([], user);
+        updateWallet(newBalance);
     }
 
     return (
@@ -62,11 +82,11 @@ function BillingPage(){
             <Navbar func = {dataFromChild}/>
             <div className = "topContainer">
                 <CustInfo isHighContrast = {isBlind} updateCustomerInfo = {updateCustomerInfo}></CustInfo>
-                <RefillWallet isHighContrast = {isBlind} refillWallet = {refillWallet}></RefillWallet>
+                <RefillWallet isHighContrast = {isBlind} balance = {currentBalance} refillWallet = {refillWallet}></RefillWallet>
             </div>
             <div className = "bottomContainer">
                 <OrderTable isHighContrast = {isBlind} cart = {currentCart}></OrderTable>
-                <FinalSummary isHighContrast ={isBlind} checkout = {checkout}></FinalSummary>
+                <FinalSummary isHighContrast ={isBlind} checkout = {checkout} total = {total} balance = {currentBalance}></FinalSummary>
             </div>
         </div>
         </BalanceContext.Provider>

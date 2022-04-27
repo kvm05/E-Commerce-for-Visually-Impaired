@@ -12,8 +12,10 @@
 
 .finalSummary{
     padding-top: 40px;
+    padding-bottom: 40px;
     height: 550px;
     width: 30%;
+    height: fit-content;
 }
 
 .summaryLight.summaryDark{

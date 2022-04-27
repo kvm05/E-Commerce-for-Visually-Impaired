@@ -25,7 +25,6 @@ function OrderTable(props){
 
     // get();
 
-    console.log(currentCart)
 
     const image=["/images/prod11.png"]
 

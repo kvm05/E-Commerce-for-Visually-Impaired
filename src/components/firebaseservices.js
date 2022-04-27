@@ -25,7 +25,8 @@ export function addNewUser(user, name){
           wishlist : [],
           wallet : 1000,
           uid : user.uid,
-          email : user.email
+          email : user.email,
+          purchaseHistory: []
         })}
 
 export async function getAllProducts(){
@@ -144,4 +145,16 @@ export async function setCartBeforeBilling(currentCart, user){
     await updateDoc(ref, {
         cart: currentCart
 });   
+}
+
+export async function completePurchase(product, user){
+    const q = query(collection(database, "users"), where("uid", "==", user.uid));
+    const querySnapshot = await getDocs(q);
+    const docId = querySnapshot.docs[0].ref.id; 
+    console.log(docId);
+        const ref = doc(database, "users", docId);
+    // Atomically add a new region to the "regions" array field.
+    await updateDoc(ref, {
+        purchaseHistory: arrayUnion(product)
+});
 }

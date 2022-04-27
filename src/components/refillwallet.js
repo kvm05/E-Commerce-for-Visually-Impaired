@@ -12,10 +12,12 @@ function RefillWallet(props){
     const [currentUser, setCurrentUser] = useState(null);
     const {currentBalance, setCurrentBalance} = useContext(BalanceContext);
     const [refillAmount, setRefillAmount] = useState(0);
-    const [newBalance, setNewBalance] = useState(0);
+    const [newBalance, setNewBalance] = useState(props.balance);
     const [refill, toggleRefill] = useState(false);
 
     let userDetails = [];
+
+    console.log(props.balance)
 
 
     // async function get(){
@@ -49,7 +51,7 @@ function RefillWallet(props){
                 <input type = "text" placeholder = {0} id = "updateBalance" onInput = {(event) =>{
                     if(!isNaN(parseInt(event.target.value))){
                         setRefillAmount(parseInt(event.target.value))
-                        setNewBalance(currentBalance + parseInt(event.target.value))
+                        setNewBalance(props.balance + parseInt(event.target.value))
                     }
                 }}></input>
                 <div className = "newBalance">
@@ -87,7 +89,7 @@ function RefillWallet(props){
             <h1 id="refillHeader">Refill Wallet</h1>
             <div>
                 <h3>Current Balance:</h3>
-                <p>{currentBalance}</p>
+                <p>{props.balance}</p>
             </div>
             {refill ? logos : []}
             <button id={`login-button${props.isHighContrast ? 'dark':'light'}`} onClick = {fillMoney}>Refill Wallet</button>
