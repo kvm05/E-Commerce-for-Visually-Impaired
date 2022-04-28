@@ -1,7 +1,8 @@
 import "./ordersummary.css"
-import {OrderContext, UserContext} from "../App";
+import {OrderContext, UserContext, TTSContext, ContrastContext} from "../App";
 import { Link, useNavigate } from "react-router-dom";
 import {useContext, useState, useEffect} from "react";
+import { useSpeechSynthesis } from 'react-speech-kit';
 import { readData } from "./firebaseservices";
 import "./navbar.css"
 import { BalanceContext } from "./billingpage";
@@ -12,6 +13,9 @@ function FinalSummary(props){
     const [currentUser, setCurrentUser] = useState(null);
     const {currentBalance, setCurrentBalance} = useContext(BalanceContext);
     const [canCheckout, disableCheckout] = useState(false);
+    const {speak, cancel} = useSpeechSynthesis();
+    const {screenReader, changeScreenReader} = useContext(TTSContext);
+    const {isHighContrast, changeContrast} = useContext(ContrastContext);
 
     let userDetails = [];
 
@@ -27,7 +31,7 @@ function FinalSummary(props){
 
     const tax=Math.floor((0.18*props.total)*100)/100;
     const final=Math.floor((props.total+tax)*100)/100;
-    const newBalance = props.balance - props.total;
+    const newBalance = props.balance - final;
     
     useEffect(() =>{
         if(newBalance < 0){
@@ -39,25 +43,25 @@ function FinalSummary(props){
 
     return (
         <div className="finalSummary">
-            <h1 className={`summary${props.isHighContrast?"Dark":"Light"}`}>Final Total</h1>
+            <h1 className={`summary${isHighContrast?"Dark":"Light"}`} onMouseEnter={() => screenReader?speak({text:"Final Total given below"}):cancel()} onMouseLeave={() => cancel()}>Final Total</h1>
             <div className="totals">
-                <div className={`total${props.isHighContrast?"Dark":"Light"}`}>
-                <h3>Your Total: </h3><p>{props.total}</p>
+                <div className={`total${isHighContrast?"Dark":"Light"}`} onMouseEnter={() => screenReader?speak({text:`Total: ₹${props.total}`}):cancel()} onMouseLeave={() => cancel()}>
+                <h3>Your Total: </h3><p>₹{props.total}</p>
                 </div>
-                <div className={`total${props.isHighContrast?"Dark":"Light"}`}>
-                <h3>Taxes: </h3><p>{tax}</p>
+                <div className={`total${isHighContrast?"Dark":"Light"}`} onMouseEnter={() => screenReader?speak({text:`Taxes: ₹${tax}`}):cancel()} onMouseLeave={() => cancel()}>
+                <h3>Taxes: </h3><p>₹{tax}</p>
                 </div>
-                <div className={`total${props.isHighContrast?"Dark":"Light"}`}>
-                <h3>Final Total: </h3><p>{final}</p>
+                <div className={`total${isHighContrast?"Dark":"Light"}`} onMouseEnter={() => screenReader?speak({text:`Final Total: ₹${final}`}):cancel()} onMouseLeave={() => cancel()}>
+                <h3>Final Total: </h3><p>₹{final}</p>
                 </div>
-                <div className={`total${props.isHighContrast?"Dark":"Light"}`}>
-                <h3>New Balance: </h3><p>{newBalance}</p>
+                <div className={`total${isHighContrast?"Dark":"Light"}`} onMouseEnter={() => screenReader?speak({text:`New Balance: ₹${newBalance}`}):cancel()} onMouseLeave={() => cancel()}>
+                <h3>New Balance: </h3><p>₹{newBalance}</p>
                 </div>
             </div>
-            <button id={`login-button${props.isHighContrast ? 'dark':'light'}`} disabled = {canCheckout} onClick = {() =>{
+            <button id={`login-button${isHighContrast ? 'dark':'light'}`} disabled = {canCheckout} onClick = {() =>{
                 props.checkout(newBalance);
-            }}>Pay And Checkout</button>
-            {canCheckout ? <h3>Insufficient Balance</h3> : null}
+            }} onMouseEnter={() => screenReader?speak({text:"Click to pay and checkout"}):cancel()} onMouseLeave={() => cancel()}>Pay And Checkout</button>
+            {canCheckout ? <h3 onMouseEnter={() => screenReader?speak({text:"Insufficient Balance"}):cancel()} onMouseLeave={() => cancel()}>Insufficient Balance</h3> : null}
         </div>
     )
 }

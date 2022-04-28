@@ -23,10 +23,10 @@
     overflow: auto;
 }
 
-.table thead th{
+#tableHeader-dark th{
     position: sticky;
     top: 0;
-    background-color: #402300;
+    /* background-color: #402300; */
     vertical-align: middle;
 }
 

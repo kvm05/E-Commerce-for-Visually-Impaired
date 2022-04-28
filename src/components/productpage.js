@@ -4,7 +4,7 @@ import "./navbar.css";
 import Container from "./container";
 // import { ClickCategory } from "./Categories";
 import CartPage from "./cartpage";
-import {SearchContext} from "../App"
+import {SearchContext, ContrastContext} from "../App"
 import DetailedProducts from "./detailedproducts";
 
 
@@ -15,12 +15,13 @@ function ProductPage(props){
     }
 
     const {valueToBeSearched} = useContext(SearchContext);
+    const {isHighContrast, changeContrast} = useContext(ContrastContext);
     console.log(valueToBeSearched);
     // console.log(ClickCategory)
     return(
-        <div id={`homepage ${isBlind ? 'dark':'light'}`}>
-            <Navbar func = {dataFromChild}/>
-            <Container name={props.name} isHighContrast={isBlind} />    
+        <div id={`homepage ${isHighContrast ? 'dark':'light'}`}>
+            <Navbar />
+            <Container name={props.name}  />    
             {/* <DetailedProducts></DetailedProducts> */}
         </div>
     );

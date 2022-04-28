@@ -35,7 +35,12 @@
 }
 
 .summaryLight{
-    border-bottom: 5px solid black;    
+    border-bottom: 5px solid black;  
+    padding-bottom: 30px;
+    margin-bottom: 10px;
+    text-align: center;
+    width: 90%;
+    color: black !important;
 }
 
 .totals{

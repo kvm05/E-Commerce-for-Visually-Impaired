@@ -1,5 +1,6 @@
 import React, {useState, useContext, useEffect} from "react";
-import { UserContext } from "../App";
+import { UserContext, TTSContext, ContrastContext } from "../App";
+import { useSpeechSynthesis } from 'react-speech-kit';
 import { readData } from "./firebaseservices";
 import "./ordertable.css" 
 
@@ -10,6 +11,9 @@ function OrderTable(props){
     // const [currentCart, setCurrentCart] = useState([]);
     // setCurrentCart(props.cart);
     const currentCart = props.cart;
+    const {speak, cancel} = useSpeechSynthesis();
+    const {screenReader, changeScreenReader} = useContext(TTSContext);
+    const {isHighContrast, changeContrast} = useContext(ContrastContext);
 
     let userDetails = [];
 
@@ -33,21 +37,21 @@ function OrderTable(props){
             <tr>
                 <td> <div className = "nameCell">
                 <img src = {image[0]} alt = {product.name}></img>
-                <p>  {product.name}  </p>
+                <p onMouseEnter={() => screenReader?speak({text:`Product: ${product.name}`}):cancel()} onMouseLeave={() => cancel()}>  {product.name}  </p>
                 </div></td>
-                <td> {product.price} </td>
-                <td> {product.quantity} </td>
-                <td> {product.price * product.quantity} </td>
+                <td onMouseEnter={() => screenReader?speak({text:`Price: ₹${product.price}`}):cancel()} onMouseLeave={() => cancel()}> {product.price} </td>
+                <td onMouseEnter={() => screenReader?speak({text:`Quantity: ${product.quantity}`}):cancel()} onMouseLeave={() => cancel()}> {product.quantity} </td>
+                <td onMouseEnter={() => screenReader?speak({text:`Total: ₹${product.price * product.quantity}`}):cancel()} onMouseLeave={() => cancel()}> {product.price * product.quantity} </td>
             </tr>
         )
     })
 
     return(
-        <div className = {`orderTable${props.isHighContrast ? 'Dark':'Light'}`} >
-            <h1 id="orderHeader">Order Summary</h1>
+        <div className = {`orderTable${isHighContrast ? 'Dark':'Light'}`} >
+            <h1 id={`orderHeader-${isHighContrast ? 'dark':'light'}`} onMouseEnter={() => screenReader?speak({text:"Order Summary below"}):cancel()} onMouseLeave={() => cancel()}>Order Summary</h1>
             <div className = "table">
                 <table>
-                    <thead>
+                    <thead id={`tableHeader-${isHighContrast ? 'dark':'light'}`}>
                         <tr>
                             <th>Product</th>
                             <th>Price</th>

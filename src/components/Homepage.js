@@ -4,40 +4,35 @@ import Titles from "./Titles";
 import Categories from "./Categories";
 import "./Homepage.css";
 import "./index.css";
-import { SearchContext } from "../App";
+import { SearchContext, ContrastContext } from "../App";
 import ProductPage from "./productpage";
 import Container from "./container";
 
 const categories = ["Shoes", "Electronics", "Food", "Clothes"];
 
 function Homepage(){
-    const [isBlind, getChildData] = useState(true)
-    const dataFromChild = (childData) => {
-        getChildData(childData)
-        // console.log("ITS HERE")
-        
-    }
-
     const {valueToBeSearched} = useContext(SearchContext);
+    const {isHighContrast, changeContrast} = useContext(ContrastContext);
+    console.log(isHighContrast)
     if(valueToBeSearched)
         return (
-            <div id={`homepage ${isBlind ? 'dark':'light'}`}>
-                <Navbar func = {dataFromChild}/>
-                <Container name="Search Results" isHighContrast={isBlind} />    
+            <div id={`homepage ${isHighContrast ? 'dark':'light'}`}>
+                <Navbar />
+                <Container name="Search Results" />    
             </div>
         );
         
     return(
-        <div id={`homepage ${isBlind ? 'dark':'light'}`}>
-            <Navbar func = {dataFromChild}/>
-            <Titles checkBlind = {isBlind}/>
+        <div id={`homepage ${isHighContrast ? 'dark':'light'}`}>
+            <Navbar />
+            <Titles/>
             <div id="categories">
-                <Categories name = {categories[0]} checkBlind = {isBlind}/>
-                <Categories name = {categories[1]} checkBlind = {isBlind}/>
+                <Categories name = {categories[0]} />
+                <Categories name = {categories[1]} />
             </div>
             <div id="categories">
-                <Categories name = {categories[2]} checkBlind = {isBlind}/> 
-                <Categories name = {categories[3]} checkBlind = {isBlind}/> 
+                <Categories name = {categories[2]} /> 
+                <Categories name = {categories[3]} /> 
             </div>
         </div>
     );

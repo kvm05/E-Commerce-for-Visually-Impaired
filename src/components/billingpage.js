@@ -7,7 +7,8 @@ import RefillWallet from "./refillwallet";
 import "./billingpage.css"
 import CustInfo from "./custinfo";
 import FinalSummary from "./finalsummary";
-import { UserContext } from "../App";
+import { useSpeechSynthesis } from 'react-speech-kit';
+import { UserContext, TTSContext, ContrastContext } from "../App";
 import { readData, updateWallet, completePurchase, setCartBeforeBilling } from "./firebaseservices";
 
 export const BalanceContext = React.createContext(
@@ -17,10 +18,9 @@ export const BalanceContext = React.createContext(
 
 function BillingPage(){
 
-    const [isBlind, getChildData] = useState(true)
-    const dataFromChild = (childData) => {
-        getChildData(childData)
-    }
+    const {speak, cancel} = useSpeechSynthesis();
+    const {screenReader, changeScreenReader} = useContext(TTSContext);
+    const {isHighContrast, changeContrast} = useContext(ContrastContext);
 
     const customerDetails = {};
 
@@ -78,15 +78,15 @@ function BillingPage(){
 
     return (
         <BalanceContext.Provider value = {{currentBalance, setCurrentBalance}}>
-            <div className = "billingPage" id={`homepage ${isBlind ? 'dark':'light'}`}>
-            <Navbar func = {dataFromChild}/>
+            <div className = "billingPage" id={`homepage ${isHighContrast ? 'dark':'light'}`}>
+            <Navbar />
             <div className = "topContainer">
-                <CustInfo isHighContrast = {isBlind} updateCustomerInfo = {updateCustomerInfo}></CustInfo>
-                <RefillWallet isHighContrast = {isBlind} balance = {currentBalance} refillWallet = {refillWallet}></RefillWallet>
+                <CustInfo updateCustomerInfo = {updateCustomerInfo}></CustInfo>
+                <RefillWallet balance = {currentBalance} refillWallet = {refillWallet}></RefillWallet>
             </div>
             <div className = "bottomContainer">
-                <OrderTable isHighContrast = {isBlind} cart = {currentCart}></OrderTable>
-                <FinalSummary isHighContrast ={isBlind} checkout = {checkout} total = {total} balance = {currentBalance}></FinalSummary>
+                <OrderTable cart = {currentCart}></OrderTable>
+                <FinalSummary checkout = {checkout} total = {total} balance = {currentBalance}></FinalSummary>
             </div>
         </div>
         </BalanceContext.Provider>

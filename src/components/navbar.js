@@ -6,13 +6,14 @@ import { Link, useNavigate } from "react-router-dom";
 import {DetectOutsideClick} from "./DetectOutsideClick"; 
 import { getAuth, signOut } from "firebase/auth";
 import { useSpeechSynthesis, useSpeechRecognition } from 'react-speech-kit';
-import { UserContext, SearchContext, TTSContext } from '../App';
+import { UserContext, SearchContext, TTSContext, ContrastContext } from '../App';
 
 const Navbar = (props)  =>{
   const dropdownRef = useRef(null);
   const [isClicked, setClicked] = DetectOutsideClick(dropdownRef, false);
   const {user, setUser} = useContext(UserContext);
   const {screenReader, changeScreenReader} = useContext(TTSContext);
+  const {isHighContrast, changeContrast} = useContext(ContrastContext);
   const navigate = useNavigate()
   const {speak, cancel} = useSpeechSynthesis();
   const { listen, stop, listening} = useSpeechRecognition({
@@ -21,10 +22,9 @@ const Navbar = (props)  =>{
     }
   })
   const onClick = () => setClicked(!isClicked);
-  const [isBlind, setBlind] = useState(true)
-  const isCheckBlind = () =>{ setBlind(!isBlind)
-  props.func(!isBlind)
-}
+  const isCheckBlind = () =>{ 
+    changeContrast(!isHighContrast)
+  }
   const auth = getAuth();
   const emailSignOut = () => {
     const auth = getAuth();
@@ -62,24 +62,24 @@ const Navbar = (props)  =>{
     }
   }
   return (
-    <div id = {`navbar ${isBlind ? 'dark':'light'}`}>
+    <div id = {`navbar ${isHighContrast ? 'dark':'light'}`}>
       <div id='left-navbar'>
         <Link id='MyLink' to = '/'>
-          <div id = {`logo${isBlind ? 'dark':'light'}`}>
+          <div id = {`logo${isHighContrast ? 'dark':'light'}`}>
             Logo
           </div>  
         </Link>
       </div> 
       <div id='right-navbar'>
         <div id='searchbar'>
-          <input type="search" id = {`search ${isBlind ? 'dark':'light'}`} placeholder='Search' onMouseEnter={() => screenReader?speak({text:"Search"}):cancel()} onMouseLeave={() => cancel()} onInput = {(event) =>{
+          <input type="search" id = {`search ${isHighContrast ? 'dark':'light'}`} placeholder='Search' onMouseEnter={() => screenReader?speak({text:"Search"}):cancel()} onMouseLeave={() => cancel()} onInput = {(event) =>{
             console.log(event.target.value);
             setValueToBeSearched(event.target.value);
           }} value={valueToBeSearched}/>
-          <button id = {`search-button ${isBlind ? 'dark':'light'}`} onMouseEnter={() => screenReader?speak({text:`Click to search`}):cancel()} onMouseLeave={() => cancel()}>
+          <button id = {`search-button ${isHighContrast ? 'dark':'light'}`} onMouseEnter={() => screenReader?speak({text:`Click to search`}):cancel()} onMouseLeave={() => cancel()}>
             <i class="fas fa-magnifying-glass"></i>
           </button>
-          <button id = {`search-button ${isBlind ? 'dark':'light'}`} onClick={() => {
+          <button id = {`search-button ${isHighContrast ? 'dark':'light'}`} onClick={() => {
             if(listening){
               goToCat()
               stop()
@@ -92,12 +92,12 @@ const Navbar = (props)  =>{
           </button>
         </div>
         <div id='toggle1'>
-          <div id='toggle1text' onMouseEnter={() => screenReader?speak({text:`High Contrast: ${isBlind ? 'On' : 'Off'}`}):cancel()} onMouseLeave={() => cancel()}>{`High Contrast: ${isBlind ? 'On' : 'Off'}`}</div>
-          <label className="switch" onMouseEnter={() => screenReader?speak({text:`Toggle for High Contrast Currently: ${isBlind ? 'On' : 'Off'}`}):cancel()} onMouseLeave={() => cancel()}>
+          <div id='toggle1text' onMouseEnter={() => screenReader?speak({text:`High Contrast: ${isHighContrast ? 'On' : 'Off'}`}):cancel()} onMouseLeave={() => cancel()}>{`High Contrast: ${isHighContrast ? 'On' : 'Off'}`}</div>
+          <label className="switch" onMouseEnter={() => screenReader?speak({text:`Toggle for High Contrast Currently: ${isHighContrast ? 'On' : 'Off'}`}):cancel()} onMouseLeave={() => cancel()}>
             <input type="checkbox" onClick={() => {
               isCheckBlind()
-              speak({text:`Toggling High Contrast ${!isBlind?'On':'Off'}`})
-            }} defaultChecked={true} checked={isBlind}  />
+              screenReader?speak({text:`Toggling High Contrast ${!isHighContrast?'On':'Off'}`}):cancel()
+            }} defaultChecked={true} checked={isHighContrast}  />
               <span className="slider round"></span>
             </label>
         </div>
@@ -113,10 +113,10 @@ const Navbar = (props)  =>{
         </div>
         {(user) ? 
         <div id='profile-bar'>
-          <button id={`profile${isBlind ? 'dark':'light'}`} onClick={onClick}  onMouseEnter={() => screenReader?speak({text:"Click to see profile or logout"}):cancel()} onMouseLeave={() => cancel()}>
+          <button id={`profile${isHighContrast ? 'dark':'light'}`} onClick={onClick}  onMouseEnter={() => screenReader?speak({text:"Click to see profile or logout"}):cancel()} onMouseLeave={() => cancel()}>
             <i className="fas fa-user"></i>
           </button>
-          <div className={`menu ${isClicked ? 'active':'inactive'} ${isBlind ? 'dark':'light'}`}>
+          <div className={`menu ${isClicked ? 'active':'inactive'} ${isHighContrast ? 'dark':'light'}`}>
             <Link to='/account' id='MyLink'>
               <div id='my-profile'  onMouseEnter={() => screenReader?speak({text:"Click to see profile"}):cancel()} onMouseLeave={() => cancel()}>
                 My Profile              
@@ -131,7 +131,7 @@ const Navbar = (props)  =>{
         </div> : 
         <div>
           <Link id='MyLink' to='/sign'>
-            <button id={`login-button${isBlind ? 'dark':'light'}`} onMouseEnter={() => screenReader?speak({text:"Login"}):cancel()} onMouseLeave={() => cancel()}>
+            <button id={`login-button${isHighContrast ? 'dark':'light'}`} onMouseEnter={() => screenReader?speak({text:"Login"}):cancel()} onMouseLeave={() => cancel()}>
               Login
             </button>
           </Link>

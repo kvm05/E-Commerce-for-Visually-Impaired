@@ -14,6 +14,7 @@ import {
 import ProductPage from "./components/productpage";
 import CartPage from "./components/cartpage";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useSpeechSynthesis } from 'react-speech-kit';
 // import { currentUser } from "./components/currentuser"
 import { PrivateRoute } from "./components/PrivateRoute";
 import Wishlist from "./components/wishlist";
@@ -37,12 +38,21 @@ export const SearchContext = React.createContext({
 
 export const TTSContext = React.createContext({})
 
+export const ContrastContext = React.createContext({})
+
 function MainPage() {
   const [user, setUser] = useState(null);
   const [orderTotal, setOrderTotal] = useState(0);
   const [valueToBeSearched, setValueToBeSearched] = useState("");
   const [screenReader, changeScreenReader] = useState(true);
-
+  const [isHighContrast, changeContrast] = useState(true);
+  const {speak, cancel} = useSpeechSynthesis();
+  window.onscroll = function(event) {
+        if((window.innerHeight + window.scrollY) >= document.body.offsetHeight){
+            console.log("End of page");
+            screenReader?speak({text:"You have reached the bottom of the page"}):cancel()
+        }
+    }
   useEffect(() => {
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
@@ -63,29 +73,31 @@ function MainPage() {
       <OrderContext.Provider value = {{orderTotal, setOrderTotal}}>
         <SearchContext.Provider value = {{valueToBeSearched, setValueToBeSearched}}>
           <TTSContext.Provider value={{screenReader, changeScreenReader}}>
-            <BrowserRouter> 
-              <Routes>
-                <Route path="/" element={<Homepage />} />
-                <Route path="/sign" element={<SignIn></SignIn>} />
-                <Route
-                  path="categories/Shoes"
-                  element={<ProductPage name="Shoes" />}
-                />
-                <Route
-                  path="categories/Electronics"
-                  element={<ProductPage name="Electronics" />}
-                />
-                <Route path="categories/Food" element={<ProductPage name="Food" />} />
-                <Route
-                  path="categories/Clothes"
-                  element={<ProductPage name="Clothes" />}
-                />
-                <Route path="cart" element={<CartPage />} />
-                <Route path="account" element={<AccountPage />} />
-                <Route path = "wishlist" element = {<Wishlist />} />
-                <Route path = "billing" element = {<BillingPage />} />
-              </Routes>
-            </BrowserRouter>
+            <ContrastContext.Provider value = {{isHighContrast, changeContrast}}>
+              <BrowserRouter> 
+                <Routes>
+                  <Route path="/" element={<Homepage />} />
+                  <Route path="/sign" element={<SignIn></SignIn>} />
+                  <Route
+                    path="categories/Shoes"
+                    element={<ProductPage name="Shoes" />}
+                    />
+                  <Route
+                    path="categories/Electronics"
+                    element={<ProductPage name="Electronics" />}
+                    />
+                  <Route path="categories/Food" element={<ProductPage name="Food" />} />
+                  <Route
+                    path="categories/Clothes"
+                    element={<ProductPage name="Clothes" />}
+                    />
+                  <Route path="cart" element={<CartPage />} />
+                  <Route path="account" element={<AccountPage />} />
+                  <Route path = "wishlist" element = {<Wishlist />} />
+                  <Route path = "billing" element = {<BillingPage />} />
+                </Routes>
+              </BrowserRouter>
+            </ContrastContext.Provider>
           </TTSContext.Provider>
         </SearchContext.Provider>
       </OrderContext.Provider>

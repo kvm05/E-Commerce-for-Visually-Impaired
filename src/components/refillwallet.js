@@ -1,8 +1,9 @@
-import { UserContext } from "../App";
+import { UserContext, TTSContext, ContrastContext } from "../App";
 import { readData } from "./firebaseservices";
 import {useContext, useState} from "react";
 import "./refillwallet.css"
 import "./navbar.css"
+import { useSpeechSynthesis } from 'react-speech-kit';
 import {BalanceContext} from "./billingpage"
 
 
@@ -14,6 +15,9 @@ function RefillWallet(props){
     const [refillAmount, setRefillAmount] = useState(0);
     const [newBalance, setNewBalance] = useState(props.balance);
     const [refill, toggleRefill] = useState(false);
+    const {speak, cancel} = useSpeechSynthesis();
+    const {screenReader, changeScreenReader} = useContext(TTSContext);
+    const {isHighContrast, changeContrast} = useContext(ContrastContext);
 
     let userDetails = [];
 
@@ -47,38 +51,38 @@ function RefillWallet(props){
             }}><i class="fa fa-window-close" aria-hidden="true"></i>
             </button>
             <div className = "updateBalance">
-                <label for = "updateBalance">Refill amount:</label>
+                <label for = "updateBalance" onMouseEnter={() => screenReader?speak({text:"Enter refill Amount to the left"}):cancel()} onMouseLeave={() => cancel()}>Refill amount:</label>
                 <input type = "text" placeholder = {0} id = "updateBalance" onInput = {(event) =>{
                     if(!isNaN(parseInt(event.target.value))){
                         setRefillAmount(parseInt(event.target.value))
                         setNewBalance(props.balance + parseInt(event.target.value))
                     }
-                }}></input>
-                <div className = "newBalance">
+                }} onMouseEnter={() => screenReader?speak({text:"Enter refill Amount"}):cancel()} onMouseLeave={() => cancel()}></input>
+                <div className = "newBalance" onMouseEnter={() => screenReader?speak({text:`New Balance: ₹${newBalance}`}):cancel()} onMouseLeave={() => cancel()}>
                     <h3>New Balance:</h3>
-                    <p>{newBalance}</p>
+                    <p>₹{newBalance}</p>
                 </div>
             </div>
-            <h3>Refill using:</h3>
+            <h3 onMouseEnter={() => screenReader?speak({text:"Refill using the methods below"}):cancel()} onMouseLeave={() => cancel()}>Refill using:</h3>
             <div className = "logos">
             <div>
-                <a href = "https://paytm.com/" alt = "Paytm" id = "Paytm"><img src = "/images/paytm.png" alt = "Paytm" /></a>
+                <a href = "https://paytm.com/" alt = "Paytm" id = "Paytm"><img src = "/images/paytm.png" alt = "Paytm" onMouseEnter={() => screenReader?speak({text:"Click to refill using Paytm"}):cancel()} onMouseLeave={() => cancel()}/></a>
                 <p>PayTM</p>
             </div>
             <div>
-                <a href = "https://pay.google.com/" alt = "GPay"><img src = "/images/gpay.png" alt = "GPay" /></a>
+                <a href = "https://pay.google.com/" alt = "GPay"><img src = "/images/gpay.png" alt = "GPay" onMouseEnter={() => screenReader?speak({text:"Click to refill using GPay"}):cancel()} onMouseLeave={() => cancel()}/></a>
                 <p>GPay</p>
             </div>
             <div>
-                <a href = "https://www.bhimupi.org.in//" alt = "UPI"><img src = "/images/upi.png" alt = "UPI" /></a>
+                <a href = "https://www.bhimupi.org.in//" alt = "UPI"><img src = "/images/upi.png" alt = "UPI" onMouseEnter={() => screenReader?speak({text:"Click to refill using BHIM UPI"}):cancel()} onMouseLeave={() => cancel()}/></a>
                 <p>UPI</p>
             </div>
             <div>
-                <a href = "https://www.rupay.co.in//" alt = "Rupay"><img src = "/images/rupay.png" alt = "Rupay" /></a>
+                <a href = "https://www.rupay.co.in//" alt = "Rupay"><img src = "/images/rupay.png" alt = "Rupay" onMouseEnter={() => screenReader?speak({text:"Click to refill using Rupay"}):cancel()} onMouseLeave={() => cancel()}/></a>
                 <p>Rupay</p>
             </div>
             <div>
-                <a href = "https://www.visa.co.in//" alt = "Visa"><img src = "/images/visa.png" alt = "Visa" /></a>
+                <a href = "https://www.visa.co.in//" alt = "Visa"><img src = "/images/visa.png" alt = "Visa" onMouseEnter={() => screenReader?speak({text:"Click to refill using Visa"}):cancel()} onMouseLeave={() => cancel()}/></a>
                 <p>Visa</p>
             </div>
             </div>
@@ -88,11 +92,11 @@ function RefillWallet(props){
         <div className = {`refillWallet${props.isHighContrast ? "Light" : "Dark"}`}>
             <h1 id="refillHeader">Refill Wallet</h1>
             <div>
-                <h3>Current Balance:</h3>
-                <p>{props.balance}</p>
+                <h3 onMouseEnter={() => screenReader?speak({text:`Current Balance: ₹${props.balance}`}):cancel()} onMouseLeave={() => cancel()}>Current Balance:</h3>
+                <p>₹{props.balance}</p>
             </div>
             {refill ? logos : []}
-            <button id={`login-button${props.isHighContrast ? 'dark':'light'}`} onClick = {fillMoney}>Refill Wallet</button>
+            <button id={`login-button${isHighContrast ? 'dark':'light'}`} onClick = {fillMoney} onMouseEnter={() => screenReader?speak({text:"Click to refill wallet"}):cancel()} onMouseLeave={() => cancel()}>Refill Wallet</button>
         </div>
     )
 }

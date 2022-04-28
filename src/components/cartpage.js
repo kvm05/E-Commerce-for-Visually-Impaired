@@ -8,23 +8,22 @@ import "./navbar.css"
 import "./cartpage.css"
 import "./firebaseservices"
 import {readData, updateCart, setCartBeforeBilling} from "./firebaseservices";
-import {UserContext, OrderContext, SearchContext} from "../App";
+import { useSpeechSynthesis } from 'react-speech-kit';
+import {UserContext, OrderContext, SearchContext, ContrastContext, TTSContext} from "../App";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Container from "./container";
 
 function CartPage(props){
-    const [isBlind, getChildData] = useState(true)
-    const dataFromChild = (childData) => {
-        getChildData(childData)
-    }
     const {user} = useContext(UserContext);
     let userDetails = [];
-
+    const {speak, cancel} = useSpeechSynthesis();
     const [ currentUser, setUser] = useState(null);
     const {orderTotal, setOrderTotal} = useContext(OrderContext);
     const {valueToBeSearched} = useContext(SearchContext);
     const [ currentCart, updateCurrentCart] = useState([]);
     const [backupCart, setBackupCart] = useState(null);
+    const {screenReader, changeScreenReader} = useContext(TTSContext);
+    const {isHighContrast, changeContrast} = useContext(ContrastContext);
 
     const navigate = useNavigate();
 
@@ -121,7 +120,6 @@ function CartPage(props){
                 onCartUpdate = {onCartUpdate}
                 // updateTotal = {updateTotal}
                 key = {item.name}
-                isHighContrast = {isBlind}
                 id ={item.id}></CartItem>
     })
 
@@ -137,19 +135,24 @@ function CartPage(props){
 
     if(valueToBeSearched)
     return (
-        <div className = "cartpage" id={`homepage ${isBlind ? 'dark':'light'}`}>
-            <Navbar func = {dataFromChild}/>
-            <Container name="Search Results" isHighContrast={isBlind} />    
+        <div className = "cartpage" id={`homepage ${isHighContrast ? 'dark':'light'}`}>
+            <Navbar/>
+            <Container name="Search Results" />    
         </div>
     );
     const temp = <h3> Your cart is empty!</h3>;
-
+    window.onscroll = function(event) {
+        if((window.innerHeight + window.scrollY) >= document.body.offsetHeight){
+            console.log("End of page");
+            speak({text:"You have reached the bottom of the page"})
+        }
+    }
     return (
-        <div className="cartpage" id={`homepage ${isBlind ? 'dark':'light'}`}>
-            <Navbar func = {dataFromChild}/>
-            <h1 id="heading">Your Cart</h1>
+        <div className="cartpage" id={`homepage ${isHighContrast ? 'dark':'light'}`}>
+            <Navbar/>
+            <h1 id="heading" onMouseEnter={() => screenReader?speak({text:"Cart! Below, you will find the products added to cart. At the bottom of the page, you can clear the cart or undo the changes made. To the right, you can find the order summary"}):cancel()} onMouseLeave={() => cancel()}>Your Cart</h1>
             <div className="container">
-                <div className={`cart${isBlind ? 'dark':'light'}`}>
+                <div className={`cart${isHighContrast ? 'dark':'light'}`}>
                     {/* <CartItem name="Product 1" price={45} image={image} quantity={2}  isHighContrast={isBlind}></CartItem>
                     <CartItem name="Product 1" price={45} image={image} quantity={2}  isHighContrast={isBlind}></CartItem>
                     <CartItem name="Product 1" price={45} image={image} quantity={2}  isHighContrast={isBlind}></CartItem>
@@ -160,11 +163,11 @@ function CartPage(props){
                     {/* {displayCart ? displayCart : temp} */}
                     {displayCart}
                 </div>
-                <OrderSummary isHighContrast={isBlind} toBilling = {toBilling}></OrderSummary>
+                <OrderSummary isHighContrast={isHighContrast} toBilling = {toBilling}></OrderSummary>
             </div>
             <div className="cartButtons">
-                <button id={`login-button${isBlind ? 'dark':'light'}`} onClick = {clearCart}>Clear Cart</button>
-                <button id={`login-button${isBlind ? 'dark':'light'}`} onClick = {undoChanges}>Undo Changes</button>
+                <button id={`login-button${isHighContrast ? 'dark':'light'}`} onMouseEnter={() => screenReader?speak({text:"Click to clear cart"}):cancel()} onMouseLeave={() => cancel()} onClick = {clearCart}>Clear Cart</button>
+                <button id={`login-button${isHighContrast ? 'dark':'light'}`} onClick = {undoChanges} onMouseEnter={() => screenReader?speak({text:"Click to undo changes"}):cancel()} onMouseLeave={() => cancel()}>Undo Changes</button>
             </div>
         </div>
     )

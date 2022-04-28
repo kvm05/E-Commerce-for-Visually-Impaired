@@ -9,6 +9,7 @@
     margin:40px;
     border-radius:30px;
     padding: 20px;
+    min-height: 100vh;
     /* background: rgba(198, 198, 198,0.2); */
     /* border: 5px solid black; */
 }

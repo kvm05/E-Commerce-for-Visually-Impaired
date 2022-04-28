@@ -2,7 +2,7 @@ import FilterPane from "./filterpane";
 import { Link, useNavigate } from "react-router-dom";
 import "./container.css"
 import {readData, filterByBrand, getBrands, search, getAllProducts, updateCart} from "./firebaseservices";
-import {UserContext, SearchContext} from "../App";
+import {UserContext, SearchContext, TTSContext, ContrastContext} from "../App";
 import React, {useState, useContext, useEffect} from "react";
 import { useSpeechSynthesis } from 'react-speech-kit';
 import WishListItem from "./wishlistitem";
@@ -10,10 +10,8 @@ import Container from "./container";
 import Navbar from "./navbar";
 
 function Wishlist(props){
-    const [isBlind, getChildData] = useState(true)
-    const dataFromChild = (childData) => {
-        getChildData(childData)
-    }
+    const {screenReader, changeScreenReader} = useContext(TTSContext);
+    const {isHighContrast, changeContrast} = useContext(ContrastContext);
     const {speak, cancel} = useSpeechSynthesis();
     const image=[]
     for(let i=11;i<=20;i++){
@@ -48,7 +46,6 @@ function Wishlist(props){
             description = {product.description}
             rating = {product.rating}
             category = {product.category}
-            isHighContrast = {isBlind}
             addToCart = {addToCart}
             removeFromWishlist = {removeFromWishlist}></WishListItem>
         })
@@ -77,29 +74,29 @@ function Wishlist(props){
 
     if(valueToBeSearched)
     return (
-        <div className = "cartpage" id={`homepage ${isBlind ? 'dark':'light'}`}>
-            <Navbar func = {dataFromChild}/>
-            <Container name="Search Results" isHighContrast={isBlind} />    
+        <div className = "cartpage" id={`homepage ${isHighContrast ? 'dark':'light'}`}>
+            <Navbar />
+            <Container name="Search Results" />    
         </div>
     );
 
     const temp = <h3>"Your wishlist is empty!"</h3>;
     
     return (
-        <div className="cartpage" id={`homepage ${isBlind ? 'dark':'light'}`}>
-            <Navbar func = {dataFromChild}/> 
+        <div className="cartpage" id={`homepage ${isHighContrast ? 'dark':'light'}`}>
+            <Navbar /> 
             <div className="container">
                 {/* <FilterPane brands = {brands} filterBrand = {filterBrand} price = {maxPrice} rating = {5}/> */}
                 <div className="prod">
                     <div className="category">
-                    <h1 id='category-header' onMouseEnter={() => speak({text:document.querySelector('#category-header').textContent})}>Wishlist</h1>
+                    <h1 id='category-header' onMouseEnter={() => screenReader?speak({text:document.querySelector('#category-header').textContent}):cancel()} onMouseLeave={() => cancel()}>Wishlist</h1>
                         <div  className="icons">
                             <Link to = '/cart'>
-                                <img src={isBlind?"/images/viewcart-wheat.png":"/images/view cart.png"} alt="view cart" onMouseEnter={() => speak({text: "View Cart"})}></img>
+                                <img src={isHighContrast?"/images/viewcart-wheat.png":"/images/view cart.png"} alt="view cart" onMouseEnter={() => screenReader?speak({text: "View Cart"}):cancel()} onMouseLeave={() => cancel()}></img>
                             </Link>
-                            <Link to = '/wishlist'>
-                                <a href="wishlist"><img src={isBlind?"/images/wishlist-wheat.png" :"/images/wishlist.png"} alt="wishlist" onMouseEnter={() => speak({text: "View Wishlist: Currently Disabled"})}></img></a>
-                            </Link>                    
+                            {/* <Link to = '/wishlist'>
+                                <a href="wishlist"><img src={isHighContrast?"/images/wishlist-wheat.png" :"/images/wishlist.png"} alt="wishlist" onMouseEnter={() => speak({text: "View Wishlist"})}></img></a>
+                            </Link>                     */}
                         </div>
                     </div>
                     {displayProducts ? displayProducts : temp}
