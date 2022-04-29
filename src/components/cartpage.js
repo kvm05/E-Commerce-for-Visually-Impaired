@@ -8,7 +8,7 @@ import "./navbar.css"
 import "./cartpage.css"
 import "./firebaseservices"
 import {readData, updateCart, setCartBeforeBilling} from "./firebaseservices";
-import { useSpeechSynthesis } from 'react-speech-kit';
+import { useSpeechSynthesis, useSpeechRecognition } from 'react-speech-kit';
 import {UserContext, OrderContext, SearchContext, ContrastContext, TTSContext} from "../App";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Container from "./container";
@@ -19,13 +19,77 @@ function CartPage(props){
     const {speak, cancel} = useSpeechSynthesis();
     const [ currentUser, setUser] = useState(null);
     const {orderTotal, setOrderTotal} = useContext(OrderContext);
-    const {valueToBeSearched} = useContext(SearchContext);
+    const {valueToBeSearched, setValueToBeSearched} = useContext(SearchContext);
     const [ currentCart, updateCurrentCart] = useState([]);
     const [backupCart, setBackupCart] = useState(null);
     const {screenReader, changeScreenReader} = useContext(TTSContext);
     const {isHighContrast, changeContrast} = useContext(ContrastContext);
+    const { listen, stop, listening} = useSpeechRecognition({
+    onResult: (result) => {
+      setValueToBeSearched(result)
+    }
+  })
 
     const navigate = useNavigate();
+
+    function quantityVoice(){
+        const index = valueToBeSearched.indexOf('increase')
+        if(index!==-1){
+            const product = valueToBeSearched.slice(index+9, valueToBeSearched.length);
+            const indexprod = product.indexOf(' by')
+            const productName = product.slice(0,indexprod)
+            const quantityIncrease = product.slice(indexprod+4, product.length)
+            const quan = parseInt(quantityIncrease)
+            const prod = currentCart.filter((product) => {
+                return product.name===productName
+            })
+            if(prod.length!==0){
+                onCartUpdate(productName, prod[0].quantity+quan)
+            }
+        }
+        else{
+            const indexdec = valueToBeSearched.indexOf('decrease')
+            if(indexdec!==-1){
+                const product = valueToBeSearched.slice(index+10, valueToBeSearched.length);
+                const indexprod = product.indexOf(' by')
+                const productName = product.slice(0,indexprod)
+                const quantityIncrease = product.slice(indexprod+4, product.length)
+                const quan = parseInt(quantityIncrease)
+                console.log(productName);
+                console.log(quan);
+                const prod = currentCart.filter((product) => {
+                    return product.name===productName
+                })
+                if(prod.length!==0){
+                    onCartUpdate(productName, prod[0].quantity-quan)
+                }
+            }
+        }
+    }
+
+    function goToBilling(){
+        const index = valueToBeSearched.indexOf("go to");
+        if(index!==-1){
+        const cat = valueToBeSearched.slice(index+6,valueToBeSearched.length)
+        const path = "/".concat(cat)
+        // console.log(category)
+        setValueToBeSearched('')
+        navigate(path)
+        }
+        else{
+        const index2 = valueToBeSearched.indexOf("open");
+        if(index2!==-1){
+            const cat = valueToBeSearched.slice(index2+5,valueToBeSearched.length)
+            const category = cat.charAt(0).toUpperCase() + cat.slice(1);
+            const path = "/categories/".concat(category)
+            console.log(path)
+            setValueToBeSearched('')
+            navigate(path)
+        }
+        }
+    }
+
+    useEffect(quantityVoice, [valueToBeSearched])
 
     async function get(){
         if (currentUser == null && user != null) {
@@ -64,7 +128,7 @@ function CartPage(props){
             console.log(tempCart)
             const itemToChange = itemsToChange[0]
             itemToChange.quantity = newValue;
-            if(itemToChange.quantity === 0){
+            if(itemToChange.quantity <= 0){
                 //return currentCart.filter(x => x.name != itemToChange.name)
                 // tempCart.splice(currentCart.indexOf(itemToChange), 1);
                 tempCart = tempCart.filter((item) => {
@@ -137,13 +201,13 @@ function CartPage(props){
 
     }
 
-    if(valueToBeSearched)
-    return (
-        <div className = "cartpage" id={`homepage ${isHighContrast ? 'dark':'light'}`}>
-            <Navbar/>
-            <Container name="Search Results" />    
-        </div>
-    );
+    // if(valueToBeSearched)
+    // return (
+    //     <div className = "cartpage" id={`homepage ${isHighContrast ? 'dark':'light'}`}>
+    //         <Navbar/>
+    //         <Container name="Search Results" />    
+    //     </div>
+    // );
     const temp = <h3> Your cart is empty!</h3>;
     window.onscroll = function(event) {
         if((window.innerHeight + window.scrollY) >= document.body.offsetHeight){

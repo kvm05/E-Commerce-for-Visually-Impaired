@@ -80,7 +80,7 @@ function CartItem(props){
                 <p onMouseEnter={() => screenReader?speak({text:`Quantity: ${props.quantity}`}):cancel()} onMouseLeave={() => cancel()}>{props.quantity}</p>
                 <button onClick={increaseQuantity}><i class="fa fa-plus" aria-hidden="true"  onMouseEnter={() => screenReader?speak({text:"Click to increase quantity"}):cancel()} onMouseLeave={() => cancel()} ></i></button>
             </div>
-            <div id={`total${isHighContrast?"Dark":"Light"}`}  onMouseEnter={() => screenReader?speak({text:`Total: ₹${currentQuantity*props.price}`}):cancel()} onMouseLeave={() => cancel()}>Total: ₹{currentQuantity*props.price}</div>
+            <div id={`total${isHighContrast?"Dark":"Light"}`}  onMouseEnter={() => screenReader?speak({text:`Total: ₹${currentQuantity*props.price}`}):cancel()} onMouseLeave={() => cancel()}>Total: ₹{props.quantity*props.price}</div>
         </div>
     );
 }

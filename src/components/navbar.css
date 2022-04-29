@@ -260,14 +260,14 @@ input:checked + .slider:before {
 	background: none;
 	border: none;
 	margin: 0px 10px;
-	font-size: 20px;
+	font-size: 30px;
 }
 [id = "search-button dark"] {
 	background: none;
 	border: none;
 	color: wheat;
 	margin: 0px 10px;
-	font-size: 20px;
+	font-size: 30px;
 }
 .menu {
 	background: #ffffff;

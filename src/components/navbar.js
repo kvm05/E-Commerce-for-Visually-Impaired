@@ -75,12 +75,11 @@ const Navbar = (props)  =>{
         }
     }
   get()
-  console.log(admin);
   return (
     <div id = {`navbar ${isHighContrast ? 'dark':'light'}`}>
       <div id='left-navbar'>
         <Link id='MyLink' to = '/'>
-          <div id = {`logo${isHighContrast ? 'dark':'light'}`}>
+          <div id = {`logo${isHighContrast ? 'dark':'light'}`} onClick={() => {setValueToBeSearched('')}}>
             Logo
           </div>  
         </Link>
@@ -101,6 +100,7 @@ const Navbar = (props)  =>{
             }
             else{
               listen()
+              setValueToBeSearched('')
             }
           }} onMouseEnter={() => screenReader?speak({text:`Click for voice input`}):cancel()} onMouseLeave={() => cancel()}>
             {listening?<i class="fa-solid fa-microphone-slash"></i>:<i class="fa-solid fa-microphone"></i>}
