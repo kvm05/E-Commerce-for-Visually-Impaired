@@ -168,6 +168,7 @@ function CartPage(props){
             <div className="cartButtons">
                 <button id={`login-button${isHighContrast ? 'dark':'light'}`} onMouseEnter={() => screenReader?speak({text:"Click to clear cart"}):cancel()} onMouseLeave={() => cancel()} onClick = {clearCart}>Clear Cart</button>
                 <button id={`login-button${isHighContrast ? 'dark':'light'}`} onClick = {undoChanges} onMouseEnter={() => screenReader?speak({text:"Click to undo changes"}):cancel()} onMouseLeave={() => cancel()}>Undo Changes</button>
+                <button id={`login-button${isHighContrast ? 'dark':'light'}`}  onMouseEnter={() => screenReader?speak({text:"Click to save changes"}):cancel()} onMouseLeave={() => cancel()}>Save Changes</button> {/* onClick = {saveChanges} */}
             </div>
         </div>
     )

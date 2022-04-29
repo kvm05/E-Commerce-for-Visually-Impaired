@@ -1,6 +1,7 @@
 import FilterPane from "./filterpane";
 import { Link, useNavigate } from "react-router-dom";
 import "./container.css"
+import "./navbar.css"
 import {readData, filterByBrand, getBrands, search, getAllProducts, updateCart} from "./firebaseservices";
 import {UserContext, SearchContext, TTSContext, ContrastContext} from "../App";
 import React, {useState, useContext, useEffect} from "react";
@@ -89,7 +90,7 @@ function Wishlist(props){
                 {/* <FilterPane brands = {brands} filterBrand = {filterBrand} price = {maxPrice} rating = {5}/> */}
                 <div className="prod">
                     <div className="category">
-                    <h1 id='category-header' onMouseEnter={() => screenReader?speak({text:document.querySelector('#category-header').textContent}):cancel()} onMouseLeave={() => cancel()}>Wishlist</h1>
+                    <h1 id='category-header' onMouseEnter={() => screenReader?speak({text:`${document.querySelector('#category-header').textContent} To the bottom of the page, you can save changes`}):cancel()} onMouseLeave={() => cancel()}>Wishlist</h1>
                         <div  className="icons">
                             <Link to = '/cart'>
                                 <img src={isHighContrast?"/images/viewcart-wheat.png":"/images/view cart.png"} alt="view cart" onMouseEnter={() => screenReader?speak({text: "View Cart"}):cancel()} onMouseLeave={() => cancel()}></img>
@@ -101,6 +102,9 @@ function Wishlist(props){
                     </div>
                     {displayProducts ? displayProducts : temp}
                 </div>
+            </div>
+            <div className="wishlistButtons">
+                <button id={`login-button${isHighContrast ? 'dark':'light'}`}  onMouseEnter={() => screenReader?speak({text:"Click to save changes"}):cancel()} onMouseLeave={() => cancel()}>Save Changes</button> {/* onClick = {saveChanges} */}
             </div>
         </div>
         

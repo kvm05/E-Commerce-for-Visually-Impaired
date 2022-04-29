@@ -15,7 +15,7 @@
     border-radius: 30px;
 }
 
-.cartButtons{
+.cartButtons, .wishlistButtons{
     width: 70%;
     margin: 20px 40px;
     padding: 20px 50px;
@@ -42,3 +42,7 @@
     width: 85%;
 }
 
+.wishlistButtons{
+   width: 100%;
+   margin-left: 40%;
+}
