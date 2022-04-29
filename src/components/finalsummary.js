@@ -6,6 +6,7 @@ import { useSpeechSynthesis } from 'react-speech-kit';
 import { readData } from "./firebaseservices";
 import "./navbar.css"
 import { BalanceContext } from "./billingpage";
+import Popup from "./Popup";
 
 function FinalSummary(props){
     const {orderTotal} = useContext(OrderContext);
@@ -16,6 +17,9 @@ function FinalSummary(props){
     const {speak, cancel} = useSpeechSynthesis();
     const {screenReader, changeScreenReader} = useContext(TTSContext);
     const {isHighContrast, changeContrast} = useContext(ContrastContext);
+    const [showPopup, changeShowPopup] = useState(false);
+    const [content, changecontent] = useState('');
+    const navigate = useNavigate()
 
     let userDetails = [];
 
@@ -32,6 +36,15 @@ function FinalSummary(props){
     const tax=Math.floor((0.18*props.total)*100)/100;
     const final=Math.floor((props.total+tax)*100)/100;
     const newBalance = props.balance - final;
+
+    function thankYouMessage(){
+        changeShowPopup(true)
+        changecontent("Thank you for shopping with us!")
+        setTimeout(() => {
+            changeShowPopup(false)
+            navigate("/")
+        }, 5000);
+    }
     
     useEffect(() =>{
         if(newBalance < 0){
@@ -60,8 +73,11 @@ function FinalSummary(props){
             </div>
             <button id={`login-button${isHighContrast ? 'dark':'light'}`} disabled = {canCheckout} onClick = {() =>{
                 props.checkout(newBalance);
+                thankYouMessage();
+                screenReader?speak({text:"Thank you for shopping with us!"}):cancel()
             }} onMouseEnter={() => screenReader?speak({text:"Click to pay and checkout"}):cancel()} onMouseLeave={() => cancel()}>Pay And Checkout</button>
             {canCheckout ? <h3 onMouseEnter={() => screenReader?speak({text:"Insufficient Balance"}):cancel()} onMouseLeave={() => cancel()}>Insufficient Balance</h3> : null}
+            {(showPopup) ?<Popup content={content}/>:<p></p>}
         </div>
     )
 }
