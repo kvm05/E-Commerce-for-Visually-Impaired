@@ -2,7 +2,7 @@ import FilterPane from "./filterpane";
 import { Link, useNavigate } from "react-router-dom";
 import "./container.css"
 import "./navbar.css"
-import {readData, filterByBrand, getBrands, search, getAllProducts, updateCart} from "./firebaseservices";
+import {readData, filterByBrand, getBrands, search, getAllProducts, updateCart, setWishlist} from "./firebaseservices";
 import {UserContext, SearchContext, TTSContext, ContrastContext} from "../App";
 import React, {useState, useContext, useEffect} from "react";
 import { useSpeechSynthesis } from 'react-speech-kit';
@@ -15,9 +15,6 @@ function Wishlist(props){
     const {isHighContrast, changeContrast} = useContext(ContrastContext);
     const {speak, cancel} = useSpeechSynthesis();
     const image=[]
-    for(let i=11;i<=20;i++){
-        image.push(`/images/prod${i}.png`);
-    }
     // console.log(image);
     const {user} = useContext(UserContext);
     const {valueToBeSearched} = useContext(SearchContext);
@@ -73,6 +70,10 @@ function Wishlist(props){
         })
     }
 
+    async function saveWishlist(){
+        await setWishlist(currentWishlist);
+    }
+
     if(valueToBeSearched)
     return (
         <div className = "cartpage" id={`homepage ${isHighContrast ? 'dark':'light'}`}>
@@ -104,7 +105,7 @@ function Wishlist(props){
                 </div>
             </div>
             <div className="wishlistButtons">
-                <button id={`login-button${isHighContrast ? 'dark':'light'}`}  onMouseEnter={() => screenReader?speak({text:"Click to save changes"}):cancel()} onMouseLeave={() => cancel()}>Save Changes</button> {/* onClick = {saveChanges} */}
+                <button id={`login-button${isHighContrast ? 'dark':'light'}`}  onClick = {saveWishlist} onMouseEnter={() => screenReader?speak({text:"Click to save changes"}):cancel()} onMouseLeave={() => cancel()}>Save Changes</button> {/* onClick = {saveChanges} */}
             </div>
         </div>
         

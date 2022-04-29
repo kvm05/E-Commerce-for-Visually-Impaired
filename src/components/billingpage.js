@@ -47,16 +47,16 @@ function BillingPage(){
         total += item.quantity * item.price;
     }
 
-    function refillWallet(newBalance){
+    async function refillWallet(newBalance){
         setCurrentBalance(newBalance);
-        updateWallet(user, newBalance);
+        await updateWallet(user, newBalance);
     }
 
     function updateCustomerInfo(field, value){
         customerDetails[field] = value;
     }
 
-    function checkout(newBalance){
+    async function checkout(newBalance){
         const purchasedProducts = currentCart.map((product) =>{
             return Object.assign(product, customerDetails);
         })
@@ -72,8 +72,8 @@ function BillingPage(){
             completePurchase(product, user);
         }
         
-        setCartBeforeBilling([], user);
-        updateWallet(newBalance);
+        await setCartBeforeBilling([], user);
+        await updateWallet(newBalance);
     }
 
     return (
