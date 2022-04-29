@@ -7,7 +7,7 @@
     height: 97vh;
 } */
 .orderTableLight, .orderTableDark{
-    height: 500px;
+    height: fit-content;
     border-radius: 30px;
     width: 50%;
     margin: 40px;

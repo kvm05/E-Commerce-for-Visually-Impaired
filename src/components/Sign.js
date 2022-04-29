@@ -196,6 +196,12 @@ function Sign() {
               Sign up
             </a>
           </p>
+          <p className="form_text">
+            Admin?
+            <a href="#" className="form_link" id="adminPanel" onClick = {navigate("/admin")}>
+              Admin
+            </a>
+          </p>
           <div className="or">
             OR <br/>
             <button className="google" onClick={googleLogin}><i class="fab fa-google"></i></button>

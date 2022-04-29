@@ -1,4 +1,4 @@
-.app
+/* .app
 {
     max-width: 1200px;
     width: 100%;
@@ -74,7 +74,7 @@
 
 /*thumbnail for pictures insertion*/
 
-.box .cart
+/* .box .cart
 {
     background: #333;
     color: white;
@@ -83,5 +83,76 @@
     cursor: pointer;
     padding: 10px 25px;
     margin-top: 10px;
+} */
+
+
+.MainContainer {
+    padding: 4% 12%;
+    margin-top: 30px;
+    box-sizing: border-box;
+
+    width:100%;
+    display: flex;
+    align-items: center;
 }
 
+.ProductPreview {
+    width: 50%;
+}
+
+.ProductPreview > img {
+    width: 100%;
+}
+
+.ProductData
+{
+    width: 50%;
+}
+
+.ProductTitle
+{
+    font-size: 45px;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 16px;
+}
+
+.ProductDescription
+{
+    font-size: 20px;
+    color: rgba(0,0,0,0.8);
+    margin-top: 0;
+    margin-bottom: 16px;
+}
+
+.ProductImage
+{
+    width: 100%;
+    max-width: 80px;
+
+    border: 2px solid transparent;
+    border-radius: 8px;
+    margin-right: 12px;
+    cursor: pointer;
+}
+
+.SelectedProductImage
+{
+    border: 2px solid teal;
+}
+
+.Heading
+{
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.PrimaryButton
+{
+    color: white;
+    background-color: teal;
+    font-size: 18px;
+    border-radius: 8px;
+    border: 0;
+    padding: 12px 24px;
+}

@@ -1,0 +1,69 @@
+.UserTable{
+    height: fit-content;
+    border-radius: 30px;
+    width: 70%;
+    margin: 40px;
+    padding: 40px;
+    background: rgba(198, 198, 198,0.2);
+    /* border-color: #cccccc; */
+}
+
+.UserTable .table{
+    margin-top: 50px;
+    height: 270px;
+    overflow-y: auto;
+    width:100%;
+    margin-bottom: 40px;
+}
+
+.UserTable .table table{
+    width: 100%;
+    margin: auto;
+}
+.table thead th{
+    position: sticky;
+    top: 0;
+    background-color: black;
+    vertical-align: middle;
+    color: white;
+}
+
+.UserTable td, th{
+    border-bottom: 3px solid black;
+    text-align: center;
+    padding: 0 30px;
+    font-size: 0.9em;
+}
+
+th{
+    padding-bottom: 20px;
+    margin-top: 20px;
+}
+
+.UserTable h2{
+    font-size: 2.7em;
+    margin-bottom: 40px;
+}
+
+td button{
+    background: none;
+    color:black;
+    height: 50px;
+    width: 100%;
+    border: none;
+    font-size: 0.8em;
+}
+
+.UserTable input{
+    height: 50px;
+    background: none;
+    border: none;
+    border-bottom: 3px solid black;
+    font-size: 1em;
+}
+
+.searchUser button{
+    font-size: 1em;
+    background: none;
+    border: none;
+}

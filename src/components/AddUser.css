@@ -1,0 +1,54 @@
+.AddUser{
+    background: rgba(198, 198, 198,0.2);
+    border-radius: 30px;
+    padding: 50px 50px;
+    width: 70%;
+    margin: 40px;
+    height: fit-content;
+}
+
+
+.AddUser h2{
+    font-size: 2.7em;
+    margin-bottom: 40px;
+}
+
+.AddUser form{
+    padding: 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 1em;
+}
+
+.AddUser form div{
+    display: flex;
+    flex-direction: column;
+    margin: 20px 40px;
+}
+
+.AddUser form input{
+    margin: 10px;
+    padding: 15px 10px;
+    /* border-radius: 10px; */
+    border: none;
+    background: none;
+    border-bottom: 2px solid black;
+    color: white;
+}
+
+.AddUser button{
+    height: 60px;
+    font-size: 1em;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 20px;
+    display: inline-block;
+    margin-left: auto;
+}
+
+.AddUser button:hover{
+    background-color: orange;
+}

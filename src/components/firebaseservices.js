@@ -1,4 +1,4 @@
-import { getFirestore, collection, addDoc, getDocs, doc, getDoc, query, where, orderBy, updateDoc, arrayUnion, setDoc } from "firebase/firestore";
+import { getFirestore, collection, addDoc, getDocs, doc, getDoc, query, where, orderBy, updateDoc, arrayUnion, setDoc, deleteDoc } from "firebase/firestore";
 import { get } from "react-hook-form";
 import { app, database } from "./firebase";
 // import { currentUser } from "./currentuser"
@@ -157,4 +157,19 @@ export async function completePurchase(product, user){
     await updateDoc(ref, {
         purchaseHistory: arrayUnion(product)
 });
+}
+
+export async function getAllUsers(){
+    const q = query(collection(database, "users"));
+    const querySnapshot = await getDocs(q);
+    return querySnapshot.docs.map((obj) =>{
+        return obj.data();
+    })   
+}
+
+export async function removeUser(uid){
+    const q = query(collection(database, "users"), where("uid", "==", uid));
+    const querySnapshot = await getDocs(q);
+    const docId = querySnapshot.docs[0].ref.id; 
+    await deleteDoc(doc(database, "users", docId));
 }

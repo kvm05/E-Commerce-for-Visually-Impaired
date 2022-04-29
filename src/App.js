@@ -20,6 +20,7 @@ import { PrivateRoute } from "./components/PrivateRoute";
 import Wishlist from "./components/wishlist";
 import BillingPage from "./components/billingpage";
 import DetailedProducts from "./components/detailedproducts";
+import AdminPanel from "./components/AdminPanel";
 
 export const UserContext = React.createContext({
   user: {},
@@ -95,6 +96,7 @@ function MainPage() {
                   <Route path="account" element={<AccountPage />} />
                   <Route path = "wishlist" element = {<Wishlist />} />
                   <Route path = "billing" element = {<BillingPage />} />
+                  <Route path = "admin" element = {<AdminPanel />} />
                 </Routes>
               </BrowserRouter>
             </ContrastContext.Provider>

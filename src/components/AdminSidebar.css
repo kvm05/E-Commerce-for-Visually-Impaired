@@ -1,0 +1,37 @@
+.AdminSidebar{
+    width: 20%;
+    height: 100%;
+    background-color: black;
+    position: fixed;
+}
+
+.AdminSidebar h2{
+    font-weight: bolder;
+    color: white;
+    margin: 60px 40px; 
+}
+
+.adminButtons{
+    display: flex;
+    flex-direction: column;
+}
+
+.adminButtons button{
+    text-align: left;
+    height: 90px;
+    width: 100%;
+    padding: 20px;
+    border: none;
+    border-bottom: 3px solid white ;
+    background: none;
+    color: white;
+    font-size: 1em;
+}
+
+.adminButtons button i{
+    margin-right: 30px;
+}
+
+.adminButtons button:hover, .adminButtons button:checked{
+    background-color: orange;
+}
