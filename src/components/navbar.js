@@ -7,11 +7,14 @@ import {DetectOutsideClick} from "./DetectOutsideClick";
 import { getAuth, signOut } from "firebase/auth";
 import { useSpeechSynthesis, useSpeechRecognition } from 'react-speech-kit';
 import { UserContext, SearchContext, TTSContext, ContrastContext } from '../App';
+import {readData} from "./firebaseservices";
 
 const Navbar = (props)  =>{
   const dropdownRef = useRef(null);
   const [isClicked, setClicked] = DetectOutsideClick(dropdownRef, false);
   const {user, setUser} = useContext(UserContext);
+  const [ currentUser, setCurrentUser] = useState(null);
+  const [ admin, setAdmin] = useState(false);
   const {screenReader, changeScreenReader} = useContext(TTSContext);
   const {isHighContrast, changeContrast} = useContext(ContrastContext);
   const navigate = useNavigate()
@@ -37,6 +40,7 @@ const Navbar = (props)  =>{
     });
   }
 
+
   const {valueToBeSearched,setValueToBeSearched} = useContext(SearchContext);
   
   const goToCat = () => {
@@ -61,6 +65,17 @@ const Navbar = (props)  =>{
       }
     }
   }
+  let userDetails = []
+  async function get(){
+        if (currentUser == null && user != null) {
+            setCurrentUser(user)
+            userDetails = await readData("users", "", user);
+            setAdmin(userDetails.admin)
+            console.log(userDetails);
+        }
+    }
+  get()
+  console.log(admin);
   return (
     <div id = {`navbar ${isHighContrast ? 'dark':'light'}`}>
       <div id='left-navbar'>
@@ -122,6 +137,10 @@ const Navbar = (props)  =>{
                 My Profile              
               </div>
             </Link>
+            {admin?
+                <div id='my-admin' onClick={() => {navigate("/admin")}}  onMouseEnter={() => screenReader?speak({text:"Click to go to admin page"}):cancel()} onMouseLeave={() => cancel()}>
+                  Admin             
+                </div>:[]}
             <Link id='MyLink' to='/sign'>
               <div id='logout' onClick={emailSignOut}  onMouseEnter={() => screenReader?speak({text:"Logout"}):cancel()} onMouseLeave={() => cancel()}>
                 <i class="fas fa-arrow-right-from-bracket"></i>Logout             

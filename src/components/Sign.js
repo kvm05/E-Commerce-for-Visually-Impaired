@@ -127,6 +127,7 @@ function Sign() {
   const onSubmit = (data) => {
     emailLogin(data.email, data.password)
   }
+
   const {user} = useContext(UserContext);
 
   const newUserSubmit = async (data) => {
@@ -194,12 +195,6 @@ function Sign() {
             Don't have an account yet?
             <a href="#" className="form_link" id="createAccount">
               Sign up
-            </a>
-          </p>
-          <p className="form_text">
-            Admin?
-            <a href="#" className="form_link" id="adminPanel" onClick = {navigate("/admin")}>
-              Admin
             </a>
           </p>
           <div className="or">

@@ -293,7 +293,7 @@ input:checked + .slider:before {
 	background-color: #000;
 	box-shadow: 0px 0px 10px wheat;
 }
-#my-profile {
+#my-profile, #my-admin {
 	height: 30px;
 	display: flex;
 	/* justify-content: center; */
@@ -302,8 +302,9 @@ input:checked + .slider:before {
 	padding-left: 5px;
 	font-family: "Roboto";
 	color: grey;
+	cursor: pointer;
 }
-#my-profile:hover {
+#my-profile:hover, #my-admin:hover {
 	background-color: #d3d3d3;
 }
 #logout {

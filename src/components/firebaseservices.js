@@ -26,7 +26,8 @@ export function addNewUser(user, name){
           wallet : 1000,
           uid : user.uid,
           email : user.email,
-          purchaseHistory: []
+          purchaseHistory: [],
+          admin: false
         })}
 
 export async function getAllProducts(){
