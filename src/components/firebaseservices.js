@@ -173,3 +173,21 @@ export async function removeUser(uid){
     const docId = querySnapshot.docs[0].ref.id; 
     await deleteDoc(doc(database, "users", docId));
 }
+
+export async function removeProduct(name){
+    const q = query(collection(database, "products"), where("name", "==", name));
+    const querySnapshot = await getDocs(q);
+    const docId = querySnapshot.docs[0].ref.id; 
+    await deleteDoc(doc(database, "products", docId));
+}
+
+export async function addNewProduct(product){
+    addDoc(collection(database, "products"), {
+        name: product.name,
+        description: product.description,
+        price: product.price,
+        image: product.image,
+        category: product.category,
+        rating: product.rating
+      })
+}

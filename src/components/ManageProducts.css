@@ -1,0 +1,15 @@
+.ManageProducts{
+    /* display: flex; */
+    width: 80%;
+    margin-left: 20%;
+}
+
+.ManageProducts h1{
+    padding: 40px 0;
+    font-size: 3em;
+    font-weight: bolder;
+    border-bottom: 5px solid black;
+    margin-bottom: 60px;
+    width: 80%;
+    margin-left: 50px;
+}

@@ -18,11 +18,11 @@
 
 .adminButtons button{
     text-align: left;
-    height: 90px;
+    height: 60px;
     width: 100%;
     padding: 20px;
     border: none;
-    border-bottom: 3px solid white ;
+    /* border-bottom: 3px solid white ; */
     background: none;
     color: white;
     font-size: 1em;

@@ -1,0 +1,48 @@
+.AdminDashboard{
+    /* display: flex; */
+    width: 80%;
+    margin-left: 20%;
+}
+
+.AdminDashboard .dashboard{
+    display: flex;
+}
+
+.AdminDashboard h1{
+    padding: 40px 0;
+    font-size: 3em;
+    font-weight: bolder;
+    border-bottom: 5px solid black;
+    margin-bottom: 60px;
+    width: 80%;
+    margin-left: 50px;
+}
+
+.AdminDashboard .usageStats{
+    height: fit-content;
+    border-radius: 30px;
+    width: 30%;
+    margin: 40px;
+    padding: 30px;
+    background: rgba(198, 198, 198,0.2);
+}
+
+
+.userStats i, .productStats i{
+    font-size: 8em;
+    color: darkgrey;
+    margin-right: 40%;
+    width: 40%;
+}
+
+.usageStats p{
+    display: inline-block;
+    font-size: 2em;
+    color: darkgrey;
+    font-weight: bold;
+}
+
+.AdminDashboard h2{
+    font-size: 1.7em;
+    margin-bottom: 40px;
+}

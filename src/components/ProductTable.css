@@ -1,4 +1,4 @@
-.UserTable{
+.ProductTable{
     height: fit-content;
     border-radius: 30px;
     width: 70%;
@@ -8,7 +8,7 @@
     /* border-color: #cccccc; */
 }
 
-.UserTable .table{
+.ProductTable .table{
     margin-top: 50px;
     height: 270px;
     overflow-y: auto;
@@ -16,11 +16,11 @@
     margin-bottom: 40px;
 }
 
-.UserTable .table table{
+.ProductTable .table table{
     width: 100%;
     margin: auto;
 }
-.UserTable .table thead th{
+.ProductTable .table thead th{
     position: sticky;
     top: 0;
     background-color: black;
@@ -28,7 +28,7 @@
     color: white;
 }
 
-.UserTable td, th{
+.ProductTable td, th{
     border-bottom: 3px solid black;
     text-align: center;
     padding: 0 30px;
@@ -40,12 +40,12 @@ th{
     margin-top: 20px;
 }
 
-.UserTable h2{
+.ProductTable h2{
     font-size: 2.7em;
     margin-bottom: 40px;
 }
 
-.UserTable td button{
+.ProductTable td button{
     background: none;
     color:black;
     height: 50px;
@@ -56,12 +56,12 @@ th{
     padding: 10px 20px; 
 }
 
-.UserTable td button:hover{
+.ProductTable td button:hover{
     color:white;
     background-color: red;
 }
 
-.UserTable input{
+.ProductTable input{
     height: 50px;
     background: none;
     border: none;
@@ -69,7 +69,7 @@ th{
     font-size: 1em;
 }
 
-.searchUser button{
+.searchProduct button{
     font-size: 1em;
     background: none;
     border: none;
