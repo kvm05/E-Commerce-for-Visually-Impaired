@@ -13,7 +13,6 @@ const categories = ["Shoes", "Electronics", "Food", "Clothes"];
 function Homepage(){
     const {valueToBeSearched} = useContext(SearchContext);
     const {isHighContrast, changeContrast} = useContext(ContrastContext);
-    console.log(isHighContrast)
     if(valueToBeSearched)
         return (
             <div id={`homepage ${isHighContrast ? 'dark':'light'}`}>

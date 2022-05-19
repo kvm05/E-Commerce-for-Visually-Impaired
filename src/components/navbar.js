@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import {DetectOutsideClick} from "./DetectOutsideClick"; 
 import { getAuth, signOut } from "firebase/auth";
 import { useSpeechSynthesis, useSpeechRecognition } from 'react-speech-kit';
-import { UserContext, SearchContext, TTSContext, ContrastContext } from '../App';
+import { UserContext, SearchContext, TTSContext, ContrastContext, VoiceInputContext } from '../App';
 import {readData} from "./firebaseservices";
 
 const Navbar = (props)  =>{
@@ -18,10 +18,11 @@ const Navbar = (props)  =>{
   const {screenReader, changeScreenReader} = useContext(TTSContext);
   const {isHighContrast, changeContrast} = useContext(ContrastContext);
   const navigate = useNavigate()
+  const {voiceInput, setVoiceInput} = useContext(VoiceInputContext);
   const {speak, cancel} = useSpeechSynthesis();
   const { listen, stop, listening} = useSpeechRecognition({
     onResult: (result) => {
-      setValueToBeSearched(result)
+      setVoiceInput(result)
     }
   })
   const onClick = () => setClicked(!isClicked);
@@ -44,25 +45,31 @@ const Navbar = (props)  =>{
   const {valueToBeSearched,setValueToBeSearched} = useContext(SearchContext);
   
   const goToCat = () => {
-    const index = valueToBeSearched.indexOf("go to");
+    const index = voiceInput.indexOf("go to");
     if(index!==-1){
-      const cat = valueToBeSearched.slice(index+6,valueToBeSearched.length)
+      const cat = voiceInput.slice(index+6,voiceInput.length)
       const category = cat.charAt(0).toUpperCase() + cat.slice(1);
       const path = "/categories/".concat(category)
       // console.log(category)
-      setValueToBeSearched('')
+      setVoiceInput('')
       navigate(path)
     }
     else{
-      const index2 = valueToBeSearched.indexOf("open");
+      const index2 = voiceInput.indexOf("open");
       if(index2!==-1){
-        const cat = valueToBeSearched.slice(index2+5,valueToBeSearched.length)
+        const cat = voiceInput.slice(index2+5,voiceInput.length)
         const category = cat.charAt(0).toUpperCase() + cat.slice(1);
         const path = "/categories/".concat(category)
         console.log(path)
-        setValueToBeSearched('')
+        console.log(voiceInput);
+        setVoiceInput('')
         navigate(path)
       }
+    }
+    const index3 = voiceInput.indexOf("search");
+    if(index3 !== -1){
+      const cat = voiceInput.slice(index3, voiceInput.length);
+      setValueToBeSearched(cat);
     }
   }
   let userDetails = []
@@ -99,6 +106,7 @@ const Navbar = (props)  =>{
               stop()
             }
             else{
+              console.log("Listening")
               listen()
               setValueToBeSearched('')
             }

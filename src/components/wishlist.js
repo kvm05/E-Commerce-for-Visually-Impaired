@@ -71,13 +71,12 @@ function Wishlist(props){
     }
 
     async function saveWishlist(){
-        console.log("Saved");
         await setWishlist(currentWishlist, user);
     }
 
     if(valueToBeSearched)
     return (
-        <div className = "cartpage" id={`homepage ${isHighContrast ? 'dark':'light'}`}>
+        <div className = "wishlist" id={`homepage ${isHighContrast ? 'dark':'light'}`}>
             <Navbar />
             <Container name="Search Results" />    
         </div>
@@ -86,7 +85,7 @@ function Wishlist(props){
     const temp = <h3>"Your wishlist is empty!"</h3>;
     
     return (
-        <div className="cartpage" id={`homepage ${isHighContrast ? 'dark':'light'}`}>
+        <div className="wishlist" id={`homepage ${isHighContrast ? 'dark':'light'}`}>
             <Navbar /> 
             <div className="container">
                 {/* <FilterPane brands = {brands} filterBrand = {filterBrand} price = {maxPrice} rating = {5}/> */}

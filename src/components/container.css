@@ -9,9 +9,8 @@
     margin:40px;
     border-radius:30px;
     padding: 20px;
-    min-height: 100vh;
     /* background: rgba(198, 198, 198,0.2); */
-    /* border: 5px solid black; */
+    /* border: 5px solid black; */;
 }
 
 
@@ -28,11 +27,13 @@
 
 .prod{
     margin:50px;
+    margin-bottom: 10px;
 }
 
 .category{
     height: 150px;
     padding:20px;
+    width: 100%;
 }
 .category h1{
     display: inline-block;
@@ -44,6 +45,7 @@
     text-align: center;
     border-bottom: 5px solid wheat;
     width: 85%;
+    margin-right: 20px;
 }
 
 .icons{
@@ -59,4 +61,25 @@
 
 .displaySection{
     padding: 20px;
+}
+
+.wishlist{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-y: auto
+}
+
+.wishlistButtons{
+    /* display: inline-block; */
+    margin: 0px auto;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.wishlist .container{
+    width: 80%;
+    margin: 20px auto;
 }
