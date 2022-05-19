@@ -1,0 +1,29 @@
+.VoicePopupDark{
+    height: fit-content;
+    width: 50%;
+    position: absolute;
+    top:150px;
+    left: 400px;
+    z-index: 1000;
+    background-color: black;
+    padding: 40px;
+    color: wheat;
+    border-radius: 30px;
+	box-shadow: 0em 1.5em 1.5em -0.4em gray;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.VoicePopupDark img{
+    height: 300px;
+    /* width: 80%; */
+    object-fit: contain;
+    object-position: center;
+    display: inline-block;
+    /* margin: 20px auto; */
+}
+
+.VoicePopupDark h2{
+    text-align: center;
+}

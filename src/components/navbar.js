@@ -6,8 +6,9 @@ import { Link, useNavigate } from "react-router-dom";
 import {DetectOutsideClick} from "./DetectOutsideClick"; 
 import { getAuth, signOut } from "firebase/auth";
 import { useSpeechSynthesis, useSpeechRecognition } from 'react-speech-kit';
-import { UserContext, SearchContext, TTSContext, ContrastContext, VoiceInputContext } from '../App';
+import { UserContext, SearchContext, TTSContext, ContrastContext, VoiceInputContext, VoicePopupContext } from '../App';
 import {readData} from "./firebaseservices";
+import VoicePopup from './VoicePopup';
 
 const Navbar = (props)  =>{
   const dropdownRef = useRef(null);
@@ -19,6 +20,7 @@ const Navbar = (props)  =>{
   const {isHighContrast, changeContrast} = useContext(ContrastContext);
   const navigate = useNavigate()
   const {voiceInput, setVoiceInput} = useContext(VoiceInputContext);
+  const {voicePopup, setVoicePopup} = useContext(VoicePopupContext);
   const {speak, cancel} = useSpeechSynthesis();
   const { listen, stop, listening} = useSpeechRecognition({
     onResult: (result) => {
@@ -68,8 +70,10 @@ const Navbar = (props)  =>{
     }
     const index3 = voiceInput.indexOf("search");
     if(index3 !== -1){
-      const cat = voiceInput.slice(index3, voiceInput.length);
+      const cat = voiceInput.slice(index3 + 7, voiceInput.length);
       setValueToBeSearched(cat);
+      navigate("/categories/Search");
+      setVoiceInput('');
     }
   }
   let userDetails = []
@@ -104,11 +108,13 @@ const Navbar = (props)  =>{
             if(listening){
               goToCat()
               stop()
+              setVoicePopup(false);
             }
             else{
               console.log("Listening")
               listen()
-              setValueToBeSearched('')
+              setVoiceInput('')
+              setVoicePopup(true);
             }
           }} onMouseEnter={() => screenReader?speak({text:`Click for voice input`}):cancel()} onMouseLeave={() => cancel()}>
             {listening?<i class="fa-solid fa-microphone-slash"></i>:<i class="fa-solid fa-microphone"></i>}
@@ -165,6 +171,7 @@ const Navbar = (props)  =>{
         </div>
         }
       </div>
+      {voicePopup ? <VoicePopup /> : ""}
     </div>
   )
 }

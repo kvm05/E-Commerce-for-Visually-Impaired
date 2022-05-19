@@ -125,7 +125,7 @@ function Container(props){
     return ( 
         <div className="container">
             {/* <FilterPane brands = {brands} filterBrand = {filterBrand} price = {maxPrice} rating = {5}/> */}
-            <FilterPane category = {props.name} filterBrand = {filterBrand} brands = {brands}></FilterPane>
+            {valueToBeSearched ? "" : <FilterPane category = {props.name} filterBrand = {filterBrand} brands = {brands}></FilterPane>}
             <div className="prod">
                 <div className="category">
                 <h1 id='category-header' onMouseEnter={() => screenReader?speak({text:`${document.querySelector('#category-header').textContent}. To the bottom, you will find the products. To the right, you can open the cart or wishlist page`}):cancel()} onMouseLeave={() => cancel()}>{props.valueToBeSearched? "Search Results": name[0].toUpperCase()+name.slice(1)}</h1>

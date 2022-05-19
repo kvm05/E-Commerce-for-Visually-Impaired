@@ -42,6 +42,11 @@ export const VoiceInputContext = React.createContext({
   setVoiceInput: () => {},
 })
 
+export const VoicePopupContext = React.createContext({
+  voicePopup: "",
+  setVoicePopup: () => {},
+})
+
 export const TTSContext = React.createContext({})
 
 export const ContrastContext = React.createContext({})
@@ -51,6 +56,7 @@ function MainPage() {
   const [orderTotal, setOrderTotal] = useState(0);
   const [valueToBeSearched, setValueToBeSearched] = useState("");
   const [voiceInput, setVoiceInput] = useState("");
+  const [voicePopup, setVoicePopup] = useState("");
   const [screenReader, changeScreenReader] = useState(true);
   const [isHighContrast, changeContrast] = useState(true);
   const {speak, cancel} = useSpeechSynthesis();
@@ -79,36 +85,39 @@ function MainPage() {
     <UserContext.Provider value={{ user, setUser }}>
       <OrderContext.Provider value = {{orderTotal, setOrderTotal}}>
         <SearchContext.Provider value = {{valueToBeSearched, setValueToBeSearched}}>
-          <VoiceInputContext.Provider value = {{voiceInput, setVoiceInput}}>
-            <TTSContext.Provider value={{screenReader, changeScreenReader}}>
-              <ContrastContext.Provider value = {{isHighContrast, changeContrast}}>
-                <BrowserRouter> 
-                  <Routes>
-                    <Route path="/" element={<Homepage />} />
-                    <Route path="/sign" element={<SignIn></SignIn>} />
-                    <Route
-                      path="categories/Shoes"
-                      element={<ProductPage name="Shoes" />}
-                      />
-                    <Route
-                      path="categories/Electronics"
-                      element={<ProductPage name="Electronics" />}
-                      />
-                    <Route path="categories/Food" element={<ProductPage name="Food" />} />
-                    <Route
-                      path="categories/Clothes"
-                      element={<ProductPage name="Clothes" />}
-                      />
-                    <Route path="cart" element={<CartPage />} />
-                    <Route path="account" element={<AccountPage />} />
-                    <Route path = "wishlist" element = {<Wishlist />} />
-                    <Route path = "billing" element = {<BillingPage />} />
-                    <Route path = "admin" element = {<AdminPanel />} />
-                  </Routes>
-                </BrowserRouter>
-              </ContrastContext.Provider>
-            </TTSContext.Provider>
-          </VoiceInputContext.Provider>
+          <VoicePopupContext.Provider value = {{voicePopup, setVoicePopup}}>
+            <VoiceInputContext.Provider value = {{voiceInput, setVoiceInput}}>
+              <TTSContext.Provider value={{screenReader, changeScreenReader}}>
+                <ContrastContext.Provider value = {{isHighContrast, changeContrast}}>
+                  <BrowserRouter> 
+                    <Routes>
+                      <Route path="/" element={<Homepage />} />
+                      <Route path="/sign" element={<SignIn></SignIn>} />
+                      <Route
+                        path="categories/Shoes"
+                        element={<ProductPage name="Shoes" />}
+                        />
+                      <Route
+                        path="categories/Electronics"
+                        element={<ProductPage name="Electronics" />}
+                        />
+                      <Route path="categories/Food" element={<ProductPage name="Food" />} />
+                      <Route
+                        path="categories/Clothes"
+                        element={<ProductPage name="Clothes" />}
+                        />
+                      <Route path = "categories/Search" element = {<ProductPage name = "Search Results" />} />
+                      <Route path="cart" element={<CartPage />} />
+                      <Route path="account" element={<AccountPage />} />
+                      <Route path = "wishlist" element = {<Wishlist />} />
+                      <Route path = "billing" element = {<BillingPage />} />
+                      <Route path = "admin" element = {<AdminPanel />} />
+                    </Routes>
+                  </BrowserRouter>
+                </ContrastContext.Provider>
+              </TTSContext.Provider>
+            </VoiceInputContext.Provider>
+          </VoicePopupContext.Provider>
         </SearchContext.Provider>
       </OrderContext.Provider>
     </UserContext.Provider>

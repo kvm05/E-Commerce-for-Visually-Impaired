@@ -4,22 +4,18 @@ import Titles from "./Titles";
 import Categories from "./Categories";
 import "./Homepage.css";
 import "./index.css";
-import { SearchContext, ContrastContext } from "../App";
+import { SearchContext, ContrastContext, VoiceInputContext, VoicePopupContext } from "../App";
 import ProductPage from "./productpage";
 import Container from "./container";
+import VoicePopup from "./VoicePopup";
 
 const categories = ["Shoes", "Electronics", "Food", "Clothes"];
 
 function Homepage(){
     const {valueToBeSearched} = useContext(SearchContext);
+    const {voiceInput} = useContext(VoiceInputContext);
+    const {voicePopup, setVoicePopup} = useContext(VoicePopupContext);
     const {isHighContrast, changeContrast} = useContext(ContrastContext);
-    if(valueToBeSearched)
-        return (
-            <div id={`homepage ${isHighContrast ? 'dark':'light'}`}>
-                <Navbar />
-                <Container name="Search Results" />    
-            </div>
-        );
         
     return(
         <div id={`homepage ${isHighContrast ? 'dark':'light'}`}>
