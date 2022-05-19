@@ -71,7 +71,8 @@ function Wishlist(props){
     }
 
     async function saveWishlist(){
-        await setWishlist(currentWishlist);
+        console.log("Saved");
+        await setWishlist(currentWishlist, user);
     }
 
     if(valueToBeSearched)
