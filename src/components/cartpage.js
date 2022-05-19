@@ -196,9 +196,10 @@ function CartPage(props){
         //     updateCart(item, user);
         // })
         console.log(currentCart);
-        await setCartBeforeBilling(currentCart, user);
-        navigate('/billing')
-
+        if (currentCart){
+            await setCartBeforeBilling(currentCart, user);
+            navigate('/billing')
+        }
     }
 
     // if(valueToBeSearched)
@@ -229,9 +230,10 @@ function CartPage(props){
                     <CartItem name="Product 1" price={45} image={image} quantity={2}  isHighContrast={isBlind}></CartItem>
                     <CartItem name="Product 1" price={45} image={image} quantity={2}  isHighContrast={isBlind}></CartItem> */}
                     {/* {displayCart ? displayCart : temp} */}
-                    {displayCart}
+                    {console.log(displayCart.length)}
+                    {displayCart.length ? displayCart : <img src = "/images/empty-cart.png" alt = "Empty Cart"></img>}
                 </div>
-                <OrderSummary isHighContrast={isHighContrast} toBilling = {toBilling}></OrderSummary>
+                <OrderSummary isHighContrast={isHighContrast} canProceed = {displayCart ? true : false} toBilling = {toBilling}></OrderSummary>
             </div>
             <div className="cartButtons">
                 <button id={`login-button${isHighContrast ? 'dark':'light'}`} onMouseEnter={() => screenReader?speak({text:"Click to clear cart"}):cancel()} onMouseLeave={() => cancel()} onClick = {clearCart}>Clear Cart</button>

@@ -65,7 +65,7 @@ const Navbar = (props)  =>{
         console.log(path)
         console.log(voiceInput);
         setVoiceInput('')
-        navigate(path)
+        navigate(path);
       }
     }
     const index3 = voiceInput.indexOf("search");

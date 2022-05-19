@@ -26,7 +26,8 @@ function OrderSummary(props){
                 <h3>Final Total: </h3><p>{`₹${final}`}</p>
                 </div>
             </div>
-            <button id={`login-button${isHighContrast ? 'dark':'light'}`} onClick = {props.toBilling} onMouseEnter={() => screenReader?speak({text:"Proceed to Billing"}):cancel()} onMouseLeave={() => cancel()}>Proceed To Billing</button>
+            <button id={`login-button${isHighContrast ? 'dark':'light'}`} onClick = {props.toBilling} disabled = {!props.canProceed} 
+            onMouseEnter={() => screenReader?speak({text:"Proceed to Billing"}):cancel()} onMouseLeave={() => cancel()}>Proceed To Billing</button>
         </div>
     )
 }

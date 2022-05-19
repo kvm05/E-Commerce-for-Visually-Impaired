@@ -3,16 +3,24 @@
 }
 
 .cartlight{
+    /* height: fit-content; */
     flex-grow: 1;
     /* border: 2px solid white; */
     box-shadow: 0 0 60px rgba(46, 46, 64, .25);
     border-radius: 30px;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center; */
 }
 .cartdark{
+    /* height: fit-content; */
     flex-grow: 1;
     /* border: 2px solid white; */
     box-shadow: 0 0 60px rgba(144, 144, 146, 0.25);
     border-radius: 30px;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center; */
 }
 
 .cartButtons{
@@ -40,5 +48,13 @@
     font-size: 3em;    
     /* margin-right: 60%; */
     width: 85%;
+}
+
+.cartdark img, .cartlight img{
+    display: block;
+    margin: auto;
+    height: 90%;
+    object-fit: contain;
+    object-position: center;
 }
 
